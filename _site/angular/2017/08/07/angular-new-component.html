@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Design: Free Resources</title>
-  <meta name="description" content="https://www.websupport.sk/blog/2016/02/kde-najst-obrazky-zadarmo-pre-vas-web/ http://www.unsplash.com">
+  <title>Angular: New component</title>
+  <meta name="description" content="Components can be created from cli by running ng generate component servers or ng g c servers where servers is name of component. Here we will describe how t...">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/design/2017/07/27/design-free-resources.html">
+  <link rel="canonical" href="http://localhost:4000/angular/2017/08/07/angular-new-component.html">
   <link rel="alternate" type="application/rss+xml" title="Your awesome title" href="/feed.xml">
   
   
@@ -75,19 +75,63 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Design: Free Resources</h1>
+    <h1 class="post-title" itemprop="name headline">Angular: New component</h1>
     <p class="post-meta">
-      <time datetime="2017-07-27T13:13:26+02:00" itemprop="datePublished">
+      <time datetime="2017-08-07T10:13:26+02:00" itemprop="datePublished">
         
-        Jul 27, 2017
+        Aug 7, 2017
       </time>
       </p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>https://www.websupport.sk/blog/2016/02/kde-najst-obrazky-zadarmo-pre-vas-web/</p>
+    <p>Components can be created from cli by running <code class="highlighter-rouge">ng generate component servers</code> or <code class="highlighter-rouge">ng g c servers</code> where <code class="highlighter-rouge">servers</code> is name of component.</p>
 
-<p><a href="www.unsplash.com">http://www.unsplash.com</a></p>
+<p>Here we will describe how to it manually.
+Component is basicaly a typescript class. We will create new component called <code class="highlighter-rouge">server</code>.
+<!--more--></p>
+
+<p>Create <code class="highlighter-rouge">src/app/server/server.component.ts</code></p>
+
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+	<span class="na">selector</span><span class="p">:</span> <span class="s1">'app-server'</span><span class="p">,</span>
+	<span class="na">templateUrl</span><span class="p">:</span> <span class="s1">'./server.component.html'</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">ServerComponent</span> <span class="p">{</span>
+	<span class="nx">serverId</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="nx">serverStatus</span> <span class="o">=</span> <span class="s1">'offline'</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><code class="highlighter-rouge">import</code> will import component decorator<br />
+<code class="highlighter-rouge">@Component</code> is decorator - typescript feature which will enhance our class<br />
+<code class="highlighter-rouge">selector</code> is selector by which we will identify it and use in other component templates (html files)</p>
+
+<p><br /><br /></p>
+
+<p>Create <code class="highlighter-rouge">src/app/server/server.component.html</code></p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"> <span class="nt">&lt;p&gt;</span>Server with id {{serverId}} is {{serverStatus}}<span class="nt">&lt;/p&gt;</span></code></pre></figure>
+
+<p><br /><br /></p>
+
+<p>In <code class="highlighter-rouge">src/app/app.module.ts</code></p>
+
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">ServerComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./server/server.component'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+	<span class="na">declarations</span><span class="p">:</span> <span class="p">[</span>
+	   <span class="nx">AppComponent</span><span class="p">,</span>
+	   <span class="nx">ServerComponent</span>
+	<span class="p">]</span>
+	<span class="p">...</span>
+<span class="p">})</span></code></pre></figure>
+
+<p><br /><br /></p>
+
+<p>In <code class="highlighter-rouge">src/app/app.component.html</code></p>
+
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts">  <span class="o">&lt;</span><span class="nx">app</span><span class="o">-</span><span class="nx">server</span><span class="o">&gt;&lt;</span><span class="sr">/app-server&gt;</span></code></pre></figure>
 
 
   </div>

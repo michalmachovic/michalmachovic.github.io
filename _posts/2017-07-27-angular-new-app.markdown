@@ -13,6 +13,11 @@ npm install --save bootstrap  (for bootstrap)
 ng serve
 {% endhighlight %}
 
+To include bootstrap open file .angular-cli.json and into styles array 	insert
+{% highlight php %}
+ "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+{% endhighlight %}
+
 Now go to [http://localhost:4200] and you will see your app.
 
 [http://localhost:4200]: http://localhost:4200
