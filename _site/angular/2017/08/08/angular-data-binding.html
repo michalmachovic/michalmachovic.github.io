@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Tag</title>
-  <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search resu...">
+  <title>Angular: Data Binding</title>
+  <meta name="description" content="app/servers/servers.component.ts import { Component, OnInit } from &#39;@angular/core&#39;; @Component({ selector: &#39;app-servers&#39;, templateUrl: &#39;./servers.component.h...">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/tag.html">
+  <link rel="canonical" href="http://localhost:4000/angular/2017/08/08/angular-data-binding.html">
   <link rel="alternate" type="application/rss+xml" title="Your awesome title" href="/feed.xml">
   
   
@@ -72,286 +72,61 @@
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Angular: Data Binding</h1>
+    <p class="post-meta">
+      <time datetime="2017-08-08T06:13:26+02:00" itemprop="datePublished">
         
+        Aug 8, 2017
+      </time>
+      </p>
+  </header>
 
+  <div class="post-content" itemprop="articleBody">
+    <p><code class="highlighter-rouge">app/servers/servers.component.ts</code></p>
 
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+	<span class="na">selector</span><span class="p">:</span> <span class="s1">'app-servers'</span><span class="p">,</span>
+	<span class="na">templateUrl</span><span class="p">:</span> <span class="s1">'./servers.component.html'</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">ServersComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+	
+	<span class="nx">allowNewServer</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+	<span class="nx">serverId</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="nx">serverStatus</span> <span class="o">=</span> <span class="s1">'offline'</span><span class="p">;</span>
 
+	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">setTimeOut</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">allowNewServer</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+		<span class="p">},</span><span class="mi">2000</span><span class="p">);</span>
+	<span class="p">}</span>
 
+	<span class="nx">ngOnInit</span><span class="p">()</span> <span class="p">{</span>
 
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
 
+<p><br /><br /></p>
+<h2>String interpolation</h2>
+<p>This is one way data binding, we are just printing out <code class="highlighter-rouge">serverId</code> and <code class="highlighter-rouge">serverStatus</code> property.
+<br /><br />
+<code class="highlighter-rouge">app/servers/servers.component.html</code></p>
 
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="p">{{</span><span class="nx">serverId</span><span class="p">}}</span> <span class="k">is</span> <span class="p">{{</span><span class="nx">serverStatus</span><span class="p">}}</span></code></pre></figure>
 
+<p><br /><br /></p>
+<h2>Property Binding</h2>
+<p><code class="highlighter-rouge">app/servers/servers.component.html</code></p>
 
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="o">&lt;</span><span class="nx">button</span> <span class="p">[</span><span class="nx">disabled</span><span class="p">]</span><span class="o">=</span><span class="s2">"!allowNewServer"</span><span class="o">&gt;</span><span class="nx">Add</span> <span class="nx">Server</span><span class="o">&lt;</span><span class="sr">/button&gt;</span></code></pre></figure>
 
+  </div>
 
-
-
-	<a href="#angular"> angular </a>
-
-	<a href="#design"> design </a>
-
-	<a href="#github"> github </a>
-
-	<a href="#jekyll"> jekyll </a>
-
-	<a href="#magento2"> magento2 </a>
-
-	<a href="#toolkit"> toolkit </a>
-
-
-
-
-
-	<h2 id="angular">angular</h2>
-	<ul>
-	 
-		 
-		 <li>
-		 <h3>
-		 <a href="/angular/2017/08/08/angular-data-binding.html">
-		 Angular: Data Binding
-		 <small>08 Aug 2017</small>
-		 </a>
-		 
-			 <a class="tag" href="/blog/tag/#angular">angular</a>
-		 
-		 </h3>
-		 </li>
-		 
-	 
-		 
-	 
-		 
-		 <li>
-		 <h3>
-		 <a href="/angular/2017/08/07/angular-new-component.html">
-		 Angular: New component
-		 <small>07 Aug 2017</small>
-		 </a>
-		 
-			 <a class="tag" href="/blog/tag/#angular">angular</a>
-		 
-		 </h3>
-		 </li>
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-		 <li>
-		 <h3>
-		 <a href="/angular/2017/07/27/angular-new-app.html">
-		 Angular: New app
-		 <small>27 Jul 2017</small>
-		 </a>
-		 
-			 <a class="tag" href="/blog/tag/#angular">angular</a>
-		 
-		 </h3>
-		 </li>
-		 
-	 
-		 
-		 <li>
-		 <h3>
-		 <a href="/angular/2017/07/27/angular-installation.html">
-		 Angular: Installation
-		 <small>27 Jul 2017</small>
-		 </a>
-		 
-			 <a class="tag" href="/blog/tag/#angular">angular</a>
-		 
-		 </h3>
-		 </li>
-		 
-	 
-		 
-	 
-		 
-	 
-	</ul>
-
-	<h2 id="design">design</h2>
-	<ul>
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-		 <li>
-		 <h3>
-		 <a href="/design/2017/07/27/design-free-resources.html">
-		 Design: Free Resources
-		 <small>27 Jul 2017</small>
-		 </a>
-		 
-			 <a class="tag" href="/blog/tag/#design">design</a>
-		 
-		 </h3>
-		 </li>
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-	</ul>
-
-	<h2 id="github">github</h2>
-	<ul>
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-		 <li>
-		 <h3>
-		 <a href="/jekyll/2017/08/01/jekyll-github-pages-local.html">
-		 Jekyll: Run site locally
-		 <small>01 Aug 2017</small>
-		 </a>
-		 
-			 <a class="tag" href="/blog/tag/#jekyll">jekyll</a>
-		 
-			 <a class="tag" href="/blog/tag/#github">github</a>
-		 
-		 </h3>
-		 </li>
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-	</ul>
-
-	<h2 id="jekyll">jekyll</h2>
-	<ul>
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-		 <li>
-		 <h3>
-		 <a href="/jekyll/2017/08/01/jekyll-github-pages-local.html">
-		 Jekyll: Run site locally
-		 <small>01 Aug 2017</small>
-		 </a>
-		 
-			 <a class="tag" href="/blog/tag/#jekyll">jekyll</a>
-		 
-			 <a class="tag" href="/blog/tag/#github">github</a>
-		 
-		 </h3>
-		 </li>
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-	</ul>
-
-	<h2 id="magento2">magento2</h2>
-	<ul>
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-		 <li>
-		 <h3>
-		 <a href="/magento2/2017/07/27/magento2-log.html">
-		 Magento2: Write message to log
-		 <small>27 Jul 2017</small>
-		 </a>
-		 
-			 <a class="tag" href="/blog/tag/#magento2">magento2</a>
-		 
-		 </h3>
-		 </li>
-		 
-	 
-		 
-	 
-	</ul>
-
-	<h2 id="toolkit">toolkit</h2>
-	<ul>
-	 
-		 
-	 
-		 
-		 <li>
-		 <h3>
-		 <a href="/toolkit/2017/08/07/toolkit.html">
-		 Toolkit
-		 <small>07 Aug 2017</small>
-		 </a>
-		 
-			 <a class="tag" href="/blog/tag/#toolkit">toolkit</a>
-		 
-		 </h3>
-		 </li>
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-		 
-	 
-	</ul>
-
+  
+</article>
 
       </div>
     </main>
