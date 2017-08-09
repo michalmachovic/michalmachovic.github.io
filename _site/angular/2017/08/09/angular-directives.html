@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Angular: Data Binding</title>
+  <title>Angular: Directives</title>
   <meta name="description" content="app/servers/servers.component.ts import { Component, OnInit } from &#39;@angular/core&#39;; @Component({ selector: &#39;app-servers&#39;, templateUrl: &#39;./servers.component.h...">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/angular/2017/08/08/angular-data-binding.html">
+  <link rel="canonical" href="http://localhost:4000/angular/2017/08/09/angular-directives.html">
   <link rel="alternate" type="application/rss+xml" title="Your awesome title" href="/feed.xml">
   
   
@@ -75,11 +75,11 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Angular: Data Binding</h1>
+    <h1 class="post-title" itemprop="name headline">Angular: Directives</h1>
     <p class="post-meta">
-      <time datetime="2017-08-08T06:13:26+02:00" itemprop="datePublished">
+      <time datetime="2017-08-09T06:13:26+02:00" itemprop="datePublished">
         
-        Aug 8, 2017
+        Aug 9, 2017
       </time>
       </p>
   </header>
@@ -93,85 +93,95 @@
 	<span class="na">templateUrl</span><span class="p">:</span> <span class="s1">'./servers.component.html'</span>
 <span class="p">})</span>
 <span class="k">export</span> <span class="kr">class</span> <span class="nx">ServersComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
-	
-	<span class="nx">allowNewServer</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-	<span class="nx">serverId</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-	<span class="nx">serverStatus</span> <span class="o">=</span> <span class="s1">'offline'</span><span class="p">;</span>
-	<span class="nx">serverName</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+	<span class="nx">serverCreated</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+	<span class="nx">servers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Testserver, '</span><span class="nx">Testserver</span> <span class="mi">2</span><span class="err">'</span><span class="p">];</span>
 
 	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
-		<span class="nx">setTimeOut</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">allowNewServer</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-		<span class="p">},</span><span class="mi">2000</span><span class="p">);</span>
 	<span class="p">}</span>
 
 	<span class="nx">ngOnInit</span><span class="p">()</span> <span class="p">{</span>
-
 	<span class="p">}</span>
 
 	<span class="nx">onCreateServer</span><span class="p">()</span> <span class="p">{</span>
-		<span class="c1">//do something</span>
-	<span class="p">}</span>
-
-	<span class="nx">onUpdateServerName</span><span class="p">(</span><span class="na">event</span><span class="p">:</span> <span class="nx">Event</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">this</span><span class="p">.</span><span class="nx">serverName</span> <span class="o">=</span> <span class="p">(</span><span class="o">&lt;</span><span class="nx">HTMLInputElement</span><span class="o">&gt;</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">serverCreated</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">servers</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">serverName</span><span class="p">);</span>
 	<span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
-<p>In template [] means property binding, () means event binding.</p>
-
 <p><br /><br /></p>
-<h2>String interpolation</h2>
-<p>This is one way data binding, we are just printing out <code class="highlighter-rouge">serverId</code> and <code class="highlighter-rouge">serverStatus</code> property.
-<br /><br />
-<code class="highlighter-rouge">app/servers/servers.component.html</code></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="p">{{</span><span class="nx">serverId</span><span class="p">}}</span> <span class="k">is</span> <span class="p">{{</span><span class="nx">serverStatus</span><span class="p">}}</span></code></pre></figure>
-
-<p><br /><br /></p>
-<h2>Property Binding</h2>
+<h2>ngIf and ngFor</h2>
 <p><code class="highlighter-rouge">app/servers/servers.component.html</code></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="o">&lt;</span><span class="nx">button</span> <span class="p">[</span><span class="nx">disabled</span><span class="p">]</span><span class="o">=</span><span class="s2">"!allowNewServer"</span><span class="o">&gt;</span><span class="nx">Add</span> <span class="nx">Server</span><span class="o">&lt;</span><span class="sr">/button&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-html" data-lang="html">  <span class="nt">&lt;p</span> <span class="err">*</span><span class="na">ngIf=</span><span class="s">"serverCreated"</span><span class="nt">&gt;</span>Server was created<span class="nt">&lt;/p&gt;</span>
+  
+<span class="nt">&lt;button</span> <span class="err">(</span><span class="na">click</span><span class="err">)="</span><span class="na">onCreateServer</span><span class="err">()"</span><span class="nt">&gt;</span>Add Server<span class="nt">&lt;/button&gt;</span>
+
+<span class="nt">&lt;app-server</span> <span class="err">*</span><span class="na">ngFor=</span><span class="s">"let server of servers, let i = index"</span><span class="nt">&gt;&lt;/app-server&gt;</span></code></pre></figure>
 
 <p><br /><br /></p>
-<h2>Event Binding</h2>
+
+<h2>ngIf with else condition</h2>
 <p><code class="highlighter-rouge">app/servers/servers.component.html</code></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="o">&lt;</span><span class="nx">button</span> 
-	<span class="p">[</span><span class="nx">disabled</span><span class="p">]</span><span class="o">=</span><span class="s2">"!allowNewServer"</span>
-	<span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"onCreateServer()"</span><span class="o">&gt;</span><span class="nx">Add</span> <span class="nx">Server</span><span class="o">&lt;</span><span class="sr">/button&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-html" data-lang="html">  <span class="nt">&lt;p</span> <span class="err">*</span><span class="na">ngIf=</span><span class="s">"serverCreated; else noServer"</span><span class="nt">&gt;</span>Server was created<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;ng-template</span> <span class="err">#</span><span class="na">noServer</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>No server was created<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/ng-template&gt;</span>
+  
+<span class="nt">&lt;button</span> <span class="err">(</span><span class="na">click</span><span class="err">)="</span><span class="na">onCreateServer</span><span class="err">()"</span><span class="nt">&gt;</span>Add Server<span class="nt">&lt;/button&gt;</span></code></pre></figure>
 
-<p><br /><br /></p>
-<h2>Passing and Using Data with Event Binding</h2>
-<p><code class="highlighter-rouge">app/servers/servers.component.html</code></p>
+<h2>ngStyle</h2>
+<p><code class="highlighter-rouge">app/server/server.component.html</code></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="o">&lt;</span><span class="nx">input</span> 
-   <span class="kd">type</span><span class="o">=</span><span class="s2">"text"</span>
-   <span class="p">(</span><span class="nx">input</span><span class="p">)</span><span class="o">=</span><span class="s2">"onUpdateServerName($event)"</span><span class="o">&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"> 
+<span class="nt">&lt;p</span> <span class="err">[</span><span class="na">ngStyle</span><span class="err">]="{</span><span class="na">backgroundColor:</span> <span class="na">getColor</span><span class="err">()}"</span><span class="nt">&gt;</span> {{serverId}} is {{getServerStatus()}} <span class="nt">&lt;/p&gt;</span>
+ 
+ </code></pre></figure>
 
-<p><code class="highlighter-rouge">$event</code> is reserved variable, it contains data which comes from input, so in this case what you type.</p>
+<p><br /><br />
+<code class="highlighter-rouge">app/servers/server.component.ts</code></p>
 
-<p><br /><br /></p>
-<h2>Two-Way Data Binding</h2>
-<p>We combine property and event binding. Important: For Two-Way-Binding to work, you need to enable the <code class="highlighter-rouge">ngModel</code>  directive. This is done by adding the <code class="highlighter-rouge">FormsModule</code>  to the <code class="highlighter-rouge">imports[]</code>  array in the <code class="highlighter-rouge">AppModule</code>.</p>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+	<span class="na">selector</span><span class="p">:</span> <span class="s1">'app-server'</span><span class="p">,</span>
+	<span class="na">templateUrl</span><span class="p">:</span> <span class="s1">'./server.component.html'</span><span class="p">,</span>
+	<span class="na">styles</span><span class="p">:</span> <span class="p">[</span><span class="err">`</span>
+	   <span class="p">.</span><span class="nx">online</span> <span class="p">{</span>
+			<span class="na">color</span><span class="p">:</span><span class="nx">white</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="err">`</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">ServerComponent</span> <span class="p">{</span>
+	<span class="na">serverId</span><span class="p">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="nl">serverStatus</span><span class="p">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="s1">'offline'</span><span class="p">;</span>
 
-<p>You then also need to add the <code class="highlighter-rouge">import from @angular/forms</code>  in the <code class="highlighter-rouge">app.module.ts</code> file:</p>
+	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">serverStatus</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span> <span class="p">?</span> <span class="s1">'online'</span> <span class="p">:</span> <span class="s1">'offline'</span><span class="p">;</span>
+	<span class="p">}</span>
 
-<p><code class="highlighter-rouge">import { FormsModule } from '@angular/forms';</code></p>
+	<span class="nx">getServerStatus</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">serverStatus</span><span class="p">;</span>
+	<span class="p">}</span>
 
-<p>Following code will update value of serverName, when you type inside the input. But it will also update value of input if you change value of serverName from somewhere else. 
-<code class="highlighter-rouge">app/servers/servers.component.html</code></p>
+	<span class="nx">getColor</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">serverStatus</span> <span class="o">===</span> <span class="s1">'online'</span> <span class="p">?</span> <span class="s1">'green'</span> <span class="p">:</span> <span class="s1">'red'</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="o">&lt;</span><span class="nx">input</span> 
-   <span class="kd">type</span><span class="o">=</span><span class="s2">"text"</span>
-   <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="s2">"serverName"</span><span class="o">&gt;</span></code></pre></figure>
+<h2>ngClass</h2>
+<p><code class="highlighter-rouge">app/server/server.component.html</code></p>
 
-<p>How do you know to which <code class="highlighter-rouge">Properties</code> or <code class="highlighter-rouge">Events</code> of HTML Elements you may bind? You can basically bind to all Properties and Events - a good idea is to <code class="highlighter-rouge">console.log()</code>  the element you’re interested in to see which properties and events it offers.</p>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"> 
+<span class="nt">&lt;p</span> 
+  <span class="err">[</span><span class="na">ngStyle</span><span class="err">]="{</span><span class="na">backgroundColor:</span> <span class="na">getColor</span><span class="err">()}"</span>
+  <span class="err">[</span><span class="na">ngClass</span><span class="err">]="{'</span><span class="na">online</span><span class="err">'</span><span class="na">:</span> <span class="na">serverStatus=</span><span class="s">=='online'}"</span>
+ <span class="nt">&gt;</span> 
+   {{serverId}} is {{getServerStatus()}} 
+ <span class="nt">&lt;/p&gt;</span>
+ 
+ </code></pre></figure>
 
-<p>Important: For events, you don’t bind to onclick but only to click (=&gt; (click)).</p>
-
-<p>The MDN (Mozilla Developer Network) offers nice lists of all properties and events of the element you’re interested in. Googling for YOUR_ELEMENT properties  or YOUR_ELEMENT events  should yield nice results.</p>
 
   </div>
 
