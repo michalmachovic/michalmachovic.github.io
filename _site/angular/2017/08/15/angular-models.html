@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Angular: New app</title>
-  <meta name="description" content="ng new my-dream-app cd my-dream-app npm install --save bootstrap (for bootstrap) ng serve To include bootstrap open file .angular-cli.json and into styles ar...">
+  <title>Angular: Models</title>
+  <meta name="description" content="If we are going to use some structure, some object a lot in our app, we will define model, so everywhere in our app it will be the same. Model is just bluepr...">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/angular/2017/07/27/angular-new-app.html">
+  <link rel="canonical" href="http://localhost:4000/angular/2017/08/15/angular-models.html">
   <link rel="alternate" type="application/rss+xml" title="Your awesome title" href="/feed.xml">
   
   
@@ -75,36 +75,33 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Angular: New app</h1>
+    <h1 class="post-title" itemprop="name headline">Angular: Models</h1>
     <p class="post-meta">
-      <time datetime="2017-07-27T10:13:26+02:00" itemprop="datePublished">
+      <time datetime="2017-08-15T06:13:26+02:00" itemprop="datePublished">
         
-        Jul 27, 2017
+        Aug 15, 2017
       </time>
       </p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    
-<figure class="highlight"><pre><code class="language-php" data-lang="php">ng new my-dream-app
-cd my-dream-app
-npm install --save bootstrap  (for bootstrap)
-ng serve</code></pre></figure>
+    <p>If we are going to use some structure, some object a lot in our app, we will define model, so everywhere in our app it will be the same. Model is just blueprint for how our model looks. We can use typescript class for this, because it can be instantianed</p>
 
-<p>To include bootstrap open file .angular-cli.json and into styles array 	insert</p>
+<p><code class="highlighter-rouge">app/recipes/recipe.model.ts</code></p>
 
-<figure class="highlight"><pre><code class="language-php" data-lang="php"> "../node_modules/bootstrap/dist/css/bootstrap.min.css"</code></pre></figure>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">export</span> <span class="kr">class</span> <span class="nx">Recipe</span> <span class="p">{</span>
+	<span class="k">public</span> <span class="nx">name</span><span class="err">:</span> <span class="kr">string</span><span class="p">;</span>
+	<span class="k">public</span> <span class="nx">description</span><span class="err">:</span> <span class="kr">string</span><span class="p">;</span>
+	<span class="k">public</span> <span class="nx">imagePath</span><span class="err">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
 
-<p>Now go to <a href="http://localhost:4200">http://localhost:4200</a> and you will see your app.
-<br /><br /><br /><br />
-It may happen that you are changing files, but ng serve isnt detecting it, so your app isnt reloaded with changes. In this case do this:</p>
+<span class="nx">contructor</span><span class="p">(</span><span class="nx">name</span><span class="err">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">desc</span><span class="err">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">imagePath</span><span class="err">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">desc</span> <span class="o">=</span> <span class="nx">desc</span><span class="p">;</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">imagePath</span> <span class="o">=</span> <span class="nx">imagePath</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-php" data-lang="php">sudo sysctl fs.inotify.max_user_watches=524288
-sudo sysctl -p --system	</code></pre></figure>
-
-<p>The problem was related with Inotify Watches Limit on Linux.
-To solve to issue I increased the watches limit to 512K</p>
-
+<p><br /><br /></p>
 
   </div>
 
