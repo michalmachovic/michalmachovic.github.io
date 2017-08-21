@@ -8,3 +8,4 @@ tags: [toolkit]
 
 
 Emmet - plugin which greatly improves html & css workflow
+Augury - google chrome extension for debugging Angular apps

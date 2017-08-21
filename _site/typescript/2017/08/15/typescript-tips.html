@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Jekyll: Run site locally</title>
-  <meta name="description" content="When you want to run your jekyll site locally, run this in terminal bundle exec jekyll serve Now open http://localhost:4000, you should see your site.">
+  <title>Typescript: Tips</title>
+  <meta name="description" content="export class Recipe { public name: string; public description: string; public imagePath: string; } contructor(name: string, desc: string, imagePath: string) ...">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/jekyll/2017/08/01/jekyll-github-pages-local.html">
+  <link rel="canonical" href="http://localhost:4000/typescript/2017/08/15/typescript-tips.html">
   <link rel="alternate" type="application/rss+xml" title="Michal Machovic" href="/feed.xml">
   
   
@@ -75,22 +75,36 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Jekyll: Run site locally</h1>
+    <h1 class="post-title" itemprop="name headline">Typescript: Tips</h1>
     <p class="post-meta">
-      <time datetime="2017-08-01T10:12:26+02:00" itemprop="datePublished">
+      <time datetime="2017-08-15T06:13:26+02:00" itemprop="datePublished">
         
-        Aug 1, 2017
+        Aug 15, 2017
       </time>
       </p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>When you want to run your jekyll site locally, run this in terminal</p>
+    
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">export</span> <span class="kr">class</span> <span class="nx">Recipe</span> <span class="p">{</span>
+	<span class="k">public</span> <span class="nx">name</span><span class="err">:</span> <span class="kr">string</span><span class="p">;</span>
+	<span class="k">public</span> <span class="nx">description</span><span class="err">:</span> <span class="kr">string</span><span class="p">;</span>
+	<span class="k">public</span> <span class="nx">imagePath</span><span class="err">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
 
-<figure class="highlight"><pre><code class="language-php" data-lang="php">bundle exec jekyll serve</code></pre></figure>
+<span class="nx">contructor</span><span class="p">(</span><span class="nx">name</span><span class="err">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">desc</span><span class="err">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">imagePath</span><span class="err">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">desc</span> <span class="o">=</span> <span class="nx">desc</span><span class="p">;</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">imagePath</span> <span class="o">=</span> <span class="nx">imagePath</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
 
-<p>Now open http://localhost:4000, you should see your site.</p>
+<p>is the same as</p>
 
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">export</span> <span class="kr">class</span> <span class="nx">Recipe</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">(</span><span class="k">public</span> <span class="nx">name</span><span class="err">:</span> <span class="kr">string</span><span class="p">,</span> <span class="k">public</span> <span class="nx">desc</span><span class="err">:</span><span class="kr">string</span><span class="p">,</span> <span class="k">public</span> <span class="nx">imagePath</span><span class="err">:</span><span class="kr">string</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><br /><br /></p>
 
   </div>
 

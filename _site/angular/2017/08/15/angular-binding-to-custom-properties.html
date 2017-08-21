@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Jekyll: Run site locally</title>
-  <meta name="description" content="When you want to run your jekyll site locally, run this in terminal bundle exec jekyll serve Now open http://localhost:4000, you should see your site.">
+  <title>Angular: Binding to custom properties</title>
+  <meta name="description" content="We can use property binding to bind to our own properties, properties of our components. By default all properties of components are available only inside th...">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/jekyll/2017/08/01/jekyll-github-pages-local.html">
+  <link rel="canonical" href="http://localhost:4000/angular/2017/08/15/angular-binding-to-custom-properties.html">
   <link rel="alternate" type="application/rss+xml" title="Michal Machovic" href="/feed.xml">
   
   
@@ -75,21 +75,68 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Jekyll: Run site locally</h1>
+    <h1 class="post-title" itemprop="name headline">Angular: Binding to custom properties</h1>
     <p class="post-meta">
-      <time datetime="2017-08-01T10:12:26+02:00" itemprop="datePublished">
+      <time datetime="2017-08-15T06:13:26+02:00" itemprop="datePublished">
         
-        Aug 1, 2017
+        Aug 15, 2017
       </time>
       </p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>When you want to run your jekyll site locally, run this in terminal</p>
+    <p>We can use property binding to bind to our own properties, properties of our components.
+By default all properties of components are available only inside these components. What to do if we want access some properties in another component ?
+We need to add decorator <code class="highlighter-rouge">@Input</code>.</p>
 
-<figure class="highlight"><pre><code class="language-php" data-lang="php">bundle exec jekyll serve</code></pre></figure>
+<p><code class="highlighter-rouge">app/server-element/server-element.component.ts</code></p>
 
-<p>Now open http://localhost:4000, you should see your site.</p>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">Input</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+	<span class="na">selector</span><span class="p">:</span> <span class="s1">'app-server-element'</span><span class="p">,</span>
+	<span class="na">templateUrl</span><span class="p">:</span> <span class="s1">'./server-element.component.html'</span>
+<span class="p">})</span>
+
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">ServerElementComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+	<span class="err">@</span><span class="nx">Input</span><span class="p">()</span> <span class="nx">element</span><span class="err">:</span> <span class="p">{</span><span class="nl">type</span><span class="p">:</span><span class="kr">string</span><span class="p">,</span> <span class="nx">name</span><span class="err">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">content</span><span class="err">:</span> <span class="kr">string</span><span class="p">};</span>
+
+	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{}</span>
+
+	<span class="nx">ngOnInit</span><span class="p">()</span> <span class="p">{</span>
+
+	<span class="p">}</span>
+
+<span class="p">}</span></code></pre></figure>
+
+<p><br /><br />
+<code class="highlighter-rouge">app/server-element/server-element.component.html</code></p>
+
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"> <span class="p">{{</span><span class="nx">element</span><span class="p">.</span><span class="kd">type</span><span class="p">}}</span>
+ </code></pre></figure>
+
+<p><br /><br /></p>
+
+<p><code class="highlighter-rouge">app/app.component.ts</code></p>
+
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+	<span class="na">selector</span><span class="p">:</span> <span class="s1">'app-root'</span><span class="p">,</span>
+	<span class="na">templateUrl</span><span class="p">:</span> <span class="s1">'./app.component.html'</span>
+<span class="p">})</span>
+
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">AppComponent</span> <span class="p">{</span>
+	<span class="nx">serverElements</span> <span class="o">=</span> <span class="p">[{</span><span class="na">type</span><span class="p">:</span> <span class="s1">'server'</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="s1">'Testserver'</span><span class="p">,</span> <span class="na">content</span><span class="p">:</span> <span class="s1">'test'</span><span class="p">}];</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><br /><br /></p>
+
+<p><code class="highlighter-rouge">app/app.component.html</code></p>
+
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="o">&lt;</span><span class="nx">app</span><span class="o">-</span><span class="nx">server</span><span class="o">-</span><span class="nx">element</span> 
+	<span class="o">*</span><span class="nx">ngFor</span><span class="o">=</span><span class="s2">"let serverElement of serverElements"</span>
+	<span class="p">[</span><span class="nx">element</span><span class="p">]</span><span class="o">=</span><span class="s2">"serverElement"</span><span class="o">&gt;&lt;</span><span class="sr">/app-server-element&gt;</span></code></pre></figure>
 
 
   </div>
