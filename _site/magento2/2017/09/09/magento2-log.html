@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Magento2: Write message to log</title>
-  <meta name="description" content="Here is how you can log to Magento2 debug.log file, located under var/system/log. logger = \Magento\Framework\App\ObjectManager::getInstance()-&amp;gt;get(&#39;\Psr\...">
+  <title>Magento2: Recompile and content deploy</title>
+  <meta name="description" content="If you want to make change to content of your theme, css or images, you are doing these changes under app/design folder. Magento is looking for files under p...">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/magento2/2017/07/27/magento2-log.html">
+  <link rel="canonical" href="http://localhost:4000/magento2/2017/09/09/magento2-log.html">
   <link rel="alternate" type="application/rss+xml" title="Michal Machovic" href="/feed.xml">
   
   
@@ -75,20 +75,34 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Magento2: Write message to log</h1>
+    <h1 class="post-title" itemprop="name headline">Magento2: Recompile and content deploy</h1>
     <p class="post-meta">
-      <time datetime="2017-07-27T10:11:26+02:00" itemprop="datePublished">
+      <time datetime="2017-09-09T10:11:26+02:00" itemprop="datePublished">
         
-        Jul 27, 2017
+        Sep 9, 2017
       </time>
       </p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>Here is how you can log to Magento2 debug.log file, located under <code class="highlighter-rouge">var/system/log</code>.</p>
+    <p>If you want to make change to content of your theme, css or images, you are doing these changes under <code class="highlighter-rouge">app/design</code> folder.</p>
 
-<figure class="highlight"><pre><code class="language-php" data-lang="php"> logger = \Magento\Framework\App\ObjectManager::getInstance()-&gt;get('\Psr\Log\LoggerInterface');
- $logger-&gt;debug('TEST');</code></pre></figure>
+<p>Magento is looking for files under <code class="highlighter-rouge">pub/static</code> folder, that means you must deploy this static content there.</p>
+
+<p><code class="highlighter-rouge">MyCompany</code> is name of your company
+<code class="highlighter-rouge">mytheme</code> is name of your theme</p>
+
+<p>You need to remove files from <code class="highlighter-rouge">pub/static</code> folder first, Magento will not remove them. So if you upload new image under <code class="highlighter-rouge">app/design</code> then remove first images from <code class="highlighter-rouge">pub/static</code> and then run command for deploying static content.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">php bin/magento setup:static-content:deploy en_GB --theme Magento/backend
+php bin/magento setup:static-content:deploy en_GB --theme MyCompany/mytheme </code></pre></figure>
+
+<p>If you install some new module, you need then recompile files.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">php bin/magento setup:upgrade
+bin/magento setup:di:compile
+sudo chmod 777 var -R
+sudo chmod 777 pub -R</code></pre></figure>
 
 
   </div>
