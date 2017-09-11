@@ -89,6 +89,10 @@
 By default all properties of components are available only inside these components. What to do if we want access some properties in another component ?
 We need to add decorator <code class="highlighter-rouge">@Input</code>.</p>
 
+<p><br />
+So in other words, we have parent component and child component. We have array of objects defined in parent component and we want to display items of this array in child component in a loop.
+<br /><br /></p>
+
 <p><code class="highlighter-rouge">app/server-element/server-element.component.ts</code></p>
 
 <figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">Input</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
@@ -137,6 +141,21 @@ We need to add decorator <code class="highlighter-rouge">@Input</code>.</p>
 <figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="o">&lt;</span><span class="nx">app</span><span class="o">-</span><span class="nx">server</span><span class="o">-</span><span class="nx">element</span> 
 	<span class="o">*</span><span class="nx">ngFor</span><span class="o">=</span><span class="s2">"let serverElement of serverElements"</span>
 	<span class="p">[</span><span class="nx">element</span><span class="p">]</span><span class="o">=</span><span class="s2">"serverElement"</span><span class="o">&gt;&lt;</span><span class="sr">/app-server-element&gt;</span></code></pre></figure>
+
+<p><br /><br /></p>
+<h1>Binding to custom properties with alias</h1>
+<p>If we want to bind to different name, you can bind with an alias.</p>
+
+<p><code class="highlighter-rouge">app/server-element/server-element.component.ts</code></p>
+
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="err">@</span><span class="nx">Input</span><span class="p">(</span><span class="s1">'srvElement'</span><span class="p">)</span> <span class="nx">element</span><span class="err">:</span> <span class="p">{</span><span class="nl">type</span><span class="p">:</span><span class="kr">string</span><span class="p">,</span> <span class="nx">name</span><span class="err">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">content</span><span class="err">:</span> <span class="kr">string</span><span class="p">};</span></code></pre></figure>
+
+<p><br /><br />
+<code class="highlighter-rouge">app/app.component.html</code></p>
+
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="o">&lt;</span><span class="nx">app</span><span class="o">-</span><span class="nx">server</span><span class="o">-</span><span class="nx">element</span> 
+	<span class="o">*</span><span class="nx">ngFor</span><span class="o">=</span><span class="s2">"let serverElement of serverElements"</span>
+	<span class="p">[</span><span class="nx">srvElement</span><span class="p">]</span><span class="o">=</span><span class="s2">"serverElement"</span><span class="o">&gt;&lt;</span><span class="sr">/app-server-element&gt;</span></code></pre></figure>
 
 
   </div>

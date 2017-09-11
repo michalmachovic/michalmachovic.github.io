@@ -10,6 +10,9 @@ We can use property binding to bind to our own properties, properties of our com
 By default all properties of components are available only inside these components. What to do if we want access some properties in another component ?
 We need to add decorator `@Input`.
 
+<br />
+So in other words, we have parent component and child component. We have array of objects defined in parent component and we want to display items of this array in child component in a loop.
+<br /><br />
 
 `app/server-element/server-element.component.ts`
 {% highlight ts %}
@@ -63,4 +66,22 @@ export class AppComponent {
 <app-server-element 
 	*ngFor="let serverElement of serverElements"
 	[element]="serverElement"></app-server-element>
+{% endhighlight %} 
+
+
+<br /><br />
+<h1>Binding to custom properties with alias</h1>
+If we want to bind to different name, you can bind with an alias.
+
+`app/server-element/server-element.component.ts`
+{% highlight ts %}
+@Input('srvElement') element: {type:string, name: string, content: string};
+{% endhighlight %} 
+
+<br /><br />
+`app/app.component.html`
+{% highlight ts %}
+<app-server-element 
+	*ngFor="let serverElement of serverElements"
+	[srvElement]="serverElement"></app-server-element>
 {% endhighlight %} 
