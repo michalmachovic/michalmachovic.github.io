@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Michal Machovic</title>
-  <meta name="description" content="Awesome blog about webdevelopment which will save our world from aliens!">
+  <title>Angular: Projecting content into component</title>
+  <meta name="description" content="Sometimes you have complex html code which you want to past into component from outside. By default everything what you put between opening and closing tag o...">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/">
+  <link rel="canonical" href="http://localhost:4000/angular/2017/09/12/angular-projecting-content-into-component.html">
   <link rel="alternate" type="application/rss+xml" title="Michal Machovic" href="/feed.xml">
   
   
@@ -72,173 +72,44 @@
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Angular: Projecting content into component</h1>
+    <p class="post-meta">
+      <time datetime="2017-09-12T06:13:26+02:00" itemprop="datePublished">
+        
+        Sep 12, 2017
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Sometimes you have complex html code which you want to past into component from outside. By default everything what you put between opening and closing tag of your own component is lost, angular ignore it. Unless you use special directive <code class="highlighter-rouge">&lt;ng-content&gt;&lt;/ng-content&gt;</code>.</p>
+
+<p><br /><br /></p>
+
+<p><code class="highlighter-rouge">app.component.html</code></p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;app-server-element</span>
+  <span class="err">*</span><span class="na">ngFor=</span><span class="s">"let serverElement of serverElements"</span>
+  <span class="err">[</span><span class="na">srvElement</span><span class="err">]="</span><span class="na">serverElement</span><span class="err">"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;strong</span> <span class="err">*</span><span class="na">ngIf=</span><span class="s">"serverElement.type==='server'"</span><span class="nt">&gt;&lt;/strong&gt;</span>
+<span class="nt">&lt;/app-server-element&gt;</span></code></pre></figure>
+
+<p><br /><br /></p>
+
+<p><code class="highlighter-rouge">server-element.component.html</code></p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"> <span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;ng-content&gt;&lt;/ng-content&gt;</span>
+ <span class="nt">&lt;/div&gt;</span> </code></pre></figure>
+
+
+  </div>
+
   
-  
-
-
-  <ul class="post-list">
-    
-      <li>
-        
-        <span class="post-meta">Sep 12, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/09/12/angular-projecting-content-into-component.html">Angular: Projecting content into component</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Sep 12, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/09/12/angular-lifecycle-hooks.html">Angular: Lifecycle hooks</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Sep 9, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/magento2/2017/09/09/magento2-log.html">Magento2: Recompile and content deploy</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 15, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/08/15/angular-using-local-references.html">Angular: Using local references</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 15, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/08/15/angular-binding-to-custom-events.html">Angular: Binding to custom events</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 15, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/typescript/2017/08/15/typescript-tips.html">Typescript: Tips</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 15, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/08/15/angular-binding-to-custom-properties.html">Angular: Binding to custom properties</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 15, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/08/15/angular-models.html">Angular: Models</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 9, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/08/09/angular-directives.html">Angular: Directives</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 8, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/08/08/angular-data-binding.html">Angular: Data Binding</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 7, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/toolkit/2017/08/07/toolkit.html">Toolkit</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 7, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/08/07/angular-new-component.html">Angular: New component</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 1, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/jekyll/2017/08/01/jekyll-github-pages-local.html">Jekyll: Run site locally</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Jul 27, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/design/2017/07/27/design-free-resources.html">Design: Free Resources</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Jul 27, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/07/27/angular-new-app.html">Angular: New app</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Jul 27, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/07/27/angular-installation.html">Angular: Installation</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Jul 27, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/jekyll/update/2017/07/27/welcome-to-jekyll.html">Welcome to Jekyll!</a>
-        </h2>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
-
-</div>
+</article>
 
       </div>
     </main>

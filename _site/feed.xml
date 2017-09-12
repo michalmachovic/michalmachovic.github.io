@@ -1,5 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-09-11T23:56:14+02:00</updated><id>http://localhost:4000/</id><title type="html">Michal Machovic</title><subtitle>Awesome blog about webdevelopment which will save our world from aliens!
-</subtitle><entry><title type="html">Magento2: Recompile and content deploy</title><link href="http://localhost:4000/magento2/2017/09/09/magento2-log.html" rel="alternate" type="text/html" title="Magento2: Recompile and content deploy" /><published>2017-09-09T10:11:26+02:00</published><updated>2017-09-09T10:11:26+02:00</updated><id>http://localhost:4000/magento2/2017/09/09/magento2-log</id><content type="html" xml:base="http://localhost:4000/magento2/2017/09/09/magento2-log.html">&lt;p&gt;If you want to make change to content of your theme, css or images, you are doing these changes under &lt;code class=&quot;highlighter-rouge&quot;&gt;app/design&lt;/code&gt; folder.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-09-12T23:24:47+02:00</updated><id>http://localhost:4000/</id><title type="html">Michal Machovic</title><subtitle>Awesome blog about webdevelopment which will save our world from aliens!
+</subtitle><entry><title type="html">Angular: Projecting content into component</title><link href="http://localhost:4000/angular/2017/09/12/angular-projecting-content-into-component.html" rel="alternate" type="text/html" title="Angular: Projecting content into component" /><published>2017-09-12T06:13:26+02:00</published><updated>2017-09-12T06:13:26+02:00</updated><id>http://localhost:4000/angular/2017/09/12/angular-projecting-content-into-component</id><content type="html" xml:base="http://localhost:4000/angular/2017/09/12/angular-projecting-content-into-component.html">&lt;p&gt;Sometimes you have complex html code which you want to past into component from outside. By default everything what you put between opening and closing tag of your own component is lost, angular ignore it. Unless you use special directive &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;ng-content&amp;gt;&amp;lt;/ng-content&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;app.component.html&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;app-server-element&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ngFor=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;let serverElement of serverElements&quot;&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;srvElement&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;]=&quot;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;serverElement&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;strong&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ngIf=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;serverElement.type==='server'&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/strong&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/app-server-element&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;server-element.component.html&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;ng-content&amp;gt;&amp;lt;/ng-content&amp;gt;&lt;/span&gt;
+ &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><category term="Angular" /><category term="angular" /><summary type="html">Sometimes you have complex html code which you want to past into component from outside. By default everything what you put between opening and closing tag of your own component is lost, angular ignore it. Unless you use special directive &amp;lt;ng-content&amp;gt;&amp;lt;/ng-content&amp;gt;. app.component.html &amp;lt;app-server-element *ngFor=&quot;let serverElement of serverElements&quot; [srvElement]=&quot;serverElement&quot;&amp;gt; &amp;lt;strong *ngIf=&quot;serverElement.type==='server'&quot;&amp;gt;&amp;lt;/strong&amp;gt; &amp;lt;/app-server-element&amp;gt; server-element.component.html &amp;lt;div&amp;gt; &amp;lt;ng-content&amp;gt;&amp;lt;/ng-content&amp;gt; &amp;lt;/div&amp;gt;</summary></entry><entry><title type="html">Angular: Lifecycle hooks</title><link href="http://localhost:4000/angular/2017/09/12/angular-lifecycle-hooks.html" rel="alternate" type="text/html" title="Angular: Lifecycle hooks" /><published>2017-09-12T06:13:26+02:00</published><updated>2017-09-12T06:13:26+02:00</updated><id>http://localhost:4000/angular/2017/09/12/angular-lifecycle-hooks</id><content type="html" xml:base="http://localhost:4000/angular/2017/09/12/angular-lifecycle-hooks.html">&lt;p&gt;A component has a lifecycle managed by Angular.
+&lt;br /&gt;&lt;br /&gt;
+Angular creates it, renders it, creates and renders its children, checks it when its data-bound properties change, and destroys it before removing it from the DOM.
+&lt;br /&gt;&lt;br /&gt;
+Angular offers lifecycle hooks that provide visibility into these key life moments and the ability to act when they occur.
+&lt;br /&gt;&lt;br /&gt;
+A directive has the same set of lifecycle hooks, minus the hooks that are specific to component content and views.
+&lt;br /&gt;&lt;br /&gt;
+So this is usefull if you want to run some specific piece of code after component was created, or destroyed or something changed.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ngOnChanges()&lt;/code&gt;
+&lt;br /&gt;
+Respond when Angular (re)sets data-bound input properties. The method receives a SimpleChanges object of current and previous property values.
+Called before ngOnInit() and whenever one or more data-bound input properties change
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ngOnInit()&lt;/code&gt;
+&lt;br /&gt;
+Initialize the directive/component after Angular first displays the data-bound properties and sets the directive/component’s input properties.
+Called once, after the first ngOnChanges().
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ngDoCheck()&lt;/code&gt;
+&lt;br /&gt;
+Detect and act upon changes that Angular can’t or won’t detect on its own.
+Called during every change detection run, immediately after ngOnChanges() and ngOnInit().
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ngAfterContentInit()&lt;/code&gt;
+&lt;br /&gt;
+Respond after Angular projects external content into the component’s view.
+Called once after the first ngDoCheck().
+A component-only hook.
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ngAfterContentChecked()&lt;/code&gt;
+&lt;br /&gt;
+Respond after Angular checks the content projected into the component.
+Called after the ngAfterContentInit() and every subsequent ngDoCheck().
+A component-only hook
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ngAfterViewInit()&lt;/code&gt;
+&lt;br /&gt;
+Respond after Angular initializes the component’s views and child views.
+Called once after the first ngAfterContentChecked().
+A component-only hook.
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ngAfterViewChecked()&lt;/code&gt;
+&lt;br /&gt;
+Respond after Angular checks the component’s views and child views.
+Called after the ngAfterViewInit and every subsequent ngAfterContentChecked().
+A component-only hook.
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ngOnDestroy()&lt;/code&gt;
+&lt;br /&gt;
+Cleanup just before Angular destroys the directive/component. Unsubscribe Observables and detach event handlers to avoid memory leaks.
+Called just before Angular destroys the directive/component.
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name></name></author><category term="Angular" /><category term="angular" /><summary type="html">A component has a lifecycle managed by Angular. Angular creates it, renders it, creates and renders its children, checks it when its data-bound properties change, and destroys it before removing it from the DOM. Angular offers lifecycle hooks that provide visibility into these key life moments and the ability to act when they occur. A directive has the same set of lifecycle hooks, minus the hooks that are specific to component content and views. So this is usefull if you want to run some specific piece of code after component was created, or destroyed or something changed. ngOnChanges() Respond when Angular (re)sets data-bound input properties. The method receives a SimpleChanges object of current and previous property values. Called before ngOnInit() and whenever one or more data-bound input properties change ngOnInit() Initialize the directive/component after Angular first displays the data-bound properties and sets the directive/component’s input properties. Called once, after the first ngOnChanges(). ngDoCheck() Detect and act upon changes that Angular can’t or won’t detect on its own. Called during every change detection run, immediately after ngOnChanges() and ngOnInit(). ngAfterContentInit() Respond after Angular projects external content into the component’s view. Called once after the first ngDoCheck(). A component-only hook. ngAfterContentChecked() Respond after Angular checks the content projected into the component. Called after the ngAfterContentInit() and every subsequent ngDoCheck(). A component-only hook ngAfterViewInit() Respond after Angular initializes the component’s views and child views. Called once after the first ngAfterContentChecked(). A component-only hook. ngAfterViewChecked() Respond after Angular checks the component’s views and child views. Called after the ngAfterViewInit and every subsequent ngAfterContentChecked(). A component-only hook. ngOnDestroy() Cleanup just before Angular destroys the directive/component. Unsubscribe Observables and detach event handlers to avoid memory leaks. Called just before Angular destroys the directive/component.</summary></entry><entry><title type="html">Magento2: Recompile and content deploy</title><link href="http://localhost:4000/magento2/2017/09/09/magento2-log.html" rel="alternate" type="text/html" title="Magento2: Recompile and content deploy" /><published>2017-09-09T10:11:26+02:00</published><updated>2017-09-09T10:11:26+02:00</updated><id>http://localhost:4000/magento2/2017/09/09/magento2-log</id><content type="html" xml:base="http://localhost:4000/magento2/2017/09/09/magento2-log.html">&lt;p&gt;If you want to make change to content of your theme, css or images, you are doing these changes under &lt;code class=&quot;highlighter-rouge&quot;&gt;app/design&lt;/code&gt; folder.&lt;/p&gt;
 
 &lt;p&gt;Magento is looking for files under &lt;code class=&quot;highlighter-rouge&quot;&gt;pub/static&lt;/code&gt; folder, that means you must deploy this static content there.&lt;/p&gt;
 
@@ -429,51 +509,4 @@ So in other words, we have parent component and child component. We have array o
 
 &lt;p&gt;Important: For events, you don’t bind to onclick but only to click (=&amp;gt; (click)).&lt;/p&gt;
 
-&lt;p&gt;The MDN (Mozilla Developer Network) offers nice lists of all properties and events of the element you’re interested in. Googling for YOUR_ELEMENT properties  or YOUR_ELEMENT events  should yield nice results.&lt;/p&gt;</content><author><name></name></author><category term="angular" /><category term="angular" /><summary type="html">app/servers/servers.component.ts import { Component, OnInit } from '@angular/core'; @Component({ selector: 'app-servers', templateUrl: './servers.component.html' }) export class ServersComponent implements OnInit { allowNewServer = false; serverId = 10; serverStatus = 'offline'; serverName = ''; constructor() { setTimeOut(() =&amp;gt; { this.allowNewServer = true; },2000); } ngOnInit() { } onCreateServer() { //do something } onUpdateServerName(event: Event) { this.serverName = (&amp;lt;HTMLInputElement&amp;gt;event.target).value; } } In template [] means property binding, () means event binding. String interpolation This is one way data binding, we are just printing out serverId and serverStatus property. app/servers/servers.component.html {{serverId}} is {{serverStatus}} Property Binding app/servers/servers.component.html &amp;lt;button [disabled]=&quot;!allowNewServer&quot;&amp;gt;Add Server&amp;lt;/button&amp;gt; Event Binding app/servers/servers.component.html &amp;lt;button [disabled]=&quot;!allowNewServer&quot; (click)=&quot;onCreateServer()&quot;&amp;gt;Add Server&amp;lt;/button&amp;gt; Passing and Using Data with Event Binding app/servers/servers.component.html &amp;lt;input type=&quot;text&quot; (input)=&quot;onUpdateServerName($event)&quot;&amp;gt; $event is reserved variable, it contains data which comes from input, so in this case what you type. Two-Way Data Binding We combine property and event binding. Important: For Two-Way-Binding to work, you need to enable the ngModel directive. This is done by adding the FormsModule to the imports[] array in the AppModule. You then also need to add the import from @angular/forms in the app.module.ts file: import { FormsModule } from '@angular/forms'; Following code will update value of serverName, when you type inside the input. But it will also update value of input if you change value of serverName from somewhere else. app/servers/servers.component.html &amp;lt;input type=&quot;text&quot; [(ngModel)]=&quot;serverName&quot;&amp;gt; How do you know to which Properties or Events of HTML Elements you may bind? You can basically bind to all Properties and Events - a good idea is to console.log() the element you’re interested in to see which properties and events it offers. Important: For events, you don’t bind to onclick but only to click (=&amp;gt; (click)). The MDN (Mozilla Developer Network) offers nice lists of all properties and events of the element you’re interested in. Googling for YOUR_ELEMENT properties or YOUR_ELEMENT events should yield nice results.</summary></entry><entry><title type="html">Toolkit</title><link href="http://localhost:4000/toolkit/2017/08/07/toolkit.html" rel="alternate" type="text/html" title="Toolkit" /><published>2017-08-07T10:13:26+02:00</published><updated>2017-08-07T10:13:26+02:00</updated><id>http://localhost:4000/toolkit/2017/08/07/toolkit</id><content type="html" xml:base="http://localhost:4000/toolkit/2017/08/07/toolkit.html">&lt;p&gt;Emmet - plugin which greatly improves html &amp;amp; css workflow
-Augury - google chrome extension for debugging Angular apps&lt;/p&gt;</content><author><name></name></author><category term="toolkit" /><category term="toolkit" /><summary type="html">Emmet - plugin which greatly improves html &amp;amp; css workflow Augury - google chrome extension for debugging Angular apps</summary></entry><entry><title type="html">Angular: New component</title><link href="http://localhost:4000/angular/2017/08/07/angular-new-component.html" rel="alternate" type="text/html" title="Angular: New component" /><published>2017-08-07T10:13:26+02:00</published><updated>2017-08-07T10:13:26+02:00</updated><id>http://localhost:4000/angular/2017/08/07/angular-new-component</id><content type="html" xml:base="http://localhost:4000/angular/2017/08/07/angular-new-component.html">&lt;p&gt;Components can be created from cli by running &lt;code class=&quot;highlighter-rouge&quot;&gt;ng generate component servers&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;ng g c servers&lt;/code&gt; where &lt;code class=&quot;highlighter-rouge&quot;&gt;servers&lt;/code&gt; is name of component.&lt;/p&gt;
-
-&lt;p&gt;Here we will describe how to it manually.
-Component is basicaly a typescript class. We will create new component called &lt;code class=&quot;highlighter-rouge&quot;&gt;server&lt;/code&gt;.
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;src/app/server/server.component.ts&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'@angular/core'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-	&lt;span class=&quot;na&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'app-server'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;na&quot;&gt;templateUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./server.component.html'&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ServerComponent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;serverId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;serverStatus&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'offline'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;import&lt;/code&gt; will import component decorator&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;@Component&lt;/code&gt; is decorator - typescript feature which will enhance our class&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;selector&lt;/code&gt; is selector by which we will identify it and use in other component templates (html files)&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;src/app/server/server.component.html&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Server with id {{serverId}} is {{serverStatus}}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;src/app/app.module.ts&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ServerComponent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./server/server.component'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;NgModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-	&lt;span class=&quot;na&quot;&gt;declarations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-	   &lt;span class=&quot;nx&quot;&gt;AppComponent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	   &lt;span class=&quot;nx&quot;&gt;ServerComponent&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;src/app/app.component.html&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/app-server&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><category term="angular" /><category term="angular" /><summary type="html">Components can be created from cli by running ng generate component servers or ng g c servers where servers is name of component. Here we will describe how to it manually. Component is basicaly a typescript class. We will create new component called server.</summary></entry></feed>
+&lt;p&gt;The MDN (Mozilla Developer Network) offers nice lists of all properties and events of the element you’re interested in. Googling for YOUR_ELEMENT properties  or YOUR_ELEMENT events  should yield nice results.&lt;/p&gt;</content><author><name></name></author><category term="angular" /><category term="angular" /><summary type="html">app/servers/servers.component.ts import { Component, OnInit } from '@angular/core'; @Component({ selector: 'app-servers', templateUrl: './servers.component.html' }) export class ServersComponent implements OnInit { allowNewServer = false; serverId = 10; serverStatus = 'offline'; serverName = ''; constructor() { setTimeOut(() =&amp;gt; { this.allowNewServer = true; },2000); } ngOnInit() { } onCreateServer() { //do something } onUpdateServerName(event: Event) { this.serverName = (&amp;lt;HTMLInputElement&amp;gt;event.target).value; } } In template [] means property binding, () means event binding. String interpolation This is one way data binding, we are just printing out serverId and serverStatus property. app/servers/servers.component.html {{serverId}} is {{serverStatus}} Property Binding app/servers/servers.component.html &amp;lt;button [disabled]=&quot;!allowNewServer&quot;&amp;gt;Add Server&amp;lt;/button&amp;gt; Event Binding app/servers/servers.component.html &amp;lt;button [disabled]=&quot;!allowNewServer&quot; (click)=&quot;onCreateServer()&quot;&amp;gt;Add Server&amp;lt;/button&amp;gt; Passing and Using Data with Event Binding app/servers/servers.component.html &amp;lt;input type=&quot;text&quot; (input)=&quot;onUpdateServerName($event)&quot;&amp;gt; $event is reserved variable, it contains data which comes from input, so in this case what you type. Two-Way Data Binding We combine property and event binding. Important: For Two-Way-Binding to work, you need to enable the ngModel directive. This is done by adding the FormsModule to the imports[] array in the AppModule. You then also need to add the import from @angular/forms in the app.module.ts file: import { FormsModule } from '@angular/forms'; Following code will update value of serverName, when you type inside the input. But it will also update value of input if you change value of serverName from somewhere else. app/servers/servers.component.html &amp;lt;input type=&quot;text&quot; [(ngModel)]=&quot;serverName&quot;&amp;gt; How do you know to which Properties or Events of HTML Elements you may bind? You can basically bind to all Properties and Events - a good idea is to console.log() the element you’re interested in to see which properties and events it offers. Important: For events, you don’t bind to onclick but only to click (=&amp;gt; (click)). The MDN (Mozilla Developer Network) offers nice lists of all properties and events of the element you’re interested in. Googling for YOUR_ELEMENT properties or YOUR_ELEMENT events should yield nice results.</summary></entry></feed>

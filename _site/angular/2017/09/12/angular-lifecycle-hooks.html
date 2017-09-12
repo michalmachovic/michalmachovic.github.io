@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Michal Machovic</title>
-  <meta name="description" content="Awesome blog about webdevelopment which will save our world from aliens!">
+  <title>Angular: Lifecycle hooks</title>
+  <meta name="description" content="A component has a lifecycle managed by Angular. Angular creates it, renders it, creates and renders its children, checks it when its data-bound properties ch...">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/">
+  <link rel="canonical" href="http://localhost:4000/angular/2017/09/12/angular-lifecycle-hooks.html">
   <link rel="alternate" type="application/rss+xml" title="Michal Machovic" href="/feed.xml">
   
   
@@ -72,173 +72,88 @@
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Angular: Lifecycle hooks</h1>
+    <p class="post-meta">
+      <time datetime="2017-09-12T06:13:26+02:00" itemprop="datePublished">
+        
+        Sep 12, 2017
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>A component has a lifecycle managed by Angular.
+<br /><br />
+Angular creates it, renders it, creates and renders its children, checks it when its data-bound properties change, and destroys it before removing it from the DOM.
+<br /><br />
+Angular offers lifecycle hooks that provide visibility into these key life moments and the ability to act when they occur.
+<br /><br />
+A directive has the same set of lifecycle hooks, minus the hooks that are specific to component content and views.
+<br /><br />
+So this is usefull if you want to run some specific piece of code after component was created, or destroyed or something changed.</p>
+
+<p><br /><br /></p>
+
+<p><code class="highlighter-rouge">ngOnChanges()</code>
+<br />
+Respond when Angular (re)sets data-bound input properties. The method receives a SimpleChanges object of current and previous property values.
+Called before ngOnInit() and whenever one or more data-bound input properties change
+<br /><br /></p>
+
+<p><code class="highlighter-rouge">ngOnInit()</code>
+<br />
+Initialize the directive/component after Angular first displays the data-bound properties and sets the directive/component’s input properties.
+Called once, after the first ngOnChanges().
+<br /><br /></p>
+
+<p><code class="highlighter-rouge">ngDoCheck()</code>
+<br />
+Detect and act upon changes that Angular can’t or won’t detect on its own.
+Called during every change detection run, immediately after ngOnChanges() and ngOnInit().
+<br /><br /></p>
+
+<p><code class="highlighter-rouge">ngAfterContentInit()</code>
+<br />
+Respond after Angular projects external content into the component’s view.
+Called once after the first ngDoCheck().
+A component-only hook.
+<br /><br /></p>
+
+<p><code class="highlighter-rouge">ngAfterContentChecked()</code>
+<br />
+Respond after Angular checks the content projected into the component.
+Called after the ngAfterContentInit() and every subsequent ngDoCheck().
+A component-only hook
+<br /><br /></p>
+
+<p><code class="highlighter-rouge">ngAfterViewInit()</code>
+<br />
+Respond after Angular initializes the component’s views and child views.
+Called once after the first ngAfterContentChecked().
+A component-only hook.
+<br /><br /></p>
+
+<p><code class="highlighter-rouge">ngAfterViewChecked()</code>
+<br />
+Respond after Angular checks the component’s views and child views.
+Called after the ngAfterViewInit and every subsequent ngAfterContentChecked().
+A component-only hook.
+<br /><br /></p>
+
+<p><code class="highlighter-rouge">ngOnDestroy()</code>
+<br />
+Cleanup just before Angular destroys the directive/component. Unsubscribe Observables and detach event handlers to avoid memory leaks.
+Called just before Angular destroys the directive/component.
+<br /><br /></p>
+
+
+  </div>
+
   
-  
-
-
-  <ul class="post-list">
-    
-      <li>
-        
-        <span class="post-meta">Sep 12, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/09/12/angular-projecting-content-into-component.html">Angular: Projecting content into component</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Sep 12, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/09/12/angular-lifecycle-hooks.html">Angular: Lifecycle hooks</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Sep 9, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/magento2/2017/09/09/magento2-log.html">Magento2: Recompile and content deploy</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 15, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/08/15/angular-using-local-references.html">Angular: Using local references</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 15, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/08/15/angular-binding-to-custom-events.html">Angular: Binding to custom events</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 15, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/typescript/2017/08/15/typescript-tips.html">Typescript: Tips</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 15, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/08/15/angular-binding-to-custom-properties.html">Angular: Binding to custom properties</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 15, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/08/15/angular-models.html">Angular: Models</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 9, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/08/09/angular-directives.html">Angular: Directives</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 8, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/08/08/angular-data-binding.html">Angular: Data Binding</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 7, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/toolkit/2017/08/07/toolkit.html">Toolkit</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 7, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/08/07/angular-new-component.html">Angular: New component</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 1, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/jekyll/2017/08/01/jekyll-github-pages-local.html">Jekyll: Run site locally</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Jul 27, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/design/2017/07/27/design-free-resources.html">Design: Free Resources</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Jul 27, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/07/27/angular-new-app.html">Angular: New app</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Jul 27, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/angular/2017/07/27/angular-installation.html">Angular: Installation</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Jul 27, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/jekyll/update/2017/07/27/welcome-to-jekyll.html">Welcome to Jekyll!</a>
-        </h2>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
-
-</div>
+</article>
 
       </div>
     </main>
