@@ -18,7 +18,15 @@ var extra = {
     },
 
     ui: (function() {
-
+    	var ua = navigator.userAgent;
+	    
+		return {
+	      IE:             !!window.attachEvent && !isOpera,
+	      Opera:          isOpera,
+	      WebKit:         ua.indexOf('AppleWebKit/') > -1,
+	      Gecko:          ua.indexOf('Gecko') > -1 && ua.indexOf('KHTML') === -1,
+	      MobileSafari:   /Apple.*Mobile.*Safari/.test(ua)
+	    }
     })(),
 
 
