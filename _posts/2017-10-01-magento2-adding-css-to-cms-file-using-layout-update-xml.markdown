@@ -91,7 +91,7 @@ You need to add <br />
 <br /><br />
 
 Complete file:<br />
-{% highlight xml}
+{% highlight xml %}
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /**
@@ -122,14 +122,14 @@ Complete file:<br />
         </xs:unique>
     </xs:element>
 </xs:schema>
-{% endhighlight}
+{% endhighlight %}
 
 <br />
 
 Now you can go to your CMS page and Layout update XML section add<br />
 
-{% highlight html}
+{% highlight html %}
 <head>
     <css src="css/brands.css"/>
 </head>            
-{% endhighlight}
+{% endhighlight %}
