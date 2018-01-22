@@ -7,12 +7,12 @@ tags: [linux]
 ---
 
 
-`sudo apt-get update`
-`sudo apt-get upgrade`
-`sudo apt-get install synaptic`
-
+`sudo apt-get update`<br />
+`sudo apt-get upgrade`<br />
+`sudo apt-get install synaptic`<br />
+<br />
 Installation of gstreamer in shell is:
 
-`sudo add-apt-repository ppa:mc3man/gstffmpeg-keep`
-`sudo apt-get update`
-`sudo apt-get install gstreamer0.10-ffmpeg`
+`sudo add-apt-repository ppa:mc3man/gstffmpeg-keep`<br />
+`sudo apt-get update`<br />
+`sudo apt-get install gstreamer0.10-ffmpeg`<br />
