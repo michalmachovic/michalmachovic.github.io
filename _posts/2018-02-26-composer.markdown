@@ -1,0 +1,62 @@
+---
+layout: post
+title:  "Composer: Installation and usage"
+date:   2018-02-14 06:13:26 +0200
+category: [php,composer]
+tags: [php]
+---
+
+<h2>Install Composer</h2>
+You can skip this step if you’ve already installed the Composer.
+{% highlight ts %}
+curl -sS https://getcomposer.org/installer | php
+{% endhighlight %}
+<br /><br />
+
+
+<h2>Make Composer Globally Available</h2>
+If you wish, you can additionally install Composer globally so you don’t have to type php/path/to/composer.phar every time. The Windows installer will automatically set up the PATH system variable.
+
+{% highlight ts %}
+mv composer.phar /usr/local/bin/composer
+{% endhighlight %}
+<br /><br />
+
+
+<h2>Working with private repositories</h2>
+Add composer.json file into your repository which describes it:
+<br /><br />
+{% highlight ts %}
+{
+  "name": "michalmachovic/composertest",
+  "description": "Composer test",
+  "type": "vcs",
+  "url": "git@github.com:michalmachovic/composertest.git",
+  
+}
+{% endhighlight %}
+
+<br /><br />
+Add following to your main project composer.json file
+{% highlight ts %}
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:michalmachovic/composertest.git"
+    }
+  ],
+  "require": {
+    "michalmachovic/composertest": "@dev"
+  }
+}
+{% endhighlight %}
+
+<br /><br />
+Then run
+`composer install` - Installs the project dependencies from the composer.lock file if present, or falls back on the composer.json.
+<br /><br />
+`composer update` - Updates your dependencies to the latest version according to composer.json, and updates the composer.lock file.
+
+
+<br /><br />
