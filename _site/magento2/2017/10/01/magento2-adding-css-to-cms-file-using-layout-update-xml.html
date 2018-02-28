@@ -146,6 +146,61 @@ Page source code result:</p>
 
 <h2>Adding CSS to a specific CMS page using Layout Update XML</h2>
 
+<p>If you want to insert css to only one specific cms page, there is opened Magento2 bug (https://github.com/magento/magento2/issues/4454), which dont allow you to insert &lt;head&gt; block using Layou XML update.<br /></p>
+
+<p>You need to update<br /></p>
+
+<p><code class="highlighter-rouge">vendor/magento/framework/View/Layout/etc/page_layout.xsd</code><br />
+You need to add <br /></p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"> <span class="nt">&lt;xs:include</span> <span class="na">schemaLocation=</span><span class="s">"urn:magento:framework:View/Layout/etc/head.xsd"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;xs:include</span> <span class="na">schemaLocation=</span><span class="s">"urn:magento:framework:View/Layout/etc/body.xsd"</span><span class="nt">/&gt;</span>
+
+            <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"head"</span> <span class="na">type=</span><span class="s">"headType"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"body"</span> <span class="na">type=</span><span class="s">"bodyType"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span></code></pre></figure>
+
+<p><br /><br /></p>
+
+<p>Complete file:<br /></p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="c">&lt;!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+--&gt;</span>
+<span class="nt">&lt;xs:schema</span> <span class="na">xmlns:xs=</span><span class="s">"http://www.w3.org/2001/XMLSchema"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;xs:include</span> <span class="na">schemaLocation=</span><span class="s">"urn:magento:framework:View/Layout/etc/elements.xsd"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;xs:include</span> <span class="na">schemaLocation=</span><span class="s">"urn:magento:framework:View/Layout/etc/head.xsd"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;xs:include</span> <span class="na">schemaLocation=</span><span class="s">"urn:magento:framework:View/Layout/etc/body.xsd"</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;xs:complexType</span> <span class="na">name=</span><span class="s">"pageLayoutType"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;xs:sequence</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;xs:element</span> <span class="na">ref=</span><span class="s">"referenceContainer"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;xs:element</span> <span class="na">ref=</span><span class="s">"container"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;xs:element</span> <span class="na">ref=</span><span class="s">"update"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;xs:element</span> <span class="na">ref=</span><span class="s">"move"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"head"</span> <span class="na">type=</span><span class="s">"headType"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"body"</span> <span class="na">type=</span><span class="s">"bodyType"</span> <span class="na">minOccurs=</span><span class="s">"0"</span> <span class="na">maxOccurs=</span><span class="s">"unbounded"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/xs:sequence&gt;</span>
+    <span class="nt">&lt;/xs:complexType&gt;</span>
+
+    <span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">"layout"</span> <span class="na">type=</span><span class="s">"pageLayoutType"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;xs:unique</span> <span class="na">name=</span><span class="s">"containerKey"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;xs:selector</span> <span class="na">xpath=</span><span class="s">".//container"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;xs:field</span> <span class="na">xpath=</span><span class="s">"@name"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/xs:unique&gt;</span>
+    <span class="nt">&lt;/xs:element&gt;</span>
+<span class="nt">&lt;/xs:schema&gt;</span></code></pre></figure>
+
+<p><br /></p>
+
+<p>Now you can go to your CMS page and Layout update XML section add<br /></p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;css</span> <span class="na">src=</span><span class="s">"css/brands.css"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/head&gt;</span>            </code></pre></figure>
 
   </div>
 
@@ -169,8 +224,6 @@ Page source code result:</p>
               Michal Machovic
             
             </li>
-            
-            <li><a href="mailto:michal.machovic@gmail.com">michal.machovic@gmail.com</a></li>
             
         </ul>
       </div>
@@ -196,8 +249,7 @@ Page source code result:</p>
       </div>
 
       <div class="footer-col footer-col-3">
-        <p>Awesome blog about webdevelopment which will save our world from aliens!
-</p>
+        <p></p>
       </div>
     </div>
 
