@@ -30,7 +30,22 @@ Run the following command in the root directory.
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition .
 {% endhighlight %}
 <br /><br />
-
+You can get message about missing libraries, following you will require:
+<br />
+ext-mbstring<br />
+ext-gd<br />
+ext-mcrypt<br />
+ext-bcmath<br />
+ext-curl<br />
+ext-intl<br />
+ext-zip<br />
+ext-soap<br />
+<br />
+You can install them with following command:
+{% highlight ts %}
+sudo apt-get install php7.0-mbstring php7.0-gd php7.0-mcrypt php7.0-bcmath php7.0-curl php7.0-intl php7.0-zip php7.0-soap 
+{% endhighlight %}
+<br /><br />
 
 <h2>Set Up Permissions</h2>
 After all the dependencies are retrieved, you should set the correct permissions on the entire Magento 2 installation directory. The official documentation recommends chmod’ing all directories to 700 and all files to a level of 600, however that didnt work for me.
