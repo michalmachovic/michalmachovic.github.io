@@ -71,6 +71,26 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES ('d
 <br /><br />
 
 
+<h2>Admin not working</h2>
+in file `/etc/apache2/apache2.conf` make sure you have `AllowOverride All`
+{% highlight ts %}
+<Directory /var/www/>
+Options Indexes FollowSymLinks
+AllowOverride All
+Require all granted
+{% endhighlight %}
+
+<br /><br />
+
+{% highlight ts %}
+sudo a2enmod rewrite
+sudo service apache2 restart
+{% endhighlight %}
+
+<br /><br />
+
+
+
 <h2>Deploy static content and clear cache with magerun</h2>
 {% highlight ts %}
 n98-magerun2.phar cache:clean && n98-magerun2.phar cache:flush && sudo chmod 777 var -R && sudo chmod 777 pub -R
