@@ -96,3 +96,11 @@ sudo service apache2 restart
 n98-magerun2.phar cache:clean && n98-magerun2.phar cache:flush && sudo chmod 777 var -R && sudo chmod 777 pub -R
 {% endhighlight %}
 <br /><br />
+
+
+<h2>Upgrade and compile (if you are adding some new modules with composer)</h2>
+ {% highlight ts %}
+ sudo php bin/magento setup:upgrade
+ sudo php bin/magento setup:di:compile
+ sudo n98-magerun2.phar cache:clean && sudo n98-magerun2.phar cache:flush && sudo chmod 777 var -R && sudo chmod 777 pub -R
+ {% endhighlight %}
