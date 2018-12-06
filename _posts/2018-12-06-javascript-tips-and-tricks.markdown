@@ -7,11 +7,22 @@ tags: [javascript,tips,tricks]
 ---
 
 <h2>Query selector</h2>
-When you want to select some element.
+This return first element which has class="test" and changes its css display to none.
 
 <br />
 {% highlight php %}
 document.querySelector('.test').style.display = 'none';
+{% endhighlight %}
+<br /><br />
+
+
+
+<h2>getElementById</h2>
+This return element which has id="test". It is faster than querySelector.
+
+<br />
+{% highlight php %}
+document.getElementById('test').style.display = 'none';
 {% endhighlight %}
 <br /><br />
 
