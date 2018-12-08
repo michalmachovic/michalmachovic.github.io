@@ -48,3 +48,23 @@ document.querySelector('.another-test').addEventListener('click', function() {
 
 {% endhighlight %}
 <br /><br />
+
+
+<h2>Objects</h2>
+<b>Instantiation and inheritance</b> 
+All methods which we want to be inherited, we put in prototype property. Putting it directly into Person object isnt good idea, because then each object will have this function, which isnt effective.
+<br /><br />
+{% highlight php %}
+var Person = function(name, yearOfBirth, job) {
+	this.name = name;
+	this.yearOfBirth = yearOfBirth;
+	this.job = job;
+}
+
+Person.prototype.calculateAge = function() {
+	console.log(2018 - this.yearOfBirth);
+}
+
+var john = new Person('john', 1990, 'teacher');
+john.calculateAge();
+{% endhighlight %}
