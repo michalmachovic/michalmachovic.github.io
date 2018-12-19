@@ -14,7 +14,7 @@ First we start using a anonymous closure. Anonymous closures are just functions 
 This pattern is well known as a Immediately Invoked Function Expression or IIFE. The function is evaluated then immediately invoked. Its also a good practice to run your modules in ES5 strict mode. Strict mode will protect you from some of the more dangerous parts in JavaScript.
 <br /> <br />
 
-{% highlight php %}
+{% highlight javascript %}
 (function() {
     'use strict';
     // Your code here
@@ -28,7 +28,7 @@ This pattern is well known as a Immediately Invoked Function Expression or IIFE.
 With this construct, our anonymous function has its own evaluation environment or “closure”, and then we immediately evaluate it. This lets us hide variables from the parent (global) namespace.
 What’s nice about this approach is that is that you can use local variables inside this function without accidentally overwriting existing global variables, yet still access the global variables, like so:
 <br />
-{% highlight php %}
+{% highlight javascript %}
 var global = 'Hello, I am a global variable :)';
 (function () {
   // We keep these variables private inside this closure scope
@@ -50,7 +50,7 @@ var global = 'Hello, I am a global variable :)';
 <h2>Example 2: Global Import</h2>
 Another popular approach used by libraries like jQuery is global import. It’s similar to the anonymous closure we just saw, except now we pass in globals as parameters. In this example, globalVariable is the only variable that’s global. The benefit of this approach over anonymous closures is that you declare the global variables upfront, making it crystal clear to people reading your code.
 <br />
-{% highlight php %}
+{% highlight javascript %}
 var global = 'Hello, I am a global variable :)';
 (function (global) {
 
@@ -72,7 +72,7 @@ Yet another approach is to create modules using a self-contained object interfac
 <br /><br />
 You may have noticed the _ before our private methods and properties. Because JavaScript does not have a private keyword its common to prefix private properties with an underscore.
 <br />
-{% highlight php %}
+{% highlight javascript %}
 var myModule = (function() {
     'use strict';
  
@@ -96,7 +96,7 @@ var myModule = (function() {
 The Revealing Module Pattern is one of the most popular ways of creating modules. Using the return statement we can return a object literal that ‘reveals’ only the methods or properties we want to be publicly available.
 
 <br />
-{% highlight php %}
+{% highlight javascript %}
 var myModule = (function() {
     'use strict';
  
