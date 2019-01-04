@@ -1,0 +1,152 @@
+---
+layout: post
+title:  "Javascript: ES6 / ES2015"
+date:   2019-01-04 06:13:26 +0200
+category: javascript
+tags: [javascript,es6,2015]
+---
+
+
+<br /><br />
+<h2>Data privacy</h2>
+<br /> <br />
+
+{% highlight javascript %}
+//ES5
+(function() {
+   var c = 3;
+}());
+
+
+//ES6
+{
+  let c = 3;
+}
+{% endhighlight %}
+<br /><br />
+
+
+<br /><br />
+<h2>Strings</h2>
+<br /> <br />
+{% highlight javascript %}
+//ES5
+var firstName = 'John';
+var lastName = 'Smith';
+
+console.log('This is ' + firstName + ' ' + lastName);
+
+//ES6
+let firstName = 'John';
+let lastName = 'Smith';
+
+console.log(`This is ${firstName} ${lastName}`);
+
+const n = `This is ${firstName} ${lastName}`;
+let stringStart = n.startsWith('j');
+let stringEnd = n.endsWith('h');
+let stringIncludes = n.includes('o');
+{% endhighlight %}
+
+
+
+<br /><br />
+<h2>Arrow functions - Lexical 'this' keyword</h2>
+<br /> <br />
+We have two functions here. First is `clickMe`, thats function attached to object, so it is a method, so using `this` keyword inside this function will point to that object. Second function is callback function called in addEventListener, that is regular function. In regular functions, keyword `this` points to global object - window.
+<br /><br />
+{% highlight javascript %}
+//ES5
+var box = {
+    color: 'green',
+    position: 1,
+    clickMe: function() {
+
+      console.log(this.color);   //this will work
+      console.log(this.position);  //this will work
+
+      document.querySelector('.green').addEventListener('click'), 
+        function() {
+          console.log(this.color);  //this will not work
+          console.log(this.position); //this will not work
+        }
+    }
+}
+{% endhighlight %}
+
+<br /><br />
+Solution is to defined new variable called usually `self` which will hold current `this`.
+{% highlight javascript %}
+//ES5 - SOLUTION
+var box = {
+    color: 'green',
+    position: 1,
+    clickMe: function() {
+
+      console.log(this.color);   //this will work
+      console.log(this.position);  //this will work
+      
+      var self = this;
+      document.querySelector('.green').addEventListener('click'), 
+        function() {
+          console.log(self.color);  //this will not work
+          console.log(self.position); //this will not work
+        }
+    }
+}
+{% endhighlight %}
+
+
+
+<br /><br />
+In ES6 when using arrow function, it shares its lexical `this` with its surrounding, in this case `clickMe` method. And inside `clickMe` method, `this` keyword points to the object.
+{% highlight javascript %}
+//ES6 - SOLUTION
+var box = {
+    color: 'green',
+    position: 1,
+    clickMe: function() {
+
+      console.log(this.color);   //this will work
+      console.log(this.position);  //this will work
+      
+      var self = this;
+      document.querySelector('.green').addEventListener('click'), 
+        () => {
+          console.log(this.color);  //this will work
+          console.log(this.position); //this will  work
+        }
+    }
+}
+{% endhighlight %}
+NOTE: Now if you change `clickMe` from function to arrow function, it will not work again as it will share `this` with its surrounding, which in this case is global window object.
+
+
+
+<br /><br />
+<h2>Arrow functions - Lexical 'this' keyword - prototype</h2>
+In this case we added `bind(this)` after the `map` function. Without that `this` inside will not work. With bind function we can send copy of that inside, so we are sending copy of `this`.
+<br /> <br />
+{% highlight javascript %}
+function Person(name) {
+  this.name = name;
+}
+
+//ES5
+Person.prototype.myFriends = function(friends) {
+  var arr = friends.map(function(el) {
+    return this.name + ' is friends with ' + el;
+  }.bind(this));
+
+  console.log(arr);
+}
+
+var friends = ['Bob', 'Jane', 'Mark'];
+Person('John').myFriends(friends);
+{% endhighlight %}
+
+<br/><br/>
+It is easier in ES6 with arrow function.
+{% highlight javascript %}
+  var arr = friends.map(el => `${this.name} is friends with ${el}`);
+{% endhighlight %}
