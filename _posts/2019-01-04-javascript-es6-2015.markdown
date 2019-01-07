@@ -3,7 +3,7 @@ layout: post
 title:  "Javascript: ES6 / ES2015"
 date:   2019-01-04 06:13:26 +0200
 category: javascript
-tags: [javascript,es6,2015]
+tags: [javascript,es6,es2015]
 ---
 
 
@@ -130,7 +130,8 @@ In this case we added `bind(this)` after the `map` function. Without that `this`
 {% highlight javascript %}
 function Person(name) {
   this.name = name;
-}
+}88michal
+
 
 //ES5
 Person.prototype.myFriends = function(friends) {
