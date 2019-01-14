@@ -168,3 +168,11 @@ We must also create `.babelrc` file in app folder.
     ]
 }
 {% endhighlight %}
+
+<br /><br />
+
+When i tested this, it runs to error `Cannot find module '@babel/core'`. I fixed this with following command.
+
+{% highlight javascript %}
+npm install --save-dev @babel/core @babel/preset-env
+{% endhighlight %}
