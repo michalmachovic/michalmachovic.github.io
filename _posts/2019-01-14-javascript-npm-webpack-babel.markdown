@@ -102,7 +102,6 @@ With this previous setup, we must run `npm run dev` each time we make some chang
   npm install html-webpack-plugin --save-dev
   npm install babel-core babel-preset-env babel-loader --save-dev
   npm install babel-polyfill --save
-  {% endhighlight %}
 {% endhighlight %}
 
 <br /><br />
@@ -110,7 +109,6 @@ This is how will look updated `scripts` part of `package.json` file. We added `s
 <br /> 
 
 {% highlight javascript %}
-{
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
