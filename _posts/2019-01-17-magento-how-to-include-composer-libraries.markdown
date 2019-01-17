@@ -8,9 +8,9 @@ tags: [magento,composer]
 
 
 <br /><br />
-This article is taken from [http://davemacaulay.com/how-to-include-composer-libraries-within-magento/].
+This article is taken from [http://davemacaulay.com/how-to-include-composer-libraries-within-magento/]: davemacaulay.com/how-to-include-composer-libraries-within-magento/.
 <br /><br />
-Recently I’ve been playing around with Elasticsearch and I had the need to use their PHP library with Magento. As this library wasn’t conforming to the Zend standard I had some issues getting everything up and running.
+Recently I’ve been playing around with `Elasticsearch` and I had the need to use their PHP library with Magento. As this library wasn’t conforming to the Zend standard I had some issues getting everything up and running.
 <br /><br />
 Firstly create a new folder in your lib directory. In my case I created one called `lib/Elasticsearch/` then within this directory create your `composer.json` file, in my instance I used this.
 
@@ -34,11 +34,11 @@ Then navigate to the folder via command line and run the standard
 This will create a vendor folder in your directory, so now you’ll have `lib/Elasticsearch/vendor` with the required packages and dependencies.
 <br /><br />
 
-Now you’ll need to create a new module to get the autoloading working. Considering I’m building a Magento Elasticsearch module for Gene I called mine `Gene/Elasticsearch`. Once you’ve created this module create a new observer event within your config.xml for the `controller_front_init_before` event.
+Now you’ll need to create a new module to get the autoloading working. Considering I’m building a Magento Elasticsearch module for `Gene` I called mine `Gene/Elasticsearch`. Once you’ve created this module create a new observer event within your config.xml for the `controller_front_init_before` event.
 
 <br /><br />
 
-{% highlight php %}
+{% highlight xml %}
 <events>
     <!-- Support the lib/Elasticsearch/ folder -->
     <controller_front_init_before>
@@ -54,9 +54,9 @@ Now you’ll need to create a new module to get the autoloading working. Conside
 {% endhighlight %}
 
 <br /><br />
-Within this we’re declaring that we want the `controllerFrontInitBefore` function to run when Magento does it’s own controller_front_init_before. This is an early event allowing us to get our autoloader in on every page that requires a controller. If you need it elsewhere then keep reading!
+Within this we’re declaring that we want the `controllerFrontInitBefore` function to run when Magento does it’s own `controller_front_init_before`. This is an early event allowing us to get our autoloader in on every page that requires a controller. If you need it elsewhere then keep reading!
 <br /><br />
-Now you need to create your `Observer.php` in your Model folder. Below is an example of the file I’m using.
+Now you need to create your `Observer.php` in your `Model` folder. Below is an example of the file I’m using.
 <br /><br />
 
 {% highlight php %}
@@ -97,4 +97,4 @@ You will need to alter the ‘Elasticseach’ path to the name you gave your fol
 <br /><br />
 
 <h2>My updates</h2>
-In the controller file, in some action when i want to use it, then i have to run `Gene_Elasticsearch_Model_Observer::init();`. Also if PHP library is using namespaces, in th beginning of controller file i have to add `use Auth0\SDK\Auth0;` (i was using php `Auth0` library - [https://github.com/auth0/auth0-PHP]).
+In the controller file, in some action when i want to use it, then i have to run `Gene_Elasticsearch_Model_Observer::init();`. Also if PHP library is using namespaces, in the beginning of controller file i have to add `use Auth0\SDK\Auth0;` (i was using php `Auth0` library - [https://github.com/auth0/auth0-PHP]: github.com/auth0/auth0-PHP).
