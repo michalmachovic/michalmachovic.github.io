@@ -9,8 +9,6 @@ tags: [javascript,es6,es2015]
 
 <br /><br />
 <h2>Data privacy</h2>
-<br /> <br />
-
 {% highlight javascript %}
 //ES5
 (function() {
@@ -28,7 +26,6 @@ tags: [javascript,es6,es2015]
 
 <br /><br />
 <h2>Strings</h2>
-<br /> <br />
 {% highlight javascript %}
 //ES5
 var firstName = 'John';
@@ -48,11 +45,16 @@ let stringEnd = n.endsWith('h');
 let stringIncludes = n.includes('o');
 {% endhighlight %}
 
-
+<br /><br />
+<h2>Map function</h2>
+In this example we have number 2.5. We want to split it into 2 variables. We must convert it to `string`, then split by `.`, and then convert it back to `integer`.
+{% highlight javascript %}
+count = 2.5;
+const [int, dec] = count.toString().split('.').map(el => parseInt(el, 10));
+{% endhighlight %}
 
 <br /><br />
 <h2>Arrow functions - Lexical 'this' keyword</h2>
-<br /> <br />
 We have two functions here. First is `clickMe`, thats function attached to object, so it is a method, so using `this` keyword inside this function will point to that object. Second function is callback function called in addEventListener, that is regular function. In regular functions, keyword `this` points to global object - window.
 <br /><br />
 {% highlight javascript %}
