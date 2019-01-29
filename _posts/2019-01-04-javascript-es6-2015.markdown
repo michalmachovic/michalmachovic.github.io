@@ -46,11 +46,25 @@ let stringIncludes = n.includes('o');
 {% endhighlight %}
 
 <br /><br />
-<h2>Map function</h2>
+<h2>map</h2>
 In this example we have number 2.5. We want to split it into 2 variables. We must convert it to `string`, then split by `.`, and then convert it back to `integer`.
 {% highlight javascript %}
 count = 2.5;
 const [int, dec] = count.toString().split('.').map(el => parseInt(el, 10));
+{% endhighlight %}
+
+
+<br /><br />
+<h2>findIndex / find</h2>
+{% highlight javascript %}
+function deleteItem(id) {
+    const index = this.items.findIndex(el => el.id === id);
+    this.items.splice(index, 1);
+}
+
+function updateCount(id, newCount) {
+    this.items.find(el => el.id === id).count = newCount;
+}
 {% endhighlight %}
 
 <br /><br />
