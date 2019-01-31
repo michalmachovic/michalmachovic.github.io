@@ -13,8 +13,9 @@ Node.js is an open-source, cross-platform JavaScript run-time environment that e
 Following example will read file content of `data.json` file and convert it into object. `__dirname` is root folder of your project.
 <br /><br />
 
-`index.js`
+
 {% highlight javascript %}
+//index.js
 const fs = require('fs'); //filesystem module
 
 const json = fs.readFileSync(`${__dirname}/data/data.json`, 'utf-8');
@@ -24,8 +25,9 @@ console.log(laptopData);
 {% endhighlight %}
 
 
-`data/data.json`
+
 {% highlight javascript %}
+//data/data.json
 [
     {
         "id": "0",
