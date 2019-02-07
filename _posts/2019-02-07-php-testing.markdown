@@ -227,7 +227,7 @@ class KalkulackaTest extends \Codeception\Test\Unit
     /**
     * @expectedException InvalidArgumentException
     */
-    public function testDeleniVyjimka()
+    public functoin testDeleniVyjimka()
     {
         $this->kalkulacka->vydel(2, 0);
     }
@@ -236,12 +236,12 @@ class KalkulackaTest extends \Codeception\Test\Unit
 
 `assertEquals()` parameters: <br />
 1 - expected value <br/>
-2 - actual value
-3 - error message
-4 - result tolerance
+2 - actual value<br/>
+3 - error message<br/>
+4 - result tolerance<br/>
 
 <Br /><br />
-Using `@expectedException InvalidArgumentException` in `testDeleniVyjimka` is testing it really happens exception with zero. 
+Using `@expectedException InvalidArgumentException` in `testDeleniVyjimka` is testing if really happens exception with zero. 
 
 <br /><br />
 Run test with `php codecept.phar run unit`. You should see something like:
