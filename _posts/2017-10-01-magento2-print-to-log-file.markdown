@@ -12,8 +12,8 @@ For `$logger->debug` you need to set `"Stores" -> "Configuration" -> "Advanced" 
 {% highlight php %}
 <?php
 $logger = \Magento\Framework\App\ObjectManager::getInstance()->get('\Psr\Log\LoggerInterface');
-$logger->info('*********************************************TEST****');
-$logger->debug('*********************************************TEST****');
+$logger->info('*******TEST****');
+$logger->debug('*********TEST****');
 ?>
 {% endhighlight %}
 
@@ -33,11 +33,11 @@ class Test {
     }
 
     public function execute() {
-        $this->_logger->info('*********************************************TEST NEW CRON****');
-        $this->_logger->debug('*********************************************TEST NEW CRON****');
+        $this->_logger->info('*****TEST NEW CRON****');
+        $this->_logger->debug('********TEST NEW CRON****');
         return $this;
     }
 }
-
+{% endhighlight %}
 
 
