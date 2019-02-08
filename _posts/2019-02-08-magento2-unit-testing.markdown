@@ -46,9 +46,9 @@ registration.php
 
 <?php
  
-namespace Gateway3D\Helloworld\Test\Unit;
+namespace MichalMachovic\Helloworld\Test\Unit;
  
-use Gateway3D\Helloworld\Block\Helloworld;
+use MichalMachovic\Helloworld\Block\Helloworld;
  
 class SampleTest extends \PHPUnit\Framework\TestCase
 {
@@ -59,7 +59,7 @@ class SampleTest extends \PHPUnit\Framework\TestCase
     public function setUp()
     {
         $objectManager = new \Magento\Framework\TestFramework\Unit\Helper\ObjectManager($this);
-        $this->sampleClass = $objectManager->getObject('Gateway3D\Helloworld\Block\Helloworld');
+        $this->sampleClass = $objectManager->getObject('MichalMachovic\Helloworld\Block\Helloworld');
         $this->expectedMessage = 'Hello world!';
     }
  
@@ -77,7 +77,7 @@ There is `PHPUnit` configuration file shipped with Magento 2 – `{ROOT}/dev/tes
 {% highlight xml %}
 //dev/tests/unit/phpunit.xml
 <testsuite name="Magento Unit Tests">
-        <directory suffix="Test.php">../../../app/code/Gateway3D/Helloworld/Test/Unit</directory>
+        <directory suffix="Test.php">../../../app/code/MichalMachovic/Helloworld/Test/Unit</directory>
 </testsuite>
 {% endhighlight %}
 
