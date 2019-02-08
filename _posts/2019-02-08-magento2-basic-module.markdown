@@ -1,6 +1,6 @@
 ---
 layout: post
-date:   2019-02-07 06:13:26 +0200
+date:   2019-02-08 06:13:26 +0200
 title:  "Magento2: Basic Frontend Module"
 category: php, magento2
 tags: [magento2,module,frontend]
