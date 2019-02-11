@@ -8,6 +8,7 @@ tags: [magento2,module,frontend]
 
 We will do simple module which will write `Hello world` to frontend.  Copy source code under app/code/MichalMachovic/Helloworld. Activate the module, then you can see Hello world! on `[YOUR_SITE]/helloworld/index/index`.
 
+<h2>Structure</h2>
 {% highlight php %}
 Block
  |
@@ -35,9 +36,9 @@ view
 registration.php
 {% endhighlight %}
 
-
+<br /><br />
+<h2>registration.php</h2>
 {% highlight php %}
-//registration.php
 <?php
 
 \Magento\Framework\Component\ComponentRegistrar::register(
@@ -48,8 +49,10 @@ registration.php
 {% endhighlight %}
 
 
+
+<br /><br />
+<h2>etc/module.xml</h2>
 {% highlight xml %}
-//etc/module.xml
 <?xml version="1.0"?>
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
@@ -58,7 +61,7 @@ registration.php
 {% endhighlight %}
 
 <br /><br />
-<h2>routes.xml</h2>
+<h2>etc/routes.xml</h2>
 Lets take url `http://localhost/magento2/sites/m2test/helloworld/index/index`. In Magento 2, each individual module can claim a `front name`. The `front name` is the `first segment of the URL` — in our case that’s `helloworld`. When a module `claims` a front name, that is its way of saying: <br /><br />
  `Hello Magento systems code — if you see any URLs that start with /helloworld, I have controllers for them`
  <br /><br />
@@ -82,9 +85,10 @@ So following piece of code means: If there is url that starts with `helloworld`,
 </config>
 {% endhighlight %}
 
-{% highlight php %}
-//Controller/Index/Index.php
 
+<br /><br />
+<h2>Controller/Index/Index.php</h2>
+{% highlight php %}
 <?php
  
 namespace MichalMachovic\Helloworld\Controller\Index;
@@ -109,9 +113,10 @@ class Index extends \Magento\Framework\App\Action\Action
 }
 {% endhighlight %}
 
-{% highlight php %}
-//Block/Helloworld.php
 
+<br /><br />
+<h2>Block/Helloworld.php</h2>
+{% highlight php %}
 <?php
 namespace MichalMachovic\Helloworld\Block;
  
@@ -124,8 +129,10 @@ class Helloworld extends \Magento\Framework\View\Element\Template
 }
 {% endhighlight %}
 
+
+<br /><br />
+<h2>view/frontend/layout/helloworld_index_index_.xml</h2>
 {% highlight xml %}
-//view/frontend/layout/helloworld_index_index_.xml
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd" layout="1column">
     <body>
         <referenceContainer name="content">
@@ -135,9 +142,10 @@ class Helloworld extends \Magento\Framework\View\Element\Template
 </page>
 {% endhighlight %}
 
-{% highlight php %}
-//view/frontend/templates/helloworld.phtml
 
+<br /><br />
+<h2>view/frontend/templates/helloworld.phtml</h2>
+{% highlight php %}
 <h1><?php echo $this->getHelloWorldTxt(); ?></h1>
 {% endhighlight %}
 
