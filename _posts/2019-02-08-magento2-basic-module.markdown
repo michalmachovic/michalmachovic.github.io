@@ -57,6 +57,18 @@ registration.php
 </config>
 {% endhighlight %}
 
+<br /><br />
+<h2>routes.xml</h2>
+Lets take url `http://localhost/magento2/sites/m2test/helloworld/index/index`. In Magento 2, each individual module can claim a `front name`. The `front name` is the `first segment of the URL` — in our case that’s `helloworld`. When a module `claims` a front name, that is its way of saying: <br /><br />
+ `Hello Magento systems code — if you see any URLs that start with /helloworld, I have controllers for them`
+ <br /><br />
+All frontend routes are going under
+{% highlight xml %} 
+<router id="standard"> 
+ {% endhighlight %}
+
+So following piece of code means: If there is url that starts with `helloworld`, module `MichalMachovic_Helloworld` will process it.
+
 {% highlight xml %}
 //etc/frontend/routes.xml
 <?xml version="1.0"?>
