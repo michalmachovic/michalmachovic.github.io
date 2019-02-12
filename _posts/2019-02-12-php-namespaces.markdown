@@ -51,18 +51,18 @@ PHP Fatal error:  Class 'My\SpecialNamespace\DomDocument' not
 found in /path/to/some/file.php on line 7   
 {% endhighlight %}
 
+<br /><br />
 PHP assumed we wanted a class named My\SpecialNamespace\DomDocument. The same thing that lets us say new MyClass also means we need to be explicit with our other classes.
 <br />
 We have two options here:
 <br />
-1. Use leading slash, this tells PHP to use `global` class `DomDocument`;
+<b>1.</b> Use leading slash, this tells PHP to use `global` class `DomDocument`;
 {% highlight php %}
 $test = new \DomDocument;
 {% endhighlight %}
 
-<br /><Br />
-
-2. Import that class with `use`. Then you can use `DomDocument` without leading slash.
+<br />
+<b>2.</b>Import that class with `use`. Then you can use `DomDocument` without leading slash.
 {% highlight php %}
 use DomDocument;
 {% endhighlight %}
