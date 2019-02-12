@@ -55,7 +55,7 @@ found in /path/to/some/file.php on line 7
 PHP assumed we wanted a class named My\SpecialNamespace\DomDocument. The same thing that lets us say new MyClass also means we need to be explicit with our other classes.
 <br />
 We have two options here:
-<br />
+<br /><br />
 <b>1.</b> Use leading slash, this tells PHP to use `global` class `DomDocument`;
 {% highlight php %}
 $test = new \DomDocument;
