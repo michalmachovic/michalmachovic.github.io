@@ -164,7 +164,7 @@ class InstallSchema implements InstallSchemaInterface
         $installer->endSetup();
     }
 }
-
+{% endhighlight %}
 
 
 <br /><br />
