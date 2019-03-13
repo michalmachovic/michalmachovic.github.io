@@ -102,3 +102,18 @@ Now we will run new container with this image. <br />
 <br /><br />
 <h2>curl 127.0.0.1:9080/index.html</h2>
 should show our page
+
+<br /><br />
+Our container has disadvantage, it is static. What happen if we will want to start from another version of Debian ? Or another version of webserver ? We need to do container again manually. We can automate this. Copy `index.html` and `lighttpd.conf` into some new folder. Also in this folder create `Dockerfile` with following content:
+{% highlight php %}
+FROM debian
+ 
+RUN apt-get update && apt-get install lighttpd -y
+ 
+EXPOSE 80
+ 
+ADD lighttpd.conf .
+ADD index.html .
+ 
+CMD lighttpd -D -f lighttpd.conf
+{% endhighlight %}
