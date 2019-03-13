@@ -1,0 +1,104 @@
+---
+layout: post
+date:   2019-03-13 06:13:26 +0200
+title:  "Docker"
+category: docker
+tags: [docker]
+---
+
+<h2>docker ps</h2>
+List of running containers
+<br /><br />
+
+<h2>docker ps -a</h2>
+List of running containers and also exited containers
+<br /><br />
+
+<h2>docker run hello-world</h2>
+We are telling docker that we want to container with image called `hello-world`. Docker tries to find it locally. As it wasnt successfull, it was downloaded from Docker Hub (public images repository). It shows as message `Hello from Docker`, that is message from the container. Script finished and container turned off.
+{% highlight php %}
+michalmachovic@michalmachovic:/var/www/html$ sudo docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+1b930d010525: Pull complete 
+Digest: sha256:2557e3c07ed1e38f26e389462d03ed943586f744621577a99efb77324b0fe535
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+{% endhighlight %}
+<br /><br />
+
+
+<h2>docker run -it --name mujDebian debian bash</h2>
+We will create our own container called `mujDebian` and start process `bash`.
+{% highlight php %}
+var/www/html$ sudo docker run -it --name mujDebian debian bash
+Unable to find image 'debian:latest' locally
+latest: Pulling from library/debian
+22dbe790f715: Pull complete 
+Digest: sha256:72e996751fe42b2a0c1e6355730dc2751ccda50564fec929f76804a6365ef5ef
+Status: Downloaded newer image for debian:latest
+{% endhighlight %}
+
+<br />
+We are now inside container in `Debian`. We will install simple static server, then we will create config file and simple html page. Finally we `exit` from container.
+
+{% highlight php %}
+root@d1cbba435b85:/# apt-get update && apt-get install lighttpd -y
+root@d1cbba435b85:/# echo 'server.document-root="./"' > lighttpd.conf
+root@d1cbba435b85:/# echo 'server.port=80' >> lighttpd.conf
+root@d1cbba435b85:/# echo "
+<H1>Tohle je muj web</H1>
+ " > index.html
+ root@d1cbba435b85:/# exit
+{% endhighlight %}
+<br /><br />
+
+<h2>docker diff mujDebian</h2>
+This will show differences which we made in container - installation of webserver and simple html and config file
+{% highlight php %}
+docker diff mujDebian
+...
+C /var/log/dpkg.log
+A /var/log/lighttpd
+A /var/www
+A /var/www/html
+A /var/www/html/index.lighttpd.html
+{% endhighlight %}
+
+Lets create new image from this our container.
+
+<h2>docker commit mujDebian michalmachovic:mujWebImage</h2>
+<br /><br />
+<h2>docker images</h2>
+will show us all docker images
+
+
+<br /><br />
+<h2>docker run -d -p 9080:80 --name mujWeb michalmachovic:mujWebImage lighttpd -D -f lighttpd.conf</h2>
+Now we will run new container with this image. <br />
+<b>-d</b> means that we will run it in background <br />
+<b>-p</b> means that we want to connect to service which container offers from outside. In our case this will be simple webserver, which we created inside container running on `port 80`, to the outside Docker will serve this on `port 9080`.
+<br /><br />
+<h2>curl 127.0.0.1:9080/index.html</h2>
+should show our page
