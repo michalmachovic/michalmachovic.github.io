@@ -14,6 +14,9 @@ List of running containers
 List of running containers and also exited containers
 <br /><br />
 
+<h2>docker rm CONTAINER_ID</h2>
+Remove container
+
 <h2>docker run hello-world</h2>
 We are telling docker that we want to container with image called `hello-world`. Docker tries to find it locally. As it wasnt successfull, it was downloaded from Docker Hub (public images repository). It shows as message `Hello from Docker`, that is message from the container. Script finished and container turned off.
 {% highlight php %}
@@ -104,7 +107,10 @@ Now we will run new container with this image. <br />
 should show our page
 
 <br /><br />
-Our container has disadvantage, it is static. What happen if we will want to start from another version of Debian ? Or another version of webserver ? We need to do container again manually. We can automate this. Copy `index.html` and `lighttpd.conf` into some new folder. Also in this folder create `Dockerfile` with following content:
+Our container has disadvantage, it is static. What happen if we will want to start from another version of Debian ? Or another version of webserver ? We need to do container again manually. We can automate this. 
+<br /><br />
+
+On your local computer, create new directory and create the same `index.html` and `lighttpd.conf` files. Also in this folder create `Dockerfile` with following content:
 {% highlight php %}
 FROM debian
  
@@ -117,3 +123,26 @@ ADD index.html .
  
 CMD lighttpd -D -f lighttpd.conf
 {% endhighlight %}
+
+<br />
+<b>FROM</b> - from which container we want to start <br />
+<b>RUN</b> - will be executed after container start, it will create whole new layer, its good to put all installations into one RUN<br />
+<b>EXPOSE</b> - saying there is something running inside container on port 80<br />
+<b>ADD</b> - add files from local directory to container<br />
+<b>CMD</b> - this will happen after start of new finished container, in our case it will run lighttpd webserver (so we dont need to type it manually)<br /><br />
+
+<h2>docker build -t michalmachovic:dalsiWeb .</h2>
+build our new container, check it exists with `docker images`.
+
+
+<h2>docker run -P --name dalsiWebKontejner2 michalmachovic:dalsiWeb</h2>
+lets run our new container with `-P` parameter, we specified inside port with `EXPOSE`, so this will assign some free port on host system. <br />
+You should something like `2019-03-13 10:42:01: (log.c.217) server started`.<br /><br />
+
+Now if you do `docker ps` in new terminal window, you should see something like: 
+{% highlight php %}
+CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS              PORTS                   NAMES
+6087dcae5e79        michalmachovic:dalsiWeb   "/bin/sh -c 'lighttp…"   39 seconds ago      Up 39 seconds       0.0.0.0:32768->80/tcp   dalsiWebKontejner2
+{% endhighlight %}
+<br />
+You can see `0.0.0.0:32768->80`,  that means it will run on port `32768`, you can test this with `curl 127.0.0.1:32768/index.html`.
