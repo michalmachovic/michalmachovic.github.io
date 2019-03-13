@@ -11,7 +11,7 @@ tags: [react,create]
 {% highlight php %}
 npm install -g create-react-app
 {% endhighlight %}
-
+<br /><br />
 
 
 <h2>Run app</h2>
@@ -19,12 +19,12 @@ npm install -g create-react-app
 npm start
 {% endhighlight %}
 App will run at `localhost:3000`.
-
+<br /><br />
 
 <h2>Possible errors</h2>
 <b>Port is in use</b> - open new tab in terminal and run `npm start` again. You can then view your app on `localhost:3001`
-<br />
-`localhost:8080 doesnt't work` - go back to terminal and search for `On your network` and visit that url.
+<br /><br />
+<b>localhost:8080 doesnt't work</b> - go back to terminal and search for `On your network` and visit that url.
 
 <br /><br />
 
