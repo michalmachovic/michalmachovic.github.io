@@ -1,0 +1,15 @@
+---
+layout: post
+date:   2019-03-28 06:13:26 +0200
+title:  "React: JSX"
+category: react
+tags: [react, jsx]
+---
+
+{% highlight html %}
+//HTML
+<div style="background-color: red;"></div>
+
+//JSX
+<div style={{backgroundColor: 'red'}}></div>
+{% endhighlight %}
