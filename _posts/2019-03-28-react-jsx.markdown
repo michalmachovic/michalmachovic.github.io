@@ -6,7 +6,7 @@ category: react
 tags: [react, jsx]
 ---
 
-{% highlight javscript %}
+{% highlight jsx %}
 //HTML
 <div style="background-color: red;"></div>
 
