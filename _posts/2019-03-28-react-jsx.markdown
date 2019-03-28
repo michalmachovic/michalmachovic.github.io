@@ -6,10 +6,12 @@ category: react
 tags: [react, jsx]
 ---
 
-{% highlight jsx %}
+{% highlight javascript %}
 //HTML
 <div style="background-color: red;"></div>
 
 //JSX
+{% raw %}
 <div style={{backgroundColor: 'red'}}></div>
+{% endraw %}
 {% endhighlight %}
