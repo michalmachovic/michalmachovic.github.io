@@ -28,6 +28,9 @@ mv composer.phar /usr/local/bin/composer
 Run the following command in the root directory.
 {% highlight ts %}
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition .
+
+//or for specific version
+composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.2.6 .
 {% endhighlight %}
 <br /><br />
 You can get message about missing libraries, following you will require:
@@ -43,17 +46,17 @@ ext-soap<br />
 <br />
 You can install them with following command:
 {% highlight ts %}
-sudo apt-get install php7.0-mbstring php7.0-gd php7.0-mcrypt php7.0-bcmath php7.0-curl php7.0-intl php7.0-zip php7.0-soap 
+sudo apt-get install php7.0-mbstring php7.0-gd php7.0-mcrypt php7.0-bcmath php7.0-curl php7.0-intl php7.0-zip php7.0-soap
 {% endhighlight %}
 <br /><br />
 
 <h2>Set Up Permissions</h2>
 After all the dependencies are retrieved, you should set the correct permissions on the entire Magento 2 installation directory. The official documentation recommends chmod’ing all directories to 700 and all files to a level of 600, however that didnt work for me.
 {% highlight ts %}
-find . -type f -exec chmod 644 {} \; // 644 permission for files 
-find . -type d -exec chmod 755 {} \; // 755 permission for directory 
-find ./var -type d -exec chmod 777 {} \; // 777 permission for var folder find ./pub/media -type d -exec chmod 777 {} \; 
-find ./pub/static -type d -exec chmod 777 {} \; 
+find . -type f -exec chmod 644 {} \; // 644 permission for files
+find . -type d -exec chmod 755 {} \; // 755 permission for directory
+find ./var -type d -exec chmod 777 {} \; // 777 permission for var folder find ./pub/media -type d -exec chmod 777 {} \;
+find ./pub/static -type d -exec chmod 777 {} \;
 chmod 777 ./app/etc && chmod 644 ./app/etc/*.xml
 {% endhighlight %}
 <br /><br />

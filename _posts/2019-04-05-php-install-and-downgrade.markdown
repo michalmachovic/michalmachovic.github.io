@@ -8,10 +8,11 @@ tags: [php, install]
 
 {% highlight javascript %}
 sudo apt-get install mysql-server
-sudo apt-get install php
-sudo apt-get install libapache2-mod-php7.2
-sudo apt-get install php-mysql
-sudo apt-get install php7.2-xml
+sudo apt-get install php7.0
+sudo apt-get install php7.0-cli
+sudo apt-get install libapache2-mod-php7.0
+sudo apt-get install php7.0-mysql
+sudo apt-get install php7.0-xml
 
 //install 7.0
 sudo add-apt-repository ppa:ondrej/php
