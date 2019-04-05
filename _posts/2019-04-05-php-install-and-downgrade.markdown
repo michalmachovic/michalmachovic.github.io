@@ -26,4 +26,7 @@ sudo update-alternatives --set php /usr/bin/php7.0
 sudo a2dismod php7.2
 sudo a2enmod php7.0
 sudo service apache2 restart
+
+//remove completely PHP from your system
+sudo apt-get purge `dpkg -l | grep php| awk '{print $2}' |tr "\n" " "`
 {% endhighlight %}
