@@ -94,12 +94,18 @@ sudo service apache2 restart
 
 
 
-<h2>Deploy static content and clear cache with magerun</h2>
+<h2>Clear cache with magerun</h2>
 {% highlight ts %}
+
 n98-magerun2.phar cache:clean && n98-magerun2.phar cache:flush && sudo chmod 777 var -R && sudo chmod 777 pub -R
 {% endhighlight %}
 <br /><br />
 
+<h2>Deploy content</h2>
+{% highlight ts %}
+php bin/magento setup:static-content:deploy en_GB en_US -f
+{% endhighlight %}
+<br /><br />
 
 <h2>Upgrade and compile (if you are adding some new modules with composer)</h2>
  {% highlight ts %}
