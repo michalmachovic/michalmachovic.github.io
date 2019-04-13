@@ -13,6 +13,13 @@ npm install -g create-react-app
 {% endhighlight %}
 <br /><br />
 
+<h2>Generate app</h2>
+`jsx` is name of app. 
+{% highlight php %}
+create-react-app jsx
+{% endhighlight %}
+
+<br /><br />
 
 <h2>Run app</h2>
 {% highlight php %}
