@@ -15,3 +15,40 @@ tags: [react, jsx]
 <div style={{backgroundColor: 'red'}}></div>
 {% endraw %}
 {% endhighlight %}
+
+<br /><br /><br />
+
+<h2>src/index.js</h2>
+{% highlight javascript %}
+{% raw %}
+// Import the React and ReactDOM libraries
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+// Create a react component
+const App = () => {
+	const labelText = 'Enter name';
+	const buttonText = { text: 'Click me' };
+	
+	return (
+	<div>
+		<label className='label' htmlFor='name'>
+			{labelText}
+		</label>
+
+		<input id="name" type="text" />
+		<button style={{ backgroundColor: 'blue', color: 'white' }}>
+			{buttonText.text}
+		</button>
+	</div>
+	);
+}
+
+// Take the react component and show it on the screen
+ReactDOM.render(
+	<App />,
+	document.querySelector('#root')
+);
+
+{% endraw %}
+{% endhighlight %}
