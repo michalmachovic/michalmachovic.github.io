@@ -23,20 +23,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);     //we must call constructor of React.Component
+	constructor(props) {
+		super(props);     //we must call constructor of React.Component
 
-        this.state = { lat: null };   // initialize state of lat, we dont know value of lat yet, so it is null
+		this.state = { lat: null };   // initialize state of lat, we dont know value of lat yet, so it is null
 
-        window.navigator.geolocation.getCurrentPosition(
+		window.navigator.geolocation.getCurrentPosition(
 			position => {
-                this.setState({ lat: position.cords.latitude })
-            },
+				this.setState({ lat: position.cords.latitude })
+			},
 			err => console.log(err)
 		);
-    }
+	}
 
-    render() {
+	render() {
 		return <div>Latitude: {this.state.lat}</div>;
 	}
 }
