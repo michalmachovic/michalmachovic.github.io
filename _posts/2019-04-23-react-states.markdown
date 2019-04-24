@@ -18,6 +18,34 @@ tags: [react, class, components]
 <h2>src/index.js</h2>
 {% highlight javascript %}
 {% raw %}
+/ Import the React and ReactDOM libraries
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class App extends React.Component {
+    constructor(props) {
+        super(props);     //we must call constructor of React.Component
+
+        this.state = { lat: null };   // initialize state of lat, we dont know value of lat yet, so it is null
+
+        window.navigator.geolocation.getCurrentPosition(
+			position => {
+                this.setState({ lat: position.cords.latitude })
+            },
+			err => console.log(err)
+		);
+    }
+
+    render() {
+		return <div>Latitude: {this.state.lat}</div>;
+	}
+}
+
+// Take the react component and show it on the screen
+ReactDOM.render(
+	<App />,
+	document.querySelector('#root')
+);
 
 
 {% endraw %}
