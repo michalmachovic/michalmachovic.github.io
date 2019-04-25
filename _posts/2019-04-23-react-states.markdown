@@ -134,6 +134,7 @@ ReactDOM.render(
 <h2>src/SeasonDisplay.js</h2>
 {% highlight javascript %}
 {% raw %}
+import './SeasonDisplay.css';
 import React from 'react';
 
 const getSeason = (lat, month) => {
