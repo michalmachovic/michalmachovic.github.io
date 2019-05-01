@@ -1,0 +1,32 @@
+---
+layout: post
+date:   2019-05-01 07:13:26 +0200
+title:  "Redux: What is Redux ?"
+category: react
+tags: [react, redux]
+---
+
+<h2>What is Redux ? </h2>
+- state management library <br />
+- makes creating complex applications easier <br />
+- not required to create a React app <br />
+- not explicitly designed to work with React <br />
+
+<br /><br />
+
+<h2>Redux Cycle</h2>
+- Action Creator <br />
+- Action <br />
+- dispatch <br />
+- Reducers <br />
+- State <br />
+
+
+
+{% highlight javascript %}
+{% raw %}
+
+{% endraw %}
+{% endhighlight %}
+
+<br /><br />

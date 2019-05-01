@@ -129,13 +129,14 @@ export default SearchBar;
 
 
 <h2>src/components/ImageList.js</h2>
+See each image has `key` property. React recommend each list of components to have this property.
 {% highlight javascript %}
 {% raw %}
 import React from 'react';
 
 const ImageList = (props) => {
 	const images = props.images.map((image) => {
-		return <img src="{image.urls.regular}" />
+		return <img key={image.id} alt={image.description} src="{image.urls.regular}" />
 	});
 
 	return(
