@@ -15,6 +15,8 @@ To fetch data we can use built-in `fetch` function (but we need to write more co
 src/index.js
 src/components/App.js
 src/components/SearchBar.js
+src/components/ImageList.js
+src/api/unsplash.js //updated version
 {% endhighlight %}
 
 <br /><br />
@@ -24,6 +26,7 @@ src/components/SearchBar.js
 {% raw %}
 import React from 'react';
 import SearchBar from './SearchBar';
+import ImageList from './ImageList';
 import axios from 'axios';
 
 class App extends React.Component {
@@ -32,7 +35,7 @@ class App extends React.Component {
 	onSearchSubmit = async (term) => {
 		const response = await axios.get('https://api.unsplash.com/search/photos',{
 			params: { query: term },
-			header: {
+			headers: {
 				Authorization: 'Client-Id CLIENTID'
 			}
 		});
@@ -58,6 +61,7 @@ class App extends React.Component {
 		return (
 			<div style={{ marginTop: '10px'}}>
 				<SearchBar onSubmit={this.onSearchSubmit} />
+				<ImageList images={this.state.images} />
 			</div>
 		);
 	}
@@ -100,10 +104,10 @@ class SearchBar extends React.Component {
 	return(
 		<div>
 			<form onSubmit={this.onFormSubmit}>
-			<!--
+		
 				// or we can do <form onSubmit={event => this.onFormSubmit(event)}>
 				// if we want to use first version of onFormSubmit above, without arrow function
-			-->
+			
 				<label>Image Search</label>
 				<input
 					type="text"
@@ -120,6 +124,33 @@ export default SearchBar;
 {% endhighlight %}
 
 <br /><br />
+
+
+
+
+<h2>src/components/ImageList.js</h2>
+{% highlight javascript %}
+{% raw %}
+import React from 'react';
+
+const ImageList = (props) => {
+	const images = props.images.map((image) => {
+		return <img src="{image.urls.regular}" />
+	});
+
+	return(
+		<div>
+			{images}
+		</div>
+	);
+};
+
+export default ImageList;
+{% endraw %}
+{% endhighlight %}
+
+<br /><br />
+
 
 
 
@@ -143,3 +174,62 @@ ReactDOM.render(
 {% endhighlight %}
 
 <br /><br /><br />
+
+
+<h2>UPDATE</h2>
+In `onSearchSubmit` we are now loading `unsplash` api with `axios`. We can put this configuration away from our `App` component into `api/unsplash.js`, so code will be cleaner.
+
+<h2>src/api/unsplash.js</h2>
+{% highlight javascript %}
+{% raw %}
+import axios from 'axios';
+
+export default axios.create({
+	baseURL: 'https://api.unsplash.com',
+	headers: {
+		Authorization: 'Client-Id CLIENTID'
+	}	
+});
+
+{% endraw %}
+{% endhighlight %}
+
+<br /><br />
+
+<h2>src/components/App.js</h2>
+{% highlight javascript %}
+{% raw %}
+import React from 'react';
+import SearchBar from './SearchBar';
+import unsplash from '../api/unsplash';
+
+class App extends React.Component {
+	state = { images: [] };
+
+	onSearchSubmit = async (term) => {
+		const response = await unsplash.get('/search/photos',{
+			params: { query: term },
+		});
+
+		this.setState({ images: response.data.results });
+	}
+
+	
+	render() {
+		return (
+			<div style={{ marginTop: '10px'}}>
+				<SearchBar onSubmit={this.onSearchSubmit} />
+			</div>
+		);
+	}
+}
+
+export default App;
+{% endraw %}
+{% endhighlight %}
+
+<br /><br />
+
+
+
+
