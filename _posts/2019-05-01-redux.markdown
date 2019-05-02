@@ -11,7 +11,9 @@ tags: [react, redux]
 - makes creating complex applications easier <br />
 - not required to create a React app <br />
 - not explicitly designed to work with React <br />
-
+<br />
+- A predictable state container for JavaScript apps <br />
+- Redux helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test
 <br /><br />
 
 <h2>Redux Cycle</h2>
@@ -39,10 +41,96 @@ We will have 3 types of form <br />
 `Create Claim` <br />
 `Delete Policy` <br />
 
+<br /><br />
+So when we put this to `redux` cycle, it will look like this: <br />
+- Action Creator = Person dropping off the form<br />
+- Action = the form<br />
+- dispatch = form receiver<br />
+- Reducers = Departments<br />
+- State = Compiled department data<br />
+<br />
+Following code can be tested at `codepen.io`.
+<br /><br />
 {% highlight javascript %}
-{% raw %}
+//people dropping off a form (Action Creators)
+const createPolicy = (name, amount) => {
+    return { //Action (a form in our analogy)
+        type: 'CREATE_POLICY',
+        payload: {
+            name: name,
+            amount: amount
+        }
+    }
+}
 
-{% endraw %}
+
+const deletePolicy = (name) => {
+    return { //Action (a form in our analogy)
+        type: 'DELETE_POLICY',
+        payload: {
+            name: name
+        }
+    }
+}
+
+const createClaim = (name, amountOfMoneyToCollect) => {
+    return { //Action (a form in our analogy)
+        type: 'CREATE_CLAIM',
+        payload: {
+            name: name,
+            amountOfMoneyToCollect: amountOfMoneyToCollect
+        }
+    }
+}
+
+//Reducers (Departments)
+const claimsHistory = (oldListOfClaims = [], action) => {
+    if (action.type === 'CREATE_CLAIM') {
+        //we care about the action (form)
+        //in reducers we are always returning new array, so we are not using push
+        return [...oldListOfClaims, action.payload];
+    }
+
+    //we dont care about the action (form)
+    return oldListOfClaims;
+}
+
+//lets image we have money of value 100 in the beginning of our company
+const accounting = (bagoOfMoney = 100, action) => {
+    if (action.type === 'CREATE_CLAIM') {
+        return bagoOfMoney - action.payload.amountOfMoneyToCollect;
+    } else if (action.type === 'CREATE_POLICY') {
+        return bagoOfMoney + action.payload.amountOfMoneyToCollect;
+    }
+
+    return bagoOfMoney;
+}
+
+const policies = (listOfPolicies = [], action) => {
+    if (action.type === 'CREATE_POLICY') {
+        return [...listOfPolicies, action.payload.name];
+    } else if (action.type === 'DELETE_POLICY') {
+        return listOfPolicies.filter(name => name !== action.payload.name);
+    }
+
+    return listOfPolicies;
+}
+
+const { createStore, combineReducers } = Redux;
+
+const ourDepartments = combineReducers({
+    accounting: accounting,
+    claimsHistory: claimsHistory,
+    policies: policies
+});
+
+const store = createStore(ourDepartments);
+store.dispatch(createPolicy('Alex', 20));
+store.dispatch(createPolicy('Jim', 40));
+store.dispatch(createPolicy('Bob', 20));
+store.dispatch(createClaim('Alex', 120));
+console.log(store.getState());
+
 {% endhighlight %}
 
 <br /><br />
