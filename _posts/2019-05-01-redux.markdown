@@ -26,20 +26,20 @@ tags: [react, redux]
 <br /><br />
 We will do an example, a model of insurance company.
 <br />
-`policy` - customer holds a policy, if bad stuff happends to them then we pay them<br />
-`claim` - customer had something bad happen to them, we need to pay them
+- policy - customer holds a policy, if bad stuff happends to them then we pay them<br />
+- claim - customer had something bad happen to them, we need to pay them
 
 <br /><br />
 Customer will bring to our company new `Form`. There is `Form receiver`, which will pass the form to correct department `Claims History`, `Policies` or `Accounting`.
 <br /><br />
-Each 'Form' is an object, which has `Type` and `Payload`.
-`type` - name, `claim` or `policy`<br />
-`payload` - contains name of customer and value
-<br /><br/ >
+Each 'Form' is an object, which has `Type` and `Payload`. <br />
+- type - name, `claim` or `policy`<br />
+- payload - contains name of customer and value<br />
+<br /><br />
 We will have 3 types of form <br />
-`Create Policy` <br />
-`Create Claim` <br />
-`Delete Policy` <br />
+- Create Policy <br />
+- Create Claim <br />
+- Delete Policy <br />
 
 <br /><br />
 So when we put this to `redux` cycle, it will look like this: <br />
