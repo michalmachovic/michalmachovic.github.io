@@ -82,6 +82,7 @@ export default combineReducers({
 {% highlight javascript %}
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { selectSong } from '../actions';
 
 class SongList extends Component {
     renderList() {
@@ -89,7 +90,10 @@ class SongList extends Component {
             return (
                 <div className="item" key={song.title}>
                     <div className="right floated content">
-                        <button className="ui button primary">
+                        <button
+                            className="ui button primary"
+                            onClick="{() => this.props.selectSong(song)}"
+                        >
                             Select
                         </button>
                     </div>
@@ -112,23 +116,63 @@ const mapStateToProps = (state) => {
     };
 }
 
-export default connect(mapStateToProps)(SongList);
+//we are passing selectSong as second argument
+//connect function will take selectSong action creator and pass it to our component as prop
+//connect function is calling dispatch behind the scenes, each time state is updated
+export default connect(mapStateToProps, {
+     selectSong: selectSong
+})(SongList);
 {% endhighlight %}
 
 
 
 
 <br /><br />
-<h3>src/components/aPP.js</h3>
+<h3>src/components/SongDetail.js</h3>
+{% highlight javascript %}
+import React from 'react';
+import { connect } from 'react-redux';
+
+const SongDetail = (props) => {
+    if (!props.song) {
+        return <div>Select a song</div>
+    }
+
+    return (
+        <div>
+            {props.song.title}
+            {props.song.duration}
+        </div>
+    );
+}
+
+const mapStateToProps = (state) => {
+    return { song: state.selectedSong }
+}
+
+export default connect(mapStateToProps)(SongDetail);
+{% endhighlight %}
+
+
+
+
+
+<br /><br />
+<h3>src/components/App.js</h3>
 {% highlight javascript %}
 import React from 'react';
 import SongList from './SongList';
+import SongDetail from './SongDetail';
 
 const App = () => {
     return (
         <div>
-            SongList
-        </div>        
+            <SongList />
+        </div>
+
+        <div>
+            <SongDetail />
+        </div>
     );
 };
 
