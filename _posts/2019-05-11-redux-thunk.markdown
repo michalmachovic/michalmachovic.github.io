@@ -15,8 +15,6 @@ We are going to do simple blog app. We will fetch data from `jsonplaceholder.typ
 - redux-thunk = middleware to help us make requests in a redux applications <br />
 
 <br /><br />
-
-<br /><br />
 <h3>src/index.js</h3>
 {% highlight javascript %}
 import React from 'react';
