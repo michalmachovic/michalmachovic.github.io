@@ -34,7 +34,7 @@ public function supportEngine()
 }
 {% endhighlight %}
 
-<br />to</br />
+<br />to<br />
 {% highlight ts %}
 public function supportEngine()
 {
@@ -42,4 +42,19 @@ public function supportEngine()
         ->fetchPairs('SHOW ENGINES');
     return (isset($variables['InnoDB']) && $variables['InnoDB'] != 'NO');
 }
+{% endhighlight %}
+
+
+<br /><br />
+<h2>Image upload not working in admin on product page</h2>
+
+In file `lib/Varien/File/Uploader.php` change: <br /><br />
+
+{% highlight ts %}
+$params['object']->$params['method']($this->_file['tmp_name']);
+{% endhighlight %}
+
+<br />to<br />
+{% highlight ts %}
+$params['object']->{$params['method']}($this->_file['tmp_name']);
 {% endhighlight %}
