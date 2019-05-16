@@ -30,6 +30,9 @@ We are going to do simple blog app. We will fetch data from `jsonplaceholder.typ
 ![](http://michalmachovic.github.io/assets/2019-05-11-redux-thunk-5.png)
 
 <br /><br />
+![](http://michalmachovic.github.io/assets/2019-05-11-redux-thunk-6.png)
+
+<br /><br />
 <h3>src/apis/jsonPlaceholder.js</h3>
 {% highlight javascript %}
 import axios from 'axios';
@@ -139,6 +142,15 @@ export default connect(null, { fetchPosts })(PostList);
 {% endhighlight %}
 
 
+<br /><br />
+<h3>src/reducers/postsReducer.js</h3>
+{% highlight javascript %}
+export default () => {
+    return '123';
+}
+{% endhighlight %}
+
+
 
 
 
@@ -146,9 +158,10 @@ export default connect(null, { fetchPosts })(PostList);
 <h3>src/reducers/index.js</h3>
 {% highlight javascript %}
 import { combineReducers } from 'redux';
+import postReducer from './postsReducer';
 
 
 export default combineReducers({
-	test: () => 'test'
+	posts: postsReducer
 });
 {% endhighlight %}
