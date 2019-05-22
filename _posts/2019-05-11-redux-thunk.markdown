@@ -95,7 +95,7 @@ export const fetchPosts = async () => {
     return async (dispatch) => {
         const response = await jsonPlaceholder.get('/posts');
 
-        dispatch({ type: 'FETCH_POSTS', payload: response})
+        dispatch({ type: 'FETCH_POSTS', payload: response.data})
     };
 };
 {% endhighlight %}
@@ -127,26 +127,36 @@ import { connect } from 'react-redux';
 import { fetchPosts } from '../actions';
 
 class PostList extends React.Component {
-    componentDidMount() {
+    componentDidMoun t() {
         this.props.fetchPosts();
     }
 
     render() {
         return <div> POST LIST </div>;
     }
-
 }
 
-//there is null because we dont have mapStateToProps function right now
-export default connect(null, { fetchPosts })(PostList);
+const mapStateToProps = (state) => {
+    return {
+        posts: state.posts
+    };
+}
+
+//there was null at place of mapStateToProps, because we didnt have mapStateToProps function before
+export default connect(mapStateToProps, { fetchPosts })(PostList);
 {% endhighlight %}
 
 
 <br /><br />
 <h3>src/reducers/postsReducer.js</h3>
 {% highlight javascript %}
-export default () => {
-    return '123';
+export default (state = [], action) => {
+    switch (action.type) {
+        case 'FETCH_POSTS':
+            return action.payload;
+        default:
+            return state;
+    }
 }
 {% endhighlight %}
 
