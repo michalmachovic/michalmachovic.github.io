@@ -32,6 +32,10 @@ We are going to do simple blog app. We will fetch data from `jsonplaceholder.typ
 <br /><br />
 ![](http://michalmachovic.github.io/assets/2019-05-11-redux-thunk-6.png)
 
+
+<br /><br />
+![](http://michalmachovic.github.io/assets/2019-05-11-redux-thunk-7.png)
+
 <br /><br />
 <h3>src/apis/jsonPlaceholder.js</h3>
 {% highlight javascript %}
@@ -95,9 +99,16 @@ export const fetchPosts = async () => {
     return async (dispatch) => {
         const response = await jsonPlaceholder.get('/posts');
 
-        dispatch({ type: 'FETCH_POSTS', payload: response.data})
+        dispatch({ type: 'FETCH_POSTS', payload: response.data});
     };
 };
+
+//this is the same like export above, just shorter syntax
+export const fetchUser = id => async dispatch => {
+  const response = await jsonPlaceholder.get(`/users/{$id}` );
+
+  dispatch({ type: 'FETCH_USER', payload: response.data });
+}
 {% endhighlight %}
 
 
@@ -125,14 +136,31 @@ export default App;
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions';
+import UserHeader from './UserHeader';
 
 class PostList extends React.Component {
     componentDidMoun t() {
         this.props.fetchPosts();
     }
 
+    renderList() {
+      return this.props.posts.map(post => {
+        return (
+            <div className="item" key={post.id}>
+                <div className="content">
+                    <div className="description">
+                        <h2>{post.title}</h2>
+                        <p>{post.body}</p>
+                    </div>
+                    <UserHeader userId={post.userId} />
+                </div>
+            </div>
+        );
+      });
+    }
+
     render() {
-        return <div> POST LIST </div>;
+        return <div className="ui relaxed divided">{this.renderList()}</div>;
     }
 }
 
@@ -144,6 +172,37 @@ const mapStateToProps = (state) => {
 
 //there was null at place of mapStateToProps, because we didnt have mapStateToProps function before
 export default connect(mapStateToProps, { fetchPosts })(PostList);
+{% endhighlight %}
+
+
+
+br /><br />
+<h3>src/components/UserHeader.js</h3>
+{% highlight javascript %}
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchUser } from '../actions';
+
+class UserHeader extends React.Component {
+    componentDidMount() {
+        this.props.fetchUser(this.props.userId);
+    }
+
+    render() {
+        const { user } = this.props;
+        if (!user) {
+          return null;
+        }
+
+        return <div className="header">{user.name}</div>;
+    }
+}
+
+const mapStateToProps = (state, ownProps) => {
+    return { user: state.users.find(user => user.id === ownProps.userId ) }
+}
+//there was null at place of mapStateToProps, because we didnt have mapStateToProps function before
+export default connect(mapStateToProps, {fetchUser})(UserHeader);
 {% endhighlight %}
 
 
@@ -162,6 +221,19 @@ export default (state = [], action) => {
 
 
 
+<br /><br />
+<h3>src/reducers/usersReducer.js</h3>
+{% highlight javascript %}
+export default (state = [], action) => {
+    switch (action.type) {
+        case 'FETCH_USER':
+            return [...state, action.payload];
+        default:
+            return state;
+    }
+}
+{% endhighlight %}
+
 
 
 <br /><br />
@@ -169,9 +241,11 @@ export default (state = [], action) => {
 {% highlight javascript %}
 import { combineReducers } from 'redux';
 import postReducer from './postsReducer';
+import usersReducer from './usersReducer';
 
 
 export default combineReducers({
-	posts: postsReducer
+	posts: postsReducer,
+  users: usersReducer
 });
 {% endhighlight %}
