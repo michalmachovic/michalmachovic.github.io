@@ -78,6 +78,7 @@ ReactDOM.render(
 <br /><br />
 <h3>src/actions/index.js</h3>
 {% highlight javascript %}
+import _ from 'lodash'; // we need to install lodash library to use memoize functions, so we will get data for each user only once
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 
 /*
@@ -93,6 +94,28 @@ export const fetchPosts = async () => {
     );
 }
 */
+
+export const fetchPostsAndUsers = () => async (dispatch, getState) => {
+    //if we are calling action creator from action creator, we need to use dispatch
+    console.log('about to fetch posts');
+    await dispatch(fetchPosts());
+    console.log('posts fetched !');
+    console.log(getState().posts);
+
+    //we will iterate through list of posts and get only unique user ids. _ is lodash library
+    //otherwise it will call request to user api each time blog post is loaded
+    const userIds = _uniq(_.map(getState().posts, 'userId'));
+    userIds.forEach(id => dispatch(fetchUser(id)));
+
+    //alternative syntax
+    /*
+    _.chain(getState().posts)
+        .map('userId')
+        .uniq()
+        .forEach(id => dispatch(fetchUser(id)))
+        .value();
+    */
+}
 
 //we will use redux-thunk
 export const fetchPosts = async () => {
@@ -135,12 +158,12 @@ export default App;
 {% highlight javascript %}
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions';
+import { fetchPostsAndUsers } from '../actions';
 import UserHeader from './UserHeader';
 
 class PostList extends React.Component {
-    componentDidMoun t() {
-        this.props.fetchPosts();
+    componentDidMount() {
+        this.props.fetchPostsAndUsers();
     }
 
     renderList() {
@@ -171,7 +194,7 @@ const mapStateToProps = (state) => {
 }
 
 //there was null at place of mapStateToProps, because we didnt have mapStateToProps function before
-export default connect(mapStateToProps, { fetchPosts })(PostList);
+export default connect(mapStateToProps, { fetchPostsAndUsers })(PostList);
 {% endhighlight %}
 
 
@@ -181,13 +204,8 @@ br /><br />
 {% highlight javascript %}
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchUser } from '../actions';
 
 class UserHeader extends React.Component {
-    componentDidMount() {
-        this.props.fetchUser(this.props.userId);
-    }
-
     render() {
         const { user } = this.props;
         if (!user) {
@@ -202,7 +220,7 @@ const mapStateToProps = (state, ownProps) => {
     return { user: state.users.find(user => user.id === ownProps.userId ) }
 }
 //there was null at place of mapStateToProps, because we didnt have mapStateToProps function before
-export default connect(mapStateToProps, {fetchUser})(UserHeader);
+export default connect(mapStateToProps)(UserHeader);
 {% endhighlight %}
 
 
