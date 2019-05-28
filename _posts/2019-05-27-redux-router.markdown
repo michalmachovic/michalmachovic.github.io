@@ -1,6 +1,6 @@
 ---
 layout: post
-date:   2019-05-16 07:13:26 +0200
+date:   2019-05-27 07:13:26 +0200
 title:  "Redux: Routers"
 category: react
 tags: [react, redux, router]
