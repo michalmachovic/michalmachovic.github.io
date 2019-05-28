@@ -14,7 +14,12 @@ As of March 22 2019, the maintainer of Redux Form seems to have accidentally rol
 `npm install redux-form@8.1.0`
 
 <br /><br />
+Documentation is at:
+`redux-form.com`
 
+<br /><br />
+
+![](http://michalmachovic.github.io/assets/2019-05-28-redux-forms-1.png)
 
 
 {% highlight javascript %}
