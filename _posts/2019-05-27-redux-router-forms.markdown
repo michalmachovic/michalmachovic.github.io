@@ -24,53 +24,105 @@ We will build app for video streaming. Install it with `npm install --save react
 
 
 <br /><br />
+<h2>Structure</h2>
 {% highlight javascript %}
-client
+streams
 |
----src
+|---api
+|
+|
+|---client
     |
-    --actions
-    |   |
-    |   --index.js
     |
-    --reducers
-    |   |
-    |   --index.js
-    |
-    |--components
-            |
-            --App.js
-            --Header.js
-            |
-            --streams
-                    |
-                    --StreamList.js
-                    --StreamCreate.js
-                    --StreamEdit.js
-                    --StreamDelete.js
-                    --StreamShow.js
+    ---src
+        |
+        --actions
+        |   |
+        |   --index.js
+        |
+        --reducers
+        |   |
+        |   --index.js
+        |
+        |--components
+                |
+                --App.js
+                --Header.js
+                |
+                --streams
+                        |
+                        --StreamList.js
+                        --StreamCreate.js
+                        --StreamEdit.js
+                        --StreamDelete.js
+                        --StreamShow.js
+{% endhighlight %}
+
+
+<br /><br />
+<h2>JSON API SERVER</h2>
+First we will do API server, which will use REST-ful conventions (standardized system for designing APIs). We will be then able to do requests to this server to create new stream, etc ...
+So REST conventions is refering to standardized system of routes and request methods used to commit or operate different actions.
+We will use `https://npmjs.com/package/json-server` for this.
+<br /><br />
+![](http://michalmachovic.github.io/assets/2019-05-27-react-router-9.png)
+<br /><br />
+Under `api` directory we will run following commands:
+{% highlight javascript %}
+npm init
+npm install --save json-server
 {% endhighlight %}
 
 <br /><br />
+In docuementation of `JSON server` we can find, that objects will be stored in `db.json` file. So in our case, we will store `streams`.
+<h3>api/db.json</h3>
+{% highlight javascript %}
+{
+    "streams": []
+}
+{% endhighlight %}
 
-<h3>index.html</h3>
+<br /><br />
+<h3>api/package.json</h3>
+{% highlight javascript %}
+{
+    ...
+    "scripts": {
+        "start": "json-server -p 3001 -w db.json"    //p is port, w means it is watching db.json for any changes
+    }
+    ...
+}
+{% endhighlight %}
+
+<br /><br />
+In `api` dir run `npm start`, that will start `JSON server`. We can use it now to manipulate our streams following REST convetions.
+<br /><br />
+
+
+<h2>REACT APP</h2>
+<h3>client/index.html</h3>
 After we put this inside `index.html` we should be able to write `gapi` into console.
 {% highlight javascript %}
 <script src="https://apis.google.com/js/api.js"></script>
 {% endhighlight %}
 
 <br /><br />
-<h3>src/index.js</h3>
+<h3>client/src/index.js</h3>
 {% highlight javascript %}
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } fomr 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import reduxThunk from 'redux-thunk';
 
 import App from './components/App';
 import reducers from './reducers';
 
-const store = createStore(reducers);
+cosnt composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+    reducers,
+    composeEnhancers(applyMiddleware(reduxThunk))
+);
 
 ReactDOM.render(
     <Provider store={store}>
@@ -82,9 +134,19 @@ document.querySelector('#root')
 <br /><br />
 
 
+<h2>Apis</h2>
+<h3>client/src/apis/streams.js</h3>
+{% highlight javascript %}
+import axios from 'axios';
+
+export default axios.create({
+    baseURL: 'http://localhost:3001'
+});
+{% endhighlight %}
+
+
 <h2>Components</h2>
-<br /><br />
-<h3>src/components/Header.js</h3>
+<h3>client/src/components/Header.js</h3>
 {% highlight javascript %}
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -114,7 +176,7 @@ export default Header;
 
 
 <br /><br />
-<h3>src/components/GoogleAuth.js</h3>
+<h3>client/src/components/GoogleAuth.js</h3>
 {% highlight javascript %}
 import React from 'react';
 import { connect } from 'react-redux';
@@ -187,7 +249,7 @@ export default connect(mapStateToProps, { signIn, signOut })(GoogleAuth);
 
 
 
-<h3>src/components/App.js</h3>
+<h3>client/src/components/App.js</h3>
 {% highlight javascript %}
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -222,17 +284,19 @@ export default App;
 
 
 <br /><br />
-<h3>src/components/streams/StreamList.js</h3>
+<h3>client/src/components/streams/StreamList.js</h3>
 {% highlight javascript %}
 
 {% endhighlight %}
 
 
 <br /><br />
-<h3>src/components/streams/StreamCreate.js</h3>
+<h3>client/src/components/streams/StreamCreate.js</h3>
 {% highlight javascript %}
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { createStream } from '../../actions';
 
 class StreamCreate extends React.Component {
     renderError({error, touched}) {  //this is destructuring object meta, so we will have access only to meta.error and meta.touched
@@ -263,8 +327,9 @@ class StreamCreate extends React.Component {
         //  />
     }
 
-    onSubmit(formValues) {
+    onSubmit = (formValues) => {
         console.log(formValues);  //submitted values
+        this.props.createStream(formValues);
     }
 
     render() {
@@ -296,15 +361,17 @@ const validate = (formsValues) => {
     return errors;
 }
 
-export default reduxForm({
+const formWrapped reduxForm({
     form: 'streamCreate',
     validate: validate
 })(StreamCreate);
+
+export default connect(null, { createStream })(formWrapped);
 {% endhighlight %}
 
 
 <br /><br />
-<h3>src/components/streams/StreamDelete.js</h3>
+<h3>client/src/components/streams/StreamDelete.js</h3>
 {% highlight javascript %}
 import React from 'react';
 
@@ -316,7 +383,7 @@ export default StreamDelete;
 {% endhighlight %}
 
 <br /><br />
-<h3>src/components/streams/StreamEdit.js</h3>
+<h3>client/src/components/streams/StreamEdit.js</h3>
 {% highlight javascript %}
 import React from 'react';
 
@@ -329,7 +396,7 @@ export default StreamEdit;
 
 
 <br /><br />
-<h3>src/components/streams/StreamShow.js</h3>
+<h3>client/src/components/streams/StreamShow.js</h3>
 {% highlight javascript %}
 import React from 'react';
 
@@ -343,16 +410,29 @@ export default StreamShow;
 <br /><br />
 
 <h2>Actions</h2>
-<h3>src/actions/types.js</h3>
+<h3>client/src/actions/types.js</h3>
 {% highlight javascript %}
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
+export const CREATE_STREAM = 'CREATE_STREAM';
+export const FETCH_STREAMS = 'FETCH_STREAMS';
+export const FETCH_STREAM = 'FETCH_STREAM';
+export const DELETE_STREAM = 'DELETE_STREAM';
+export const EDIT_STREAM = 'EDIT_STREAM';
 {% endhighlight %}
 
 
-<h3>src/actions/index.js</h3>
+<h3>client/src/actions/index.js</h3>
 {% highlight javascript %}
-import { SIGN_IN, SIGN_OUT } from './types';
+import streams from '../apis/streams';
+import {
+    SIGN_IN,
+    SIGN_OUT,
+    CREATE_STREAM,
+    FETCH_STREAM,
+    DELETE_STREAM,
+    EDIT_STREAM
+} from './types';
 
 export const signIn = (userId) => {
     return {
@@ -366,6 +446,34 @@ export const signOut = () => {
         type: SIGN_OUT
     };
 };
+
+export const createStream = (formValues) => {
+    //everytime we want to do async request, we are using redux-thunk
+    return async (dispatch) => {
+        const response = await streams.post('/streams', formValues);
+        dispatch({type: CREATE_STREAM, payload: response.data });
+    }
+};
+
+export const fetchStreams = () => async dispatch => {
+    const response = await streams.get('/streams');
+    dispatch({type: FETCH_STREAMS, payload: response.data });
+};
+
+export const fetchStream = (id) => async dispatch => {
+    const response = await streams.get(`/streams/{$id}`);
+    dispatch({type: FETCH_STREAM, payload: response.data });
+};
+
+export const editStream = (id, formValues) => async dispatch => {
+    const response = await streams.put(`/streams/{$id}`, formValues);
+    dispatch({type: EDIT_STREAM, payload: response.data });
+};
+
+export const deleteStream = (id) => async dispatch => {
+    await streams.delete(`/streams/${id}`);
+    dispatch({type: DELETE_STREAM, payload: id });
+};
 {% endhighlight %}
 
 
@@ -374,7 +482,7 @@ export const signOut = () => {
 <br /><br />
 
 <h2>Reducers</h2>
-<h3>src/reducers/index.js</h3>
+<h3>client/src/reducers/index.js</h3>
 {% highlight javascript %}
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
@@ -387,7 +495,7 @@ export default combineReducers({
 {% endhighlight %}
 
 <br /><br />
-<h3>src/reducers/authReducer.js</h3>
+<h3>client/src/reducers/authReducer.js</h3>
 {% highlight javascript %}
 import { SIGN_IN, SIGN_OUT } from './types';
 
