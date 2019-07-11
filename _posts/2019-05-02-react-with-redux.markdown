@@ -202,6 +202,116 @@ ReactDOM.render(
 {% endhighlight %}
 
 
+
+<br /><br /><br /><br />
+<h2>Step by Step</h2>
+We first do action creator.
+<h3>actions/index.js</h3>
+{% highlight javascript %}
+export const selectSong = song => {
+    return {
+        type: 'SONG_SELECTED',
+        payload: song
+    };
+};
+{% endhighlight %}
+
+<br /><br />
+Then we do reducers. One reducer will return list of all songs. Second reducer will allow to select specified song after user click on the button. At the top we will import `redux` library and combine all `reducers` together with `combineReducers` function.
+We will pass to `combineReducers` object. Keys of this object will be the keys which show up in inside our state object.
+<h3>reducers/index.js</h3>
+{% highlight javascript %}
+import { combineReducers } from 'redux';
+
+const songsReducer = () => {
+    return [
+        {
+            title: 'No Scrubs',
+            duration: '4:05'
+        },
+        {
+            title: 'Macarena',
+            duration: '2:30'
+        },
+        {
+            title: 'All Star',
+            duration: '3:15'
+        },
+        {
+            title: 'I want it that way',
+            duration: '1:45'
+        }
+    ];
+};
+
+const selectedSongReducer = (selectedSong = null, action) => {
+    if (action.type == 'SONG_SELECTED') {
+        return action.payload;
+    }
+
+    return selectedSong;
+};
+
+
+export default combineReducers({
+    songs: songsReducer,
+    selectedSong: selectedSongReducer
+});
+{% endhighlight %}
+
+
+<br /><br />
+Then we need to import `Provider`, `createStore` and `reducers`. We need also wrap `<App/>` with `<Provider>`.
+<h3>index.js</h3>
+{% highlight javascript %}
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+
+import App from './components/App';
+import reducers from './reducers';
+
+ReactDOM.render(
+    <Provider store={createStore(reducers)}>
+        <App />
+    </Provider>,
+    document.query('#root')
+);
+{% endhighlight %}
+
+
+<br /><br />
+We now want to get list of songs into our `SongList` component. We will use `connect` for that. <br />
+`mapStateToProps` - we will take our `state` and map it to `props`, so `state` will be then available in `props` and we can use it `SongList` component.
+<h3>components/SongList.js</h3>
+{% highlight javascript %}
+import React from 'react';
+import { connect } from 'react-redux';
+
+class SongList extends React.Component {
+    render() {
+        console.log(this.props);   //we now see songs here
+        return <div>SONGLIST</div>
+    }
+}
+
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        songs: state.songs     //songs will be now available in this.props in this component
+    };
+};
+
+export default connect(mapStateToProps)(SongList);
+{% endhighlight %}
+
+
+
+
+
+
+
 <br /><br /><br /><br />
 Při práci s reduxem potkáme tři základní konstrukce: `store`, `akci` a `reducer`.
 <br />
