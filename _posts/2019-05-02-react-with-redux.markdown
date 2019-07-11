@@ -200,3 +200,32 @@ ReactDOM.render(
     </Provider>,
     document.querySelector('#root'));
 {% endhighlight %}
+
+
+<br /><br /><br /><br />
+Při práci s reduxem potkáme tři základní konstrukce: `store`, `akci` a `reducer`.
+<br />
+
+<h3>Store</h3>
+Store je objekt ve kterém jsou uložena naše data. Store poskytuje tyto 3 základní metody, v jednoduchosti je síla.
+{% highlight javascript %}
+store.getState() // vrací naše data (state)
+store.subscribe(callback) // pokud chceme zjistit že se data změnila
+store.dispatch(akce) // provádíme akci, která změní data ve Store uložená
+{% endhighlight %}
+
+<br /><br />
+<h3>Akce</h3>
+Pokud chceme změnit data ve store, popíšeme tuto změnu pomocí jednoduchého objektu zvaného akce. Objekt akce má jediný povinný atribut jménem `type`, ten slouží pro identifikaci. Další atributy vyplníme libovolně dle potřeby. Jinak řečeno: akce musí být jednoznačně identifikovatelná a musí obsahovat všechna data nutná k jejímu provedení.
+{% highlight javascript %}
+{
+    type: "ADD_ITEM",
+    text: "Nějaký úkol"
+}
+{% endhighlight %}
+
+<br /><br />
+<h3>Reducer</h3>
+Posledním dílem skládačky je reducer. Funkce kterou napíšeme a vložíme do store, aby bezpečně modifikovala data podle požadavků vyjádřených akcí. Reducer tedy čeká uvnitř store až zavoláme dispatch(akce) a jakmile se tak stane, store zavolá reducer a předá mu:
+ - state – současná data aplikace
+ - action – celý objekt akce tak, jak jsme jej vložili do volání dispatch() (akce obsahuje identifikaci ‘type’ a jakákoliv další data potřebná k provedení)
