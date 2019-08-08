@@ -121,10 +121,13 @@ ReactDOM.render(
 <h3>src/components/App.js</h3>
 {% highlight javascript %}
 import React from 'react';
+import SongList from './SongList';
 
 const App = () => {
 	return (
-        <div className="ui container">App</div>;
+        <div>
+            <SongList />
+        </div>;
     );
 }
 
@@ -177,4 +180,44 @@ export const selectSong = (song) => {
         payload: song
     }
 }
+{% endhighlight %}
+
+
+
+<br /><br />
+<h3>src/components/SongList.js</h3>
+{% highlight javascript %}
+import React from 'react';
+import { connect } from 'react-redux';
+import { selectSong } from '../actions';
+
+class SongList extends React.Component {
+    render() {
+        return (
+                this.props.songs.map((song) => {
+                    return (
+                        <div key={song.title}>
+                            {song.title} - {song.duration}
+                            <button
+                                onClick={() => this.props.selectSong(song)}
+                            >
+                                SELECT
+                            </button>
+                        </div>
+                    )
+                })
+        );
+
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        songs: state.songs
+    }
+}
+
+export default connect(mapStateToProps, {
+    selectSong: selectSong
+})(SongList);
 {% endhighlight %}
