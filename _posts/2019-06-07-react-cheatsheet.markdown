@@ -29,6 +29,7 @@ export default MyComponent;
 
 <br /><br />
 <h2>Properties in stateless component</h2>
+{% highlight javascript %}
 const MyComponent = ({ propExample1, example2 }) => (
   <div>
     <h1>properties from parent component:</h1>
