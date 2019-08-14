@@ -135,9 +135,27 @@ export default App;
 {% endhighlight %}
 
 
-
 <br /><br />
 <h3>src/reducers/index.js</h3>
+{% highlight javascript %}
+import { combineReducers } from 'redux';
+
+const firstReducer = (state = [], action) => {
+	if (action.type == 'ACTION_NAME') {
+		return action.payload;
+	}
+	return state;
+}
+
+export default combineReducers({
+	first: firstReducer,
+	second: secondReducer
+});
+{% endhighlight %}
+
+
+<br /><br />
+<h3>src/reducers/index.js (example)</h3>
 {% highlight javascript %}
 import { combineReducers } from 'redux';
 
@@ -169,10 +187,20 @@ export default combineReducers({
 
 {% endhighlight %}
 
+<br /><br />
+<h3>src/actions/index.js</h3>
+{% highlight javascript %}
+export const actionName = item => {
+    return {
+        type: "ACTION_NAME",
+        payload: item
+    }
+}
+{% endhighlight %}
 
 
 <br /><br />
-<h3>src/actions/index.js</h3>
+<h3>src/actions/index.js (example)</h3>
 {% highlight javascript %}
 export const selectSong = (song) => {
     return {
