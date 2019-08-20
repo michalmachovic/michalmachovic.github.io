@@ -249,3 +249,6 @@ export default connect(mapStateToProps, {
     selectSong: selectSong
 })(SongList);
 {% endhighlight %}
+
+
+![useful image](http://michalmachovic.github.io/assets/2019-08-07-react-cheatsheet.png)
