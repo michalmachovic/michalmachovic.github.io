@@ -93,6 +93,16 @@ sudo service apache2 restart
 <br /><br />
 
 
+<h2>Admin not working - redirect issue</h2>
+To correct this, please try to set Use Secure URLs in Admin to true, in System -> Config -> General -> Web.
+
+{% highlight ts %}
+UPDATE core_config_data set value = "1" where path like '%web/secure/use_in_adminhtml%';
+{% endhighlight %}
+
+<br /><br />
+
+
 
 <h2>Clear cache with magerun</h2>
 {% highlight ts %}
