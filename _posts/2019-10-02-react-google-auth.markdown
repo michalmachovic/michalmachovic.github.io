@@ -92,7 +92,7 @@ export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
 {% endhighlight %}
 
-<br /><br/ >
+<br /><br />
 
 
 <h3>scr/actions/index.js</h3>
@@ -113,7 +113,7 @@ export const signOut = () => {
 }
 {% endhighlight %}
 
-<br /><br/ >
+<br /><br />
 
 
 
@@ -139,7 +139,7 @@ export default(state = INITIAL_STATE, action) => {
 };
 {% endhighlight %}
 
-<br /><br/ >
+<br /><br />
 
 
 
@@ -154,7 +154,7 @@ export default combineReducers({
 
 {% endhighlight %}
 
-<br /><br/ >
+<br /><br />
 
 
 
@@ -169,7 +169,7 @@ class GoogleAuth extends React.Component {
     componentDidMount() {
         window.gapi.load('client:auth2', () => {
             window.gapi.client.init({
-                clientId: '80950206281-dgiak56g74ad0bp6mnvptknrcprmloc4.apps.googleusercontent.com',
+                clientId: YOUR_CLIENT_ID,
                 scope: 'email'
             }).then(() => {
                 this.auth = window.gapi.auth2.getAuthInstance();
@@ -261,4 +261,4 @@ ReactDOM.render(
 
 {% endhighlight %}
 
-<br /><br/ >
+<br /><br />
