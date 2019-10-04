@@ -1,7 +1,7 @@
 ---
 layout: post
 date:   2019-10-04 07:13:26 +0200
-title:  "React: Dev Tools"
+title:  "React and Redux: Dev Tools"
 category: javascript, react, redux
 tags: [javascript, react, redux]
 ---
@@ -32,3 +32,7 @@ ReactDOM.render(
 );
 
 {% endhighlight %}
+
+
+<br /><br />
+Normally you loose all redux store data if you refresh page. If you run your app with `localhost:3000/?debug_session=SOME_STRING`, Redux Dev Tools will hold all your store data also after refresh.
