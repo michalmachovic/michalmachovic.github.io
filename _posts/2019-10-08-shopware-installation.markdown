@@ -12,6 +12,6 @@ sudo apt install -y php7.3 php7.3-cli php7.3-fpm php7.3-common php7.3-mysql php7
 
 
 sudo a2dismod php5.6 //disable your current version
-sudo a2enmod php7.2 //enabled php7.3
+sudo a2enmod php7.3 //enabled php7.3
 sudo service apache2 restart
 {% endhighlight %}
