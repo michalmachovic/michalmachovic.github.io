@@ -5,6 +5,16 @@ title:  "Shopware6: Plugin development"
 category: php, shopware
 tags: [php, shopware]
 ---
+
+
+<h2>Auto generating plugin</h2>
+You can skip first three steps and auto generate plugin with
+`bin/console plugin:create SwagBundleExample`
+<br /><br />
+
+
+<h2>Creating plugin manually</h2>
+
 1. Create plugin directory under `<shopware root>/custom/plugins`, for example `<shopware root>/custom/plugins/SwagBundleExample`.
 `Swag` is company/vendor, `BundleExample` is name of plugin.
 
@@ -61,3 +71,14 @@ class BundleExample extends Plugin
 
 `./bin/console plugin:refresh` <br />
 `./bin/console plugin:install --activate --clearCache BundleExample`
+
+
+<br /><br />
+
+<h2>Clear cache</h2>
+This should work in 99% cases<br />
+`bin/console cache:clear`
+
+<br /><br />
+Hard clean cache <br />
+`./psh.phar cache`
