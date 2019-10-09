@@ -6,7 +6,32 @@ category: php
 tags: [php]
 ---
 
-<h3>Shopware6 Installation</h3>
+<h3>With docker</h3>
+
+`git clone https://github.com/shopware/development.git` <br />
+`cd development` <br />
+`git clone https://github.com/shopware/platform.git` <br />
+
+1. Build and start the containers <br />
+`./psh.phar docker:start`
+<br /><br />
+
+2. Access the application container <br />
+`./psh.phar docker:ssh`
+<br /><br />
+
+3. Execute the installer inside the docker container <br />
+`./psh.phar install`
+
+<br /><br />
+
+After this you should see frontend on `http://localhost:8000/` and backend on `http://localhost:8000/admin`.<br />
+For admin use credentials `admin/shopware`.
+
+<br /><br />
+
+
+<h3>Without docker</h3>
 {% highlight javascript %}
 sudo apt install -y php7.3 php7.3-cli php7.3-fpm php7.3-common php7.3-mysql php7.3-curl php7.3-json php7.3-zip php7.3-gd php7.3-xml php7.3-mbstring php7.3-opcache php7.3-intl
 
