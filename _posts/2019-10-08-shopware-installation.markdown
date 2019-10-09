@@ -17,6 +17,8 @@ sudo service apache2 restart
 {% endhighlight %}
 
 <br /><br />
+Dont forget to enable `mod_rewrite`.
+<br /><br />
 
 When installation was complete, i was redirected to admin where First Run Wizard begin. I wasnt able to go through last step where domain should be verified.
 
@@ -42,6 +44,7 @@ Here is my testing config
 
 <h3>/etc/apache2/sites-available/shopware1.lan.conf</h3>
 {% highlight javascript %}
+{% raw %}
 <VirtualHost *:80>
 ServerAdmin webmaster@ostechnix1.lan
 ServerName shopware1.lan
@@ -51,6 +54,7 @@ DocumentRoot /var/www/html/shopware/sites/shopware1.lan/public
 ErrorLog ${APACHE_LOG_DIR}/error.log
 CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
+{% endraw %}
 {% endhighlight %}
 
 <br /><br />
@@ -69,6 +73,7 @@ Dont forget to run `sudo a2ensite shopware1.lan.conf`.
 I remove First Run Wizard directly in code
 <h3>/var/www/html/shopware/sites/shopware1.lan/vendor/shopware/administration/Controller/AdministrationController.php</h3>
 {% highlight php %}
+{% raw %}
 public function index(): Response
 {
     $template = $this->finder->find('administration/index.html.twig');
@@ -82,4 +87,5 @@ public function index(): Response
         'firstRunWizard' => false
     ]);
 }
+{% endraw %}
 {% php %}
