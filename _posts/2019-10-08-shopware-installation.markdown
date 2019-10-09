@@ -15,3 +15,71 @@ sudo a2dismod php5.6 //disable your current version
 sudo a2enmod php7.3 //enabled php7.3
 sudo service apache2 restart
 {% endhighlight %}
+
+<br /><br />
+
+When installation was complete, i was redirected to admin where First Run Wizard begin. I wasnt able to go through last step where domain should be verified.
+
+{% highlight javascript %}
+Verification failed
+The domain could not be verified
+
+errors: [{code: "FRAMEWORK__STORE_ERROR", status: "500", title: "Verification failed",…}]
+0: {code: "FRAMEWORK__STORE_ERROR", status: "500", title: "Verification failed",…}
+code: "FRAMEWORK__STORE_ERROR"
+detail: "The domain could not be verified"
+meta: {documentationLink: "shop-domain-verification-failed"}
+status: "500"
+title: "Verification failed"
+
+In documentation is written
+
+It should be noted that the domain entered here must already be externally accessible and that the web server must refer to the public-Directory within the Shopware 6 installation.
+{% endhighlight %}
+
+<br /><br />
+Here is my testing config
+
+<h3>/etc/apache2/sites-available/shopware1.lan.conf</h3>
+{% highlight javascript %}
+<VirtualHost *:80>
+ServerAdmin webmaster@ostechnix1.lan
+ServerName shopware1.lan
+ServerAlias www.shopware1.lan
+DocumentRoot /var/www/html/shopware/sites/shopware1.lan/public
+
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+{% endhighlight %}
+
+<br /><br />
+
+<h3>/etc/hosts</h3>
+{% highlight javascript %}
+127.0.0.1       shopware1.lan
+{% endhighlight %}
+
+<br /><br />
+
+Dont forget to run `sudo a2ensite shopware1.lan.conf`.
+
+<br /><br />
+
+I remove First Run Wizard directly in code
+<h3>/var/www/html/shopware/sites/shopware1.lan/vendor/shopware/administration/Controller/AdministrationController.php</h3>
+{% highlight php %}
+public function index(): Response
+{
+    $template = $this->finder->find('administration/index.html.twig');
+
+    return $this->render($template, [
+        'features' => FeatureConfig::getAll(),
+        'systemLanguageId' => Defaults::LANGUAGE_SYSTEM,
+        'defaultLanguageIds' => [Defaults::LANGUAGE_SYSTEM],
+        'liveVersionId' => Defaults::LIVE_VERSION,
+        //'firstRunWizard' => $this->firstRunWizardClient->frwShouldRun(),
+        'firstRunWizard' => false
+    ]);
+}
+{% php %}
