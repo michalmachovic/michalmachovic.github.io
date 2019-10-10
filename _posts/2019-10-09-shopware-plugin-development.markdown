@@ -82,3 +82,7 @@ This should work in 99% cases<br />
 <br /><br />
 Hard clean cache <br />
 `./psh.phar cache`
+
+<br /><br />
+<h2>Rebuild storefront - after css changes</h2>
+`./psh.phar storefront:dev && ./psh.phar storefront:build && ./psh.phar cache`
