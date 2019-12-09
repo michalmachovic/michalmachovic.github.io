@@ -70,5 +70,41 @@ mongo -u admin -p password --authenticationDatabase admin
 <h2>Examples</h2>
 <b>Show databases</b>
 {% highlight php %}
-show dbs
+show dbs;
 {% endhighlight %}
+<br /><br />
+
+
+<b>Create new database</b>
+{% highlight php %}
+use DB_NAME;
+use customer;
+{% endhighlight %}
+<br /><br />
+
+<b>Create new collection</b>
+{% highlight php %}
+db.createCollection("users");
+{% endhighlight %}
+<br /><br />
+
+
+<b>Show collections</b>
+{% highlight php %}
+show collections;
+{% endhighlight %}
+<br /><br />
+
+
+<b>Inser new record</b>
+{% highlight php %}
+db.users.insert([{ first_name: "ferko", last_name: "mrkvicka", email: "ferko@gmail.com"}]);
+{% endhighlight %}
+<br /><br />
+
+
+<b>Show all records</b>
+{% highlight php %}
+db.users.find();
+{% endhighlight %}
+<br /><br />
