@@ -62,3 +62,37 @@ app.use('/', (req, res, next) => {
 
 app.listen(3000);
 {% endhighlight %}
+<br /><br />
+
+
+<h2>Routes - example with form</h2>
+We need to install `body-parser` for parsing incoming requests.
+{% highlight javascript %}
+npm install --save body-parser
+{% endhighlight %}
+<br /><br />
+
+<h3>app.js</h3>
+{% highlight javascript %}
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+
+app.use(bodyParser.urlencoded({exteneded: false}));
+
+app.use('/add-product', (req, res, next) => {
+    res.send('<form action="/product" method="POST"><input type="text" name="title"><button type="submit">Add product</button></form>');
+});
+
+//this will trigger for only POST requests
+app.post('/product', (req, res, next) => {
+    console.log(req.body);  //req.body is available because of using bodyParser
+    res.redirect('/');
+});
+
+app.use('/', (req, res, next) => {
+    res.send('<h1>Hello from Express !</h1>');
+});
+
+app.listen(3000);
+{% endhighlight %}
