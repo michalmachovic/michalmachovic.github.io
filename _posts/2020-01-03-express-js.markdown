@@ -7,9 +7,18 @@ tags: [javascript, nodejs, express]
 ---
 `Express.js` is fast, unopinionated, minimalist web framework for Node.js. We can for example process requests, do routes, etc...
 
+<h2>Init npm, install Express.js and Nodemon</h2>
 {% highlight javascript %}
+npm init
 npm install --save express
+npm install --save-dev nodemon
+
+
+//then in package.json in "scripts" section
+"start": "nodemon app.js"
 {% endhighlight %}
+
+
 <br /><br />
 
 
