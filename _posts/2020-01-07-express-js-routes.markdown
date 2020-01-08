@@ -58,10 +58,11 @@ app.use('/', (req, res, next) => {
 
 app.listen(3000);
 {% endhighlight %}
+<br /><br /><br />
 
 
 
-<h2>Routes - using Router</h2>
+<h2>Routes - using Router and Path - Serving HTML pages</h2>
 Typically you dont want to have all the code in single file. Using `Router` you can split routes code into separate files.
 {% highlight javascript %}
 -routes
@@ -72,17 +73,38 @@ Typically you dont want to have all the code in single file. Using `Router` you 
     |
     |---shop.html
     |---add-product.html
+-util
+    |
+    |---path.js
+-public
+    |
+    |---css
+        |
+        |---main.css
 -app.js
+{% endhighlight %}
+<br /><br />
+
+<h3>util/path.js</h3>
+{% highlight javascript %}
+const path = require('path');
+module.exports = path.dirname(process.mainModule.filename);
 {% endhighlight %}
 <br /><br />
 
 <h3>routes/admin.js</h3>
 {% highlight javascript %}
+const path = require('path');
 const express = require('express');
 const router = express.Router()
+const rootDir = require('../util/path'); //if we want to use path to dirname above
 
 router.get('/add-product', (req, res, next) => {
-    res.send('<form action="/admin/add-product" method="POST"><input type="text" name="title"><button type="submit">Add product</button></form>');
+    res.sendFile(path.join(__dirname,'../', 'views', 'add-product.html'));
+    //__dirname return routes folder, then we need to go up one level, then to views, where is shop.html
+
+    //OR - using rootDir and  util/path.js
+    //res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
 });
 
 //this will trigger for only POST requests
@@ -98,13 +120,14 @@ module.exports = router;
 
 <h3>routes/shop.js</h3>
 {% highlight javascript %}
+const path = require('path');
 const express = require('express');
 const router = express.Router()
-const path = require('path');
 
 router.get('/', (req, res, next) => {
     //res.send('<h1>Hello from Express !</h1>');
-    res.sendFile(path.join(__dirname, 'views', 'shop.html'));
+    res.sendFile(path.join(__dirname, '../', 'views', 'shop.html'));
+    //__dirname return routes folder, then we need to go up one level, then to views, where is shop.html
 });
 module.exports = router;
 {% endhighlight %}
@@ -134,12 +157,27 @@ module.exports = router;
 </html>
 {% endhighlight %}
 
+<br /><br />
+<h3>views/404.html</h3>
+{% highlight javascript %}
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Page not found</h1>
+</body>
+</html>
+{% endhighlight %}
+
 
 <br /><br />
 <h3>views/shop.html</h3>
 {% highlight javascript %}
 <!DOCTYPE html>
 <html>
+<head>
+    <!-- we are using express.static in app.js to serve static css file from public dir -->
+    <link rel="stylesheet" href="/css/main.css">
+</head>
 <body>
     <header>
         <nav>
@@ -161,6 +199,7 @@ module.exports = router;
 <br /><br />
 <h3>app.js</h3>
 {% highlight javascript %}
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -168,13 +207,14 @@ const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 app.use(bodyParser.urlencoded({exteneded: false}));
+app.use(express.static(path.joing(__dirname, 'public')));
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 //404 error page, when i make request to path which doesnt exists
 app.use((req, res, next) => {
-    res.status(404).send('<h1>Page not found</h1>');
+    res.status(404).sendFile(path.joing(__dirname,'views','404.html'));
 });
 
 app.listen(3000);
