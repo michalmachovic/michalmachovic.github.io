@@ -207,6 +207,8 @@ const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 app.use(bodyParser.urlencoded({exteneded: false}));
+
+//add this to make public folder available to serve static files, like css
 app.use(express.static(path.joing(__dirname, 'public')));
 
 app.use('/admin', adminRoutes);
