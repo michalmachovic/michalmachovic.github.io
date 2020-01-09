@@ -99,6 +99,8 @@ const express = require('express');
 const router = express.Router()
 const rootDir = require('../util/path'); //if we want to use path to dirname above
 
+const products = [];
+
 router.get('/add-product', (req, res, next) => {
     res.sendFile(path.join(__dirname,'../', 'views', 'add-product.html'));
     //__dirname return routes folder, then we need to go up one level, then to views, where is shop.html
@@ -110,10 +112,12 @@ router.get('/add-product', (req, res, next) => {
 //this will trigger for only POST requests
 router.post('/add-product', (req, res, next) => {
     console.log(req.body);  //req.body is available because of using bodyParser
+    products.push({ title: req.body.title });
     res.redirect('/');
 });
 
-module.exports = router;
+exports.routes = router;
+exports.products = products;
 {% endhighlight %}
 
 <br /><br />
@@ -122,7 +126,8 @@ module.exports = router;
 {% highlight javascript %}
 const path = require('path');
 const express = require('express');
-const router = express.Router()
+const router = express.Router();
+const adminData = require('./admin');
 
 router.get('/', (req, res, next) => {
     //res.send('<h1>Hello from Express !</h1>');
@@ -203,7 +208,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const adminRoutes = require('./routes/admin');
+const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 app.use(bodyParser.urlencoded({exteneded: false}));
@@ -211,7 +216,7 @@ app.use(bodyParser.urlencoded({exteneded: false}));
 //add this to make public folder available to serve static files, like css
 app.use(express.static(path.joing(__dirname, 'public')));
 
-app.use('/admin', adminRoutes);
+app.use('/admin', adminData.routes);
 app.use(shopRoutes);
 
 //404 error page, when i make request to path which doesnt exists
