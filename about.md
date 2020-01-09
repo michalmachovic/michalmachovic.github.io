@@ -4,15 +4,32 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Atom <br />
+- Atom Light Theme<br />
+- atom-ternjs<br />
+- file-icons<br />
+- project-viewer<br />
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+<br /><br />
+Visual Studio Code<br />
+- OneLight++ Theme<br />
 
 
-[jekyll-organization]: https://github.com/jekyll
+<br /><br />
+Day job:
+- HTML <br />
+- CSS<br />
+- JavaScript<br />
+- TypeScript<br />
+- Knockout<br />
+- PHP<br />
+- MySql<br />
+
+<br /><br />
+
+In progress:<br />
+- Node.js <br />
+- Express<br />
+- React<br />
+- MongoDB<br />
+- Angular<br />
