@@ -138,7 +138,7 @@ module.exports = router;
 {% endhighlight %}
 
 <br /><br />
-<h3>views/app-product.html</h3>
+<h3>views/add-product.html</h3>
 {% highlight javascript %}
 <!DOCTYPE html>
 <html>
@@ -147,13 +147,13 @@ module.exports = router;
         <nav>
             <ul>
                 <li><a href="/">Shop</a></li>
-                <li><a href="/add-product">Add product</a></li>
+                <li><a href="/admin/add-product">Add product</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <form action="/add-product" method="post">
+        <form action="/admin/add-product" method="post">
             <input type="text" name="title">
             <button type="submit">Add product</button>
         </form>
@@ -188,7 +188,7 @@ module.exports = router;
         <nav>
             <ul>
                 <li><a href="/">Shop</a></li>
-                <li><a href="/add-product">Add product</a></li>
+                <li><a href="/admin/add-product">Add product</a></li>
             </ul>
         </nav>
     </header>
