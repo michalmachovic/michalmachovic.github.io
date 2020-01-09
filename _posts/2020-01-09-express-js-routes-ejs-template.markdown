@@ -8,12 +8,18 @@ tags: [javascript, nodejs, express, ejs]
 
 EJS is a simple templating language that lets you generate HTML markup with plain JavaScript.
 <br /><br />
+<h2>Install</h2>
+{% highlight javascript %}
+npm install ejs
+{% endhighlight %}
+<br /><br />
+
 <h2>Examples</h2>
 {% highlight javascript %}
 <%= pageTitle %>  //render pageTitle variable
 <%- include('includes/head.ejs') //render html/ejs file %>
-<% if (prods.length > 0) { %> //for loop
 {% endhighlight %}
+<% if (prods.length > 0) { %> //for loop
 
 <h2>Routes - using Router and Path - Serving HTML pages</h2>
 {% highlight javascript %}
