@@ -18,8 +18,10 @@ npm install ejs
 {% highlight javascript %}
 <%= pageTitle %>  //render pageTitle variable
 <%- include('includes/head.ejs') //render html/ejs file %>
-{% endhighlight %}
 <% if (prods.length > 0) { %> //for loop
+{% endhighlight %}
+
+<br /><br />
 
 <h2>Routes - using Router and Path - Serving HTML pages</h2>
 {% highlight javascript %}
