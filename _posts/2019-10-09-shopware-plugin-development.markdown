@@ -86,3 +86,7 @@ Hard clean cache <br />
 <br /><br />
 <h2>Rebuild storefront - after css changes</h2>
 `./psh.phar storefront:dev && ./psh.phar storefront:build && ./psh.phar cache`
+
+<br /><br />
+<h2>Rebuild admin</h2>
+ ./psh.phar administration:build
