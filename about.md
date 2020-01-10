@@ -13,7 +13,7 @@ Atom <br />
 <br /><br />
 Visual Studio Code<br />
 - OneLight++ Theme<br />
-
+- vscode-icons
 
 <br /><br />
 Day job:
@@ -24,6 +24,7 @@ Day job:
 - Knockout<br />
 - PHP<br />
 - MySql<br />
+- Magento<br />
 
 <br /><br />
 
@@ -33,3 +34,4 @@ In progress:<br />
 - React<br />
 - MongoDB<br />
 - Angular<br />
+- Shopware<br />
