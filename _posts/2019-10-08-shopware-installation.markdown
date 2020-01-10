@@ -30,6 +30,18 @@ For admin use credentials `admin/shopware`.
 
 <br /><br />
 
+<h3>Switching between different Shopware installations</h3>
+Go to your installation, `development`.
+<br />
+1. Build and start the containers <br />
+`./psh.phar docker:start`
+<br /><br />
+
+2. Access the application container <br />
+`./psh.phar docker:ssh`
+<br /><br />
+
+<br /><br />
 
 <h3>Without docker</h3>
 {% highlight javascript %}

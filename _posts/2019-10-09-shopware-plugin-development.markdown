@@ -53,7 +53,7 @@ You can skip first three steps and auto generate plugin with
 
 3. Create plugin base class
 <h3>/custom/plugins/SwagBundleExample/src/BundleExample.php</h3>
-
+{% highlight php %}
 <?php declare(strict_types=1);
 {% highlight php %}
 namespace Swag\BundleExample;
