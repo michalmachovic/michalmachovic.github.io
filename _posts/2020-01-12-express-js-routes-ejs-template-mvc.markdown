@@ -70,7 +70,7 @@ module.exports = class Product {
 <br /><br />
 <h3>controllers/products.js</h3>
 {% highlight javascript %}
-const Product = require('../models/product);
+const Product = require('../models/product' );
 
 exports.getAddProduct = (req, res, next) => {
      res.render('add-product', {
