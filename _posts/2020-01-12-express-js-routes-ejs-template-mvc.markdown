@@ -7,7 +7,25 @@ tags: [javascript, nodejs, express, ejs]
 ---
 
 We will add controllers and use MVC. You can have one to one mapping between routes and controllers but you can split it also differently. <br />
-We will create controller for `admin` and controller for `frontend`.
+We will create controller for `admin` and controller for `frontend`. We will store products in filesystem.
+
+<br />
+<h2>Model</h2>
+- responsible for representing your data<br />
+- responsible for managing your data (saving, fetching)<br />
+- doesnt matter if you manage data in memory, files, db<br />
+- contains data-related logic<br />
+<br /><br />
+
+<h2>View</h2>
+- what the user sees<br />
+- shouldnt contain too much logic<br />
+<br /><br />
+
+<h2>Controller</h2>
+- connects `Model` and `View`<br />
+- should only make sure that the two can communicate (in both directions)<br />
+<br /><br />
 
 <h2>Routes - using Router and Path - Serving HTML pages</h2>
 {% highlight javascript %}
@@ -23,7 +41,7 @@ We will create controller for `admin` and controller for `frontend`.
 -models
     |
     |---product.js
-    
+
 -views
     |
     |---includes
@@ -46,7 +64,20 @@ We will create controller for `admin` and controller for `frontend`.
 <br /><br />
 <h3>models/product.js</h3>
 {% highlight javascript %}
-const products = []
+//const products = []; //old approach saving products to array
+const fs = require('fs');
+const path = require('path');
+
+const p = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json');
+
+const getProductsFromFile = (cb) => {
+    fs.readFile(p, (err, fileContent) => {
+        if (err) {
+            return cb([]);
+        }
+        cb(JSON.parse(fileContent));
+    })
+}
 
 module.exports = class Product {
     constructor(title) {
@@ -54,12 +85,19 @@ module.exports = class Product {
     }
 
     save() {
-        products.push(this);
+        //products.push(this);
+        getProductsFromFile(products => {
+            products.push(this);
+            fs.writeFile(p, JSON.stringify(products), (err) => {
+                console.log(err);
+            });
+        });
     }
 
     //static means that it will be not called on concrete instance of product model, but will return all products
-    static fetchAll() {
-        return this.products;
+    //cb = callback function
+    static fetchAll(cb) {
+        getProductsFromFile(cb);
     }
 }
 {% endhighlight %}
@@ -87,13 +125,15 @@ exports.postAddProduct = (req, res, next) => {
 }
 
 export.getProducts =  (req, res, next) => {
-    res.render('shop', {
-        prods: products,
-        pageTitle: 'shop',
-        path: '/',
-        hasProducts: products.length > 0,
-        activeShop: true
-    };
+    Product.fetchAll(products => {
+        res.render('shop', {
+            prods: products,
+            pageTitle: 'shop',
+            path: '/',
+            hasProducts: products.length > 0,
+            activeShop: true
+        });
+    });
 }
 {% endhighlight %}
 <br /><br />
@@ -111,7 +151,7 @@ router.get('/add-product', productsController.getAddProduct);
 //this will trigger for only POST requests
 router.post('/add-product', productsController.postAddProduct );
 
-module.exports = router; 
+module.exports = router;
 
 {% endhighlight %}
 
