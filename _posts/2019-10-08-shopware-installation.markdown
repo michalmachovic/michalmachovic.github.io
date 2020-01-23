@@ -122,3 +122,22 @@ public function index(): Response
     ]);
 }
 {% endhighlight %}
+
+<br /><br />
+
+<h3>Possible issues</h3>
+If you see messages like this>
+{% highlight javascript %}
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+{% endhighlight %}
+
+{% highlight javascript %}
+ERROR 2059 (HY000): Authentication plugin 'caching_sha2_password' cannot be loaded: /usr/lib/x86_64-linux-gnu/mariadb18/plugin/caching_sha2_password.so: cannot open shared object file: No such file or directory
+{% endhighlight %}
+
+go to mysql docker container
+{% highlight javascript %}
+docker exec -ti development_app_mysql_1 bash -l
+mysql -u app -papp
+ALTER USER 'app'@'%' IDENTIFIED WITH mysql_native_password BY 'app';
+{% endhighlight %}
