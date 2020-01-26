@@ -49,8 +49,10 @@ We will create controller for `admin` and controller for `frontend`. We will sto
     |       |---head.ejs
     |       |---navigation.ejs
     |
-    |---shop.ejs
-    |---add-product.ejs
+    |---admin
+            |
+            |---shop.ejs
+            |---add-product.ejs
 
 -public
     |
