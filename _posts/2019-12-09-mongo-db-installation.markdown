@@ -8,8 +8,54 @@ tags: [mongo, db]
 
 MongoDB is a document database with the scalability and flexibility that you want with the querying and indexing that you need.
 
+<h2>Installation - Atlas Cloud</h2>
+We can use this for free and its better then local server, as its more realistic environment. Go to http://www.mongodb.com and sign up for free cluster.
+<br />
+1. Create new cluster <br />
+2. Under `Security -> Database Access` create new user with `Read and write to any database`. You will need `user` and `password` later in your script where you will connect to db.<br />
+3. Under `Security -> Network Access` add your current IP address.<br />
+4. Back to `Clusters`, click on `Connect`, choose `Connect your application`<br />
+<br /><br />
+Now install MongoDb driver `npm install --save mongodb`.
 
-<h2>Installation</h2>
+<h3>util/database.js</h3>
+{% highlight javascript %}
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
+const url = 'mongodb+srv://USER:PASSWORD@cluster0-gconm.mongodb.net/test?retryWrites=true&w=majority';
+
+const mongoConnect = (callback) => {
+    MongoClient.connect(
+        url
+    )
+        .then(client => {
+            console.log('Connected !');
+            callback(client);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
+module.exports = mongoConnect;
+{% endhighlight %}
+
+<br /><br />
+<h3>app.js</h3>
+{% highlight javascript %}
+...
+const mongoConnect = require('./util/database');
+const app = express();
+...
+mongoConnect((client) => {
+    console.log(client);
+    app.listen(3000);
+});
+{% endhighlight %}
+
+<br /><br /><br />
+
+<h2>Installation - Local Server</h2>
 This was tested on xubuntu 18.04.
 
 <b>Remove previous MongoDB installations</b>
