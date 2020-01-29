@@ -8,7 +8,7 @@ tags: [php, shopware]
 
 `http://localhost:8000` - shopware <br />
 `http://localhost:8000/admin` - admin (admin/shopware) <br />
-`http://localhost:8001` - adminer (db) <br />
+`http://localhost:8001` - adminer (mysql/app/app) <br />
 
 <br /><br />
 
