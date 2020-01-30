@@ -280,7 +280,7 @@ class Testing extends Plugin
 
 
 
-<h3>MichalMachovicTesting/src/Migration/Migration<TIMESTAMP>.php</h3>
+<h3>MichalMachovicTesting/src/Migration/Migration(TIMESTAMP).php</h3>
 {% highlight php %}
 <?php declare(strict_types=1);
 
