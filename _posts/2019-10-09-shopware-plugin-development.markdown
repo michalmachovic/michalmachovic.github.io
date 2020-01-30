@@ -277,3 +277,356 @@ class Testing extends Plugin
     }
 {% endhighlight %}
 <br /><br />
+
+
+
+<h3>MichalMachovicTesting/src/Migration/Migration<TIMESTAMP>.php</h3>
+{% highlight php %}
+<?php declare(strict_types=1);
+
+namespace MichalMachovic\Testing\Migration;
+
+use Doctrine\DBAL\Connection;
+use Shopware\Core\Framework\Migration\InheritanceUpdaterTrait;
+use Shopware\Core\Framework\Migration\MigrationStep;
+
+class Migration1554708925Testing extends MigrationStep
+{
+    use InheritanceUpdaterTrait;
+
+    public function getCreationTimestamp(): int
+    {
+        return 1554708925;
+    }
+
+    public function update(Connection $connection): void
+    {
+      $connection->executeQuery('
+      CREATE TABLE IF NOT EXISTS `michalmachovic_testing` (
+        `id` BINARY(16) NOT NULL,
+        `buy_request` LONGTEXT NOT NULL,
+        `created_at` DATETIME(3) NOT NULL,
+        `updated_at` DATETIME(3) NULL,
+        PRIMARY KEY (`id`)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  ');
+  //$this->updateInheritance($connection, 'product', 'personaliseit');
+    }
+
+    public function updateDestructive(Connection $connection): void
+    {
+    }
+}
+
+{% endhighlight %}
+
+
+
+<br /><br />
+<h3>MichalMachovicTesting/src/Core/Content/Testing/TestingEntity.php</h3>
+{% highlight php %}
+<?php declare(strict_types=1);
+
+namespace MichalMachovic\Testing\Core\Content\Testing;
+
+use Shopware\Core\Framework\DataAbstractionLayer\Entity;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
+
+class TestingEntity extends Entity
+{
+    use EntityIdTrait;
+
+    /**
+     * @var string
+     */
+    protected $buyRequest;
+
+  
+    public function getBuyRequest(): string
+    {
+        return $this->defaultAppUrl;
+    }
+
+    public function setBuyRequest(string $buyRequest): void
+    {
+        $this->buyRequest = $buyRequest;
+    }
+}
+
+{% endhighlight %}
+
+<br /><br />
+<h3>MichalMachovicTesting/src/Core/Content/Testing/TestingDefinition.php</h3>
+{% highlight php %}
+<?php declare(strict_types=1);
+
+namespace MichalMachovic\Testing\Core\Content\Testing;
+
+use Shopware\Core\Framework\DataAbstractionLayer\EntityDefinition;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\PrimaryKey;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\FloatField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\IdField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\LongTextField;
+use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
+
+class TestingDefinition extends EntityDefinition
+{
+    public const ENTITY_NAME = 'michalmachovic_testing';
+
+    public function getEntityName(): string
+    {
+        return self::ENTITY_NAME;
+    }
+
+    public function getCollectionClass(): string
+    {
+        return TestingCollection::class;
+    }
+
+    public function getEntityClass():string
+    {
+        return TestingEntity::class;
+    }
+
+    protected function defineFields(): FieldCollection
+    {
+        return new FieldCollection([
+            (new IdField('id', 'id'))->addFlags(new Required(), new PrimaryKey()),
+            (new LongTextField('buy_request', 'buyRequest'))->addFlags(new Required())
+        ]);
+    }
+}
+{% endhighlight %}
+
+
+<br /><br />
+<h3>MichalMachovicTesting/src/Core/Content/Testing/TestingCollection.php</h3>
+{% highlight php %}
+<?php declare(strict_types=1);
+
+namespace MichalMachovic\Testing\Core\Content\Testing;
+
+use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
+
+/**
+ * @method void              add(TestingEntity $entity)
+ * @method void              set(string $key, TestingEntity $entity)
+ * @method TestingEntity[]    getIterator()
+ * @method TestingEntity[]    getElements()
+ * @method TestingEntity|null get(string $key)
+ * @method TestingEntity|null first()
+ * @method TestingEntity|null last()
+ */
+class TestingCollection extends EntityCollection
+{
+    protected function getExpectedClass(): string
+    {
+        return TestingEntity::class;
+    }
+}
+
+{% endhighlight %}
+
+
+
+<br /><br />
+<h3>MichalMachovicTesting/src/Storefront/Controller/A2cController.php</h3>
+{% highlight php %}
+<?php declare(strict_types=1);
+
+namespace MichalMachovic\Testing\Storefront\Controller;
+
+use Shopware\Core\Checkout\Cart\SalesChannel\CartService;
+use Shopware\Core\Checkout\Order\SalesChannel\OrderService;
+use Shopware\Storefront\Page\GenericPageLoader;
+use Shopware\Core\System\SalesChannel\SalesChannelContext;
+use Shopware\Core\Framework\Routing\Annotation\RouteScope;
+use Shopware\Storefront\Controller\StorefrontController;
+use Symfony\Component\Routing\Annotation\Route;
+use Shopware\Core\Content\Product\Cart\ProductLineItemFactory;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
+use Shopware\Core\Framework\Uuid\Uuid;
+use Shopware\Core\Framework\Context;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
+
+/**
+ * @RouteScope(scopes={"storefront"})
+ */
+class A2cController extends StorefrontController
+{   
+
+    /**
+     *  @var EntityRepositoryInterface
+     */
+    private $testingRepository;
+  
+    private $cartService;
+    private $orderService;
+    private $genericPageLoader;
+   
+    public function __construct(
+        CartService $cartService, 
+        OrderService $orderService, 
+        GenericPageLoader $genericPageLoader, 
+        EntityRepositoryInterface $personaliseItRepository)
+    {
+        $this->cartService = $cartService;
+        $this->orderService = $orderService;
+        $this->genericPageLoader = $genericPageLoader;
+        $this->personaliseItRepository = $personaliseItRepository;
+    }
+
+
+
+    /**
+     * @Route("/testing/a2c/{id}", name="frontend.testing.a2c", options={"seo"="false"}, methods={"POST"})
+     */
+    public function a2c(SalesChannelContext $salesChannelContext, Context $context, Request $request, string $id)
+    {   
+
+        //data are coming from form with post 
+        $data = json_decode($request->get('data'));
+        
+        //update item in cart
+        if ($id) {
+            $cart = $this->cartService->getCart($salesChannelContext->getToken(), $salesChannelContext);
+            $product = (new ProductLineItemFactory())->create($id, ['quantity' => 1]);
+            $this->cartService->add($cart, $product, $salesChannelContext);
+
+            $lastItem = $cart->getLineItems()->last();
+            $lastItem->setPayloadValue('testing', json_encode($data));
+            $this->cartService->setCart($cart, $salesChannelContext);
+        }
+        
+
+        //insert data into own DB table
+        $insert = [
+            'id' => Uuid::randomHex(),
+            'buyRequest' => json_encode($data)
+        ];
+        $this->testingRepository->create(array($insert), $context);
+                          
+
+        return new JsonResponse(array(
+            'redirect' => 'http://localhost:8000/checkout/cart',
+        ));
+    }
+
+}
+{% endhighlight %}
+
+
+<br /><br />
+<h3>MichalMachovicTesting/src/Resources/config/config.xml</h3>
+{% highlight php %}
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Minimal configuration</title>
+        <title lang="de-DE">Minimale Konfiguration</title>
+        <input-field>
+            <name>example</name>
+            <label>Example Label EN</label>
+            <label lang="de-DE">Beispiel Label DE</label>
+        </input-field>
+    </card>
+</config>
+
+{% endhighlight %}
+
+
+<br /><br />
+<h3>MichalMachovicTesting/src/Resources/config/routes.xml</h3>
+{% highlight php %}
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing
+        https://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <import resource="../../**/Storefront/Controller/*Controller.php" type="annotation" />
+</routes>
+{% endhighlight %}
+
+
+<br /><br />
+<h3>MichalMachovicTesting/src/Resources/config/services.xml</h3>
+{% highlight php %}
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+           
+    <services>
+        <service id="MichalMachovic\Testing\Core\Content\Testing\TestingItDefinition">
+            <tag name="shopware.entity.definition" entity="michalmachovic_testing" />
+        </service>
+
+        <service id="MichalMachovic\Testing\Storefront\Controller\A2cController" public="true">
+            <argument type="service" id="Shopware\Core\Checkout\Cart\SalesChannel\CartService"/>
+            <argument type="service" id="Shopware\Core\Checkout\Order\SalesChannel\OrderService"/>
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader"/>
+            <argument type="service" id="michalmachovic_testing.repository" /> 
+              
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+    </services>
+</container>
+{% endhighlight %}
+
+
+<br /><br />
+<h3>MichalMachovicTesting/src/Resources/views/page/product-detail/index.html.twig</h3>
+{% highlight php %}
+{% sw_extends '@Storefront/base.html.twig' %}
+
+{% block base_head %}
+    {% sw_include '@Storefront/page/product-detail/meta.html.twig' %}
+{% endblock %}
+
+{% block base_content %}
+
+.....
+<script>
+let a2c = 'http://localhost:8000/testing/a2c/{{page.product.id}}';
+
+var xhr = new XMLHttpRequest();
+xhr.widthCredentials = true;
+                                                
+xhr.onreadystatechange = function() {
+    if(xhr.readyState == 4) {
+        if(xhr.status == 200) {
+            var data = JSON.parse(xhr.responseText);
+            window.top.location = data.redirect;
+        } else {
+            try {
+                var data = JSON.parse(xhr.responseText);
+                alert(data.error.message);
+            } catch(e) {
+                alert("An unknown error ocurred");
+            }
+        }
+    }
+};
+
+xhr.open("POST", a2c);
+                            
+var fd = new FormData();
+fd.append('data', JSON.stringify(body));
+xhr.send(fd);
+break;
+</script>
+.....
+{% endhighlight %}
+
+
