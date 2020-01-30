@@ -123,3 +123,10 @@ php bin/magento setup:static-content:deploy en_GB en_US -f
  sudo php bin/magento setup:di:compile
  sudo n98-magerun2.phar cache:clean && sudo n98-magerun2.phar cache:flush && sudo chmod 777 var -R && sudo chmod 777 pub -R
  {% endhighlight %}
+<br /><br />
+<h2>Cron</h2>
+{% highlight ts %}
+*/2 * * * * /usr/bin/php /var/www/html/magento2/sites/ai23/bin/magento cron:run | grep -v "Ran jobs by schedule" >> /var/www/magento2/sites/ai23/var/log/magento.cron.log
+*/2 * * * * /usr/bin/php /var/www/html/magento2/sites/ai23/update/cron.php >> /var/www/magento2/sites/ai23/var/log/update.cron.log
+*/2 * * * * /usr/bin/php /var/www/html/magento2/sites/ai23/bin/magento setup:cron:run >> /var/www/magento2/sites/ai23/var/log/setup.cron.log
+{% endhighlight %}
