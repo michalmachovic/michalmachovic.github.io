@@ -16,6 +16,10 @@ Visual Studio Code<br />
 - vscode-icons
 
 <br /><br />
+Rest API Client
+- Insomnia
+
+<br /><br />
 Day job:
 - HTML <br />
 - CSS<br />
@@ -25,6 +29,7 @@ Day job:
 - PHP<br />
 - MySql<br />
 - Magento<br />
+- Shopware<br />
 
 <br /><br />
 
