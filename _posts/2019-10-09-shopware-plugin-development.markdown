@@ -588,6 +588,7 @@ class A2cController extends StorefrontController
 <br /><br />
 <h3>MichalMachovicTesting/src/Resources/views/page/product-detail/index.html.twig</h3>
 {% highlight php %}
+{% raw %}
 {% sw_extends '@Storefront/base.html.twig' %}
 
 {% block base_head %}
@@ -595,7 +596,7 @@ class A2cController extends StorefrontController
 {% endblock %}
 
 {% block base_content %}
-
+{% endraw %}
 .....
 <script>
 let a2c = 'http://localhost:8000/testing/a2c/{{page.product.id}}';
