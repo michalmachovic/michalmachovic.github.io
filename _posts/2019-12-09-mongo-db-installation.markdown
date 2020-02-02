@@ -24,20 +24,30 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const url = 'mongodb+srv://USER:PASSWORD@cluster0-gconm.mongodb.net/test?retryWrites=true&w=majority';
 
+let _db;
+
 const mongoConnect = (callback) => {
     MongoClient.connect(
         url
     )
         .then(client => {
             console.log('Connected !');
-            callback(client);
+            _db = client.db();
+            callback();
         })
         .catch(err => {
             console.log(err);
         });
 }
 
-module.exports = mongoConnect;
+const getDb = () => {
+    if (_db) {
+        return _db;
+    }
+    throw 'No database found !';
+}
+exports.mongoConnect = mongoConnect;
+exports.getDb = getDb;
 {% endhighlight %}
 
 <br /><br />
@@ -47,7 +57,7 @@ module.exports = mongoConnect;
 const mongoConnect = require('./util/database');
 const app = express();
 ...
-mongoConnect((client) => {
+mongoConnect(() => {
     console.log(client);
     app.listen(3000);
 });
