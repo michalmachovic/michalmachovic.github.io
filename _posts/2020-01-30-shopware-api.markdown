@@ -72,8 +72,8 @@ require('vendor/autoload.php');
 
 $client = new GuzzleHttp\Client();
 $res = $client->request('POST', 'http://localhost:8000/api/oauth/token', [
-    'json' => ["client_id" => "SWIAWM9RNHE1QNVMMHE5AEE4SG",
-                "client_secret" => "T21NQlpGM2dCcGk2cGFNVlFEdGgwcld4TEd4WmM4d1A4SEZpQTk",
+    'json' => ["client_id" => "SHOPWARE_ACCESS_KEY_ID",
+                "client_secret" => "SHOPWARE_SECRET_KEY",
                 "grant_type" => "client_credentials"]
     ]);
 
