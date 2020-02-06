@@ -122,6 +122,7 @@ php bin/magento setup:static-content:deploy en_GB en_US -f
  sudo php bin/magento setup:upgrade
  sudo php bin/magento setup:di:compile
  sudo n98-magerun2.phar cache:clean && sudo n98-magerun2.phar cache:flush && sudo chmod 777 var -R && sudo chmod 777 pub -R
+ php bin/magento cache:clean && php bin/magento cache:flush && sudo chmod 777 var -R && sudo chmod 777 pub -R
  {% endhighlight %}
 <br /><br />
 <h2>Cron</h2>

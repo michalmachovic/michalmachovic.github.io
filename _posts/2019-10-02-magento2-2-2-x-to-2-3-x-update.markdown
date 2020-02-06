@@ -36,3 +36,4 @@ in `composer.json` file add <br />
 `sudo php bin/magento setup:upgrade` <br />
 `sudo php bin/magento setup:di:compile` <br />
 `sudo n98-magerun2.phar cache:clean && sudo n98-magerun2.phar cache:flush && sudo chmod 777 var -R && sudo chmod 777 pub -R`
+`php bin/magento cache:clean && php bin/magento cache:flush && sudo chmod 777 var -R && sudo chmod 777 pub -R`
