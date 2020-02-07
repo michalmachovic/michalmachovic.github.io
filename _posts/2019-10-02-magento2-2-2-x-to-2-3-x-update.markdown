@@ -37,3 +37,40 @@ in `composer.json` file add <br />
 `sudo php bin/magento setup:di:compile` <br />
 `sudo n98-magerun2.phar cache:clean && sudo n98-magerun2.phar cache:flush && sudo chmod 777 var -R && sudo chmod 777 pub -R`<br />
 `php bin/magento cache:clean && php bin/magento cache:flush && sudo chmod 777 var -R && sudo chmod 777 pub -R`
+
+
+<h2>Possible issues</h2>
+<h3>Issue</h3>
+{% highlight php %}
+     [Composer\DependencyResolver\SolverProblemsException]                                                                               
+    Problem 1                                                                                                                         
+      - klarna/module-core 4.4.5 requires guzzlehttp/guzzle ^6.0 -> no matching package found.                                        
+      - magento/product-community-edition 2.2.6 requires klarna/module-core 4.4.5 -> satisfiable by klarna/module-core[4.4.5].        
+      - Installation request for magento/product-community-edition 2.2.6 -> satisfiable by magento/product-community-edition[2.2.6].  
+  Potential causes:                                                                                                                   
+   - A typo in the package name                                                                                                       
+   - The package is not available in a stable-enough version according to your minimum-stability setting                              
+     see <https://getcomposer.org/doc/04-schema.md#minimum-stability> for more details.                                               
+  Read <https://getcomposer.org/doc/articles/troubleshooting.md> for further common problems.       
+{% endhighlight %}
+
+<br />
+<h3>Fix</h3>
+{% highlight php %}
+composer require guzzlehttp/guzzle:6.5.x-dev 
+{% endhighlight %}
+<br />
+or 
+<br />
+{% highlight php %}
+# php -f dev/tools/UpgradeScripts/pre_composer_update_2.3.php -- --root=/var/www/vhosts/PATH_TO_YOUR_SITE/htdocs --repo=https://repo.magento.com/
+{% endhighlight %}
+<br />
+You can get `pre_composer_update_2.3.php` from `Magento 2.3x` installation. 
+<br />
+Then run `composer update`.
+
+
+<br /><br />
+
+
