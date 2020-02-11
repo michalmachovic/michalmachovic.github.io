@@ -40,7 +40,7 @@ in `composer.json` file add <br />
 
 
 <h2>Possible issues</h2>
-<h3>Issue</h3>
+<h3>Issue - no matching package found</h3>
 {% highlight php %}
      [Composer\DependencyResolver\SolverProblemsException]                                                                               
     Problem 1                                                                                                                         
@@ -72,5 +72,13 @@ Then run `composer update`.
 
 
 <br /><br />
+<br /><br />
+<h3>Issue - missing product images because of cache</h3>
+`404 (Not Found)` on `pub/media/catalog/product/cache`
+<h3>Fix</h3>
+Delete cache folder from ⁨pub⁩/⁨media⁩/⁨catalog⁩/⁨product⁩/cache
+<br />
+Regenerating the cache folder using:
+`php bin/magento catalog:image:resize`
 
 
