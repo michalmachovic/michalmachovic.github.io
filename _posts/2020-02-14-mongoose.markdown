@@ -1,0 +1,16 @@
+---
+layout: post
+date:   2020-02-14 09:13:26 +0200
+title:  "Mongoose"
+category: mongoose
+tags: [mongoose]
+---
+
+`Mongoose` is elegant mongodb object modeling for node.js. `Mongoose` provides a straight-forward, schema-based solution to model your application data. It includes built-in type casting, validation, query building, business logic hooks and more, out of the box.
+
+`npm install --save mongoose`
+
+
+{% highlight javascript %}
+
+{% endhighlight %}
