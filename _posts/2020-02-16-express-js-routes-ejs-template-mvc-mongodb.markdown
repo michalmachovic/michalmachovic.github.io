@@ -51,6 +51,8 @@ Use `MongoDB Compass` for working with database.
 -app.js
 {% endhighlight %}
 <br /><br />
+
+
 <h3>models/product.js</h3>
 {% highlight javascript %}
 const url = 'mongodb+srv://MONGODB_USER:MONGODB_PASSWORD@cluster0-gconm.mongodb.net/MONGODB_DATABASE?retryWrites=true&w=majority';
@@ -83,7 +85,7 @@ const getDb = () => {
 
 exports.mongoConnect = mongoConnect;
 exports.db = getDb;
-{% endhighligt %}
+{% endhighlight %}
 
 
 
