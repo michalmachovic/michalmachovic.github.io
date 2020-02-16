@@ -5,6 +5,8 @@ title:  "Express.js - Routes and Router with EJS templating engine and MVC and M
 category: nodejs
 tags: [javascript, nodejs, express, ejs, mongodb]
 ---
+
+This is example eshop. You can add products, edit products, add products to cart and create orders. All is stored in nosql MongoDb.
 Use `MongoDB Compass` for working with database.
 <br /><br />
 
