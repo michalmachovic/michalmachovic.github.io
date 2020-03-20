@@ -5,7 +5,7 @@ title:  "Shopware6: Installation"
 category: php
 tags: [php]
 ---
-
+<h2>Development</h2>
 <h3>With docker</h3>
 
 `git clone https://github.com/shopware/development.git` <br />
@@ -140,4 +140,44 @@ go to mysql docker container
 docker exec -ti development_app_mysql_1 bash -l
 mysql -u app -papp
 ALTER USER 'app'@'%' IDENTIFIED WITH mysql_native_password BY 'app';
+{% endhighlight %}
+
+<br /><br />
+
+<h2>Production</h2>
+https://github.com/shopware/production
+
+{% highlight javascript %}
+# clone newest 6.1 patch version from github 
+git clone --branch=6.1 https://github.com/shopware/production shopware
+cd shopware
+
+# install shopware and dependencies according to the composer.lock 
+composer install
+
+# setup the environment
+bin/console system:setup
+# or create .env yourself, if you need more control
+# create jwt secret: bin/console system:generate-jwt-secret
+# create app secret: APP_SECRET=$(bin/console system:generate-app-secret)
+# create .env
+
+# create database with a basic setup (admin user and storefront sales channel)
+bin/console system:install --create-database --basic-setup
+
+# or use the interactive installer in the browser: /recovery/install/index.php
+{% endhighlight %}
+<br /><br />
+
+<h3>Possible errors</h3>
+
+<b>ext-intl is required</b><br />
+{% highlight javascript %}
+sudo apt-get install php7.2-intl
+{% endhighlight %}
+<br /><br />
+
+<b>Error during composer install</b><br />
+{% highlight javascript %}
+sudo dpkg-reconfigure libdvd-pkg
 {% endhighlight %}
