@@ -10,4 +10,7 @@ tags: [php]
 sudo a2dismod php5.6
 sudo a2enmod php7.2
 sudo service apache2 restart
+
+//for cli
+sudo update-alternatives --set php /usr/bin/php7.2
 {% endhighlight %}
