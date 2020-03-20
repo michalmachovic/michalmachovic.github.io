@@ -181,3 +181,6 @@ sudo apt-get install php7.2-intl
 {% highlight javascript %}
 sudo dpkg-reconfigure libdvd-pkg
 {% endhighlight %}
+
+<br /><br />
+Login details to admin are admin/shopware.
