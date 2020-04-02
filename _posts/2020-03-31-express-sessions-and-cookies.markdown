@@ -49,7 +49,7 @@ This is for production. We will use MongoDB for storing sessions.
 {% highlight javascript %}
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const MONGODB_URI = 'mongodb+srv://MONGO_USER:MONGO_PASSWORD@cluster0-gconm.mongodb.net/test?w=majority;
+const MONGODB_URI = 'mongodb+srv://MONGO_USER:MONGO_PASSWORD@cluster0-gconm.mongodb.net/test?w=majority';
 
 const app = express();
 const store = new MongoDBStore({
