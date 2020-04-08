@@ -1,6 +1,6 @@
 ---
 layout: post
-date:   2020-03-04 09:13:26 +0200
+date:   2020-04-03 09:13:26 +0200
 title:  "Update triggers in Mysql Database"
 category: mysql
 tags: [mysql, trigges]
