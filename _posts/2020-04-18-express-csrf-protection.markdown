@@ -25,7 +25,7 @@ const authRoutes = require('./routes/auth');
 const csrf = require('csurf');
 const csrfProtection = csrf();
 
-app.use(bodyParser.urlencoded({exteneded: false}));
+app.use(bodyParser.urlencoded({extended: false}));
 
 //we need to add this as middleware after bodyParser
 app.use(csrfProtection);
@@ -47,31 +47,36 @@ const router = express.Router();
 const authController = require('../controllers/auth');
 
 router.get('/login',authController.getLogin);
+
+router.post('/login',authController.postLogin);
 {% endhighlight %}
 
 <br /><br />
 <h3>controllers/auth.js</h3>
 {% highlight javascript %}
-const bcrypt = require('bcryptjs');
-const User = require('../models/user');
-
 exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
         path: '/login',
         pageTitle: 'Login'
     });
 }
+
+
+exports.postLogin = (req, res, next) => {
+    const email = req.body.email;
+    const password = req.body.password;
+   
+   //user authentification
+}
 {% endhighlight %}
 
 <br /><br />
 <h3>views/auth/login.ejs</h3>
 {% highlight javascript %}
-<%- include('../includes/head.ejs') %>
 <title><%= pageTitle %></title>
 </head>
 
 <body>
-    <%- include('../includes/nav.ejs') %>
     <main>
         <div class="login">
                 <div>
@@ -98,7 +103,3 @@ exports.getLogin = (req, res, next) => {
 </body>
 </html>
 {% endhighlight %}
-
-
-
-<br /><br />
