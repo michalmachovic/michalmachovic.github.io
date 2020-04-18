@@ -7,7 +7,7 @@ tags: [express, csrf]
 ---
 Cross-site request forgery (also known as CSRF) is a web security vulnerability that allows an attacker to induce users to perform actions that they do not intend to perform. It allows an attacker to partly circumvent the same origin policy, which is designed to prevent different websites from interfering with each other.
 <br /><br />
-We will install `csurf` extension for this. `npm install --save csurf`. We need to pass `csrf token` through controllers to each view (we can do this once in app.js) and add hidden input with name `_csrf` with csrf token to each view.
+We will install `csurf` extension for this. `npm install --save csurf`. We need to pass `csrf token` through controllers to each view (we can do this once in app.js) and add hidden input with name `_csrf` with csrf token to each view, to each `post` request.
 
 <h2></h2>
 
