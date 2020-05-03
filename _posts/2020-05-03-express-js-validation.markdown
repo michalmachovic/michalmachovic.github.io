@@ -18,7 +18,7 @@ We will check if on signup page, entered email is in correct format.
 
 <h2>routes/auth.js</h2>
 {% highlight javascript %}
-const express = require('express);
+const express = require('express');
 const { check } = require('express-validator/check');
 
 router.get('/signup', authController.getSignup);
@@ -33,7 +33,7 @@ router.post(
 
 <h2>controllers/auth.js</h2>
 {% highlight javascript %}
-const express = require('express);
+const express = require('express');
 const { validationResult } = require('express-validator/check');
 
 ...
