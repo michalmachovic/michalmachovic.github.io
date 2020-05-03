@@ -5,12 +5,12 @@ title:  "Express.js: Sending emails"
 category: express
 tags: [express]
 ---
-
-
-<br /><br />
-Builind own mailserver is very complex task, thats why we use some existing services for this. We will use Sendgrid (www.sendgrid.com) for this as they have free plan. We need to install also `nodemailer` and `nodemailer-sendgrid-transport`. <br />
+<br />
 `npm install --save nodemailer` <br />
 `npm install --save nodemailer-sendgrid-transport`
+<br /><br />
+Builind own mailserver is very complex task, thats why we use some existing services for this. We will use Sendgrid (www.sendgrid.com) for this as they have free plan. We need to install also `nodemailer` and `nodemailer-sendgrid-transport`. <br />
+
 
 
 <br /><br />

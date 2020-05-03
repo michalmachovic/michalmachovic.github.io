@@ -7,6 +7,8 @@ tags: [express]
 ---
 
 
+<br />
+`npm install --save connect-flash`
 <br /><br />
 Flash messages can be used for example when user enter wrong email or password during the logging process. Or user will enter email which is already in use during registration process. Problem is that after user enter some data, we will redirect him, so we must store information about what happened somewhere else. For that we can use flash message.
 
@@ -15,6 +17,25 @@ Flash messages can be used for example when user enter wrong email or password d
 <h2>Prerequisities</h2>
 We are storing sessions in db and using `mongoose`.
                         
+<br /><br />
+
+<h2>app.js</h2>
+{% highlight javascript %}
+const flash = require('connect-flash');
+...
+app.use(
+    session({
+        secret: 'my secret', 
+        resave: false, 
+        saveUninitialized: false,
+        store: store 
+    })
+);
+
+app.use(flash());
+...
+{% endhighlight %}
+
 <br /><br />
 
 <h2>controllers/auth.js</h2>
