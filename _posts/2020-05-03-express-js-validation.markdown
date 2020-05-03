@@ -24,9 +24,25 @@ const { check } = require('express-validator/check');
 router.get('/signup', authController.getSignup);
 router.post(
     '/signup', 
-    check('email')
+    [
+        check('email')
         .isEmail(),
         .withMessage('Please enter a valid email.'),
+
+        body(
+            'password',
+            'Please make sure your password has at least 5 characters and is alphanumeric'   //this is like withMessage but for both validators
+        )
+            .isLength({min: 5})
+            .isAlphanumeric(),
+        
+        body('confirmPassword').custom((value, { req }) => {      //custom validator
+            if (value !== req.body.password) {
+                throw new Error('Passwords have to match! ');
+            }
+            return true;
+        })
+    ],
     authController.postSignup);
 {% endhighlight %}
 <br /><br />
