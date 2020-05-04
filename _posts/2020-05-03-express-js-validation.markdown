@@ -26,16 +26,16 @@ router.post(
     '/signup', 
     [
         check('email')
-        .isEmail(),
-        .withMessage('Please enter a valid email.'),
-
+            .isEmail(),
+            .withMessage('Please enter a valid email.')
+            .normalizeEmail(),  //sanitazing
         body(
             'password',
             'Please make sure your password has at least 5 characters and is alphanumeric'   //this is like withMessage but for both validators
         )
             .isLength({min: 5})
-            .isAlphanumeric(),
-        
+            .isAlphanumeric()
+            .trim(),        
         body('confirmPassword').custom((value, { req }) => {      //custom validator
             if (value !== req.body.password) {
                 throw new Error('Passwords have to match! ');
@@ -59,7 +59,13 @@ exports.postSignup = (req, res, next) => {
         return res.status(422).render('auth/signup', {
             path: '/signup',
             pageTitle: 'Sign up',
-            errorMessage: errors.array()[0].msg
+            errorMessage: errors.array()[0].msg,
+            validationErrors: errors.array(),
+            oldInput: {
+                email: req.body.email
+                password: req.body.password,
+                confirmPassword: req.body.confirmPassword
+            }
         })
     }
 }
@@ -89,17 +95,35 @@ exports.postSignup = (req, res, next) => {
                     <form method="post" action="/signup">
                         <div>
                             <label>email</label>
-                            <input type="email" name="email" />
+                            <input 
+                                class="<%=  validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
+                                type="email" 
+                                name="email" 
+                                id="email"
+                                value="<%= oldInput.email %>"
+                            />
                         </div>
 
                         <div>
                             <label>password</label>
-                            <input type="password" name="password" />
+                            <input 
+                                class="<%=  validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>"
+                                type="password" 
+                                name="password" 
+                                id="password"
+                                value="<%= oldInput.password %>"
+                             />
                         </div>
 
                         <div>
                             <label>confirm password</label>
-                            <input type="password" name="confirmPassword" />
+                            <input 
+                                class="<%=  validationErrors.find(e => e.param === 'confirmPassword') ? 'invalid' : '' %>"
+                                type="password" 
+                                name="confirmPassword" 
+                                id="confirmPassword"
+                                value="<%= oldInput.confirmPassword %>"
+                             />
                         </div>
 
                         <div>
