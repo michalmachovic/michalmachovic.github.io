@@ -36,7 +36,9 @@ router.post(
             .isLength({min: 5})
             .isAlphanumeric()
             .trim(),        
-        body('confirmPassword').custom((value, { req }) => {      //custom validator
+        body('confirmPassword')
+            .trim()
+            .custom((value, { req }) => {      //custom validator
             if (value !== req.body.password) {
                 throw new Error('Passwords have to match! ');
             }
