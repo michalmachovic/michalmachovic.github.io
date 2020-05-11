@@ -126,7 +126,7 @@ module.exports = router;
 <h2>app.js</h2>
 {% highlight javascript %}
 const express = require('express');
-const feedRoutes = require('./routes/feed);
+const feedRoutes = require('./routes/feed');
 const app = express();
 
 
