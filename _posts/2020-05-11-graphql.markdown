@@ -1,0 +1,27 @@
+---
+layout: post
+date:   2020-05-11 13:13:26 +0200
+title:  "GraphQL"
+category: express, graphql
+tags: [express,graphql]
+---
+
+<h2>What is GraphQL ? </h2>
+- query language
+- usually we have one single endpoint (typically /graphql) <br />
+- uses POST because request body defines Data Structure of retrieved Data, so we are using POST for getting data <br />
+- server-side resolver analyses Request body, Fetches and Prepares and Returns Data <br />
+<br /><br />
+
+
+<h2>Why is it better than REST Api for some scenarios ? </h2>
+- lets presume you have data of posts, which have `id`, `title` and `content`<br />
+- imagine situation where you want to retrieve `id` and `title` in one page and `content` on another page<br />
+- you can do two different endpoints or one endpoint loaded with query url<br />
+- both solutions arent very good or effective<br />
+- in GraphQL you can define on frontend, which data you want to retrieve from backend<br />
+<br />
+
+{% highlight javascript %}
+
+{% endhighlight %}
