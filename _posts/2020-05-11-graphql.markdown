@@ -23,5 +23,5 @@ tags: [express,graphql]
 <br />
 
 {% highlight javascript %}
-
+npm install --save graphql express-graphql
 {% endhighlight %}

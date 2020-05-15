@@ -106,7 +106,7 @@ exports.createPost = (req, res, next) => {
 <h2>routes/feed.js</h2>
 {% highlight javascript %}
 const express = require('express');
-const feedController = require('controllers/feed');
+const feedController = require('../controllers/feed');
 
 const router = express.Router();
 
@@ -127,6 +127,7 @@ module.exports = router;
 {% highlight javascript %}
 const express = require('express');
 const feedRoutes = require('./routes/feed');
+const bodyParser = require('body-parser');
 const app = express();
 
 
