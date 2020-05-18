@@ -19,7 +19,7 @@ npm install --save multer
 <h3>views/product-add.js</h3>
 {% highlight javascript %}
 <form action="/admin/product-add" enctype="multipart/form-data" method="post">
-    <input type="file" name="image" id="image">
+    <input type="file" name="image" id="image" />
 </form>
 {% endhighlight %}
 <br /><br />
