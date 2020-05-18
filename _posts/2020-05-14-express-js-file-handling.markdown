@@ -103,9 +103,15 @@ app.use('/images', express.static(path.join(__dirname, 'images'))); //serve imag
 <br /><br />
 
 <h3>Serving files</h3>
-Uploaded images can be served as public static files. But for example invoices we want to serve only for users which it belongs to.
+Uploaded images can be served as public static files. But for example invoices we want to serve only for users which it belongs to. We will also generate PDF file with `pdfkit`.
 
 <br /><br />
+{% highlight javascript %}
+npm install --save pdfkit
+{% endhighlight %}
+
+<br /><br />
+
 
 <h3>routes/shop.js</h3>
 {% highlight javascript %}
@@ -120,19 +126,48 @@ router.get('orders/:orderId', isAuth, shopController.getInvoice);
 {% highlight javascript %}
 const fs = require('fs');  //file system
 const path = require('path');
+const Order = require('../models/order');
+
+const PDFDocument = require('pdfkit');
 
 exports.getInvoice = (req, res, next) => {
     const orderId = req.params.orderId; 
-    const invoiceName = 'invoice-' + orderId + '.pdf';
-    const invoicePath = path.join('data', 'invoice', invoiceName);
-    fs.readFile(invoicePath, (err, data) => {
-        if (err) {
-            return next(err);
+    Order.findById(orderId).then(order => {
+        if (!order) {
+            return next(new Error('No order found'));
+        }
+        if (order.user.userId.toString() !== req.user._id.toString()) {
+            return next(new Error('Unauthorizes'));
         }
 
+        const invoiceName = 'invoice-' + orderId + '.pdf';
+        const invoicePath = path.join('data', 'invoice', invoiceName);
+       
+
+        /*
+        //readFile is good only for small files, because node read content of whole file into memory. when there are lot of request, this can cause problems
+        fs.readFile(invoicePath, (err, data) => {
+            if (err) {
+                return next(err);
+            }
+
+            res.setHeader('Content-Type', 'application/pdf');
+            res.setHeader('Content-Disposition', 'attachment; filename="' + invoiceName + '"');
+            res.send(data);
+        });
+        */
+
+
+        //streaming is good for bigger files
+         
+        const pdfDoc = new PDFDocument();
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', 'attachment; filename="' + invoiceName + '"');
-        res.send(data);
-    });
-}
+        pfdDoc.pipe(fs.createWriteStream(invoicePath));
+        pdfDoc.pipe(res);
+        pdfDoc.text('Hello this is test invoice');
+        pdfDoc.end();
+    })
+    .catch(err => next(err));
+};
 {% endhighlight %}
