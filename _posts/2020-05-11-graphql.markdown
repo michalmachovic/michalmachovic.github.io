@@ -25,3 +25,123 @@ tags: [express,graphql]
 {% highlight javascript %}
 npm install --save graphql express-graphql
 {% endhighlight %}
+
+<br /><br />
+We will create new folder `graphql` under our project and under that two files `schema.js`, `resolvers.js`.
+<br />
+
+<b>schema.js</b> - here we define queries, mutations and types with which we will work in our GraphQL service <br />
+<b>resolvers.js</b> - here we logic which will be executed for queries 
+
+<br /><br />
+
+<h2>graphql/schema.js</h2>
+{% highlight javascript %}
+const { buildSchema } = require('graphql');
+module.exports = buildSchema(`
+    type TestData {
+        text: String!
+        views: Int!
+    } 
+
+    type RootQuery {
+        hello: TestData
+    }
+
+    schema {
+        query: RootQuery
+    }
+`);
+{% endhighlight %}
+<br /><br />
+
+<h2>graphql/resolvers.js</h2>
+{% highlight javascript %}
+module.exports = {
+    hello() {
+        return {
+            text: 'Hello World',
+            views: 1234
+        }
+    }
+}
+{% endhighlight %}
+<br /><br />
+
+<h2>app.js</h2>
+{% highlight javascript %}
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const { graphqlHTTP } = require('express-graphql');
+const graphqlSchema = require('./graphql/schema');
+const graphqlResolver = require('./graphql/resolvers');
+
+const app = express();
+
+// app.use(bodyParser.urlencoded()); // x-www-form-urlencoded <form>
+app.use(bodyParser.json()); // application/json
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
+
+app.use('/feed', feedRoutes);
+
+app.use(
+    '/graphql',
+    graphqlHTTP({
+      schema: graphqlSchema,
+      rootValue: graphqlResolver,
+      graphiql: true
+    })
+  );
+
+
+mongoose
+    .connect(
+        MONGODB_URI
+    )
+    .then(
+        result => {
+            app.listen(3000);
+            console.log('connected');
+        }
+    )
+    .catch(
+        error => {
+            console.log(error);
+        }
+    )
+
+{% endhighlight %}
+<br /><br />
+
+Now make `POST` request from your favourite client, for example `Insomnia`.
+
+<h2>POST http://localhost:3000/graphql</h2>
+{% highlight javascript %}
+{
+	"query": "{ hello { text views }}"
+}
+{% endhighlight %}
+
+<br /><br />
+You should get following output: <br />
+
+{% highlight javascript %}
+{
+    "data": {
+      "hello": {
+        "text": "Hello World",
+        "views": 1234
+      }
+    }
+  }
+  {% endhighlight %}
+
+  <br /><br />
+  Also if you are using `graphiql: true`, you can go to `http://localhost:3000/graphql` in your browser where you will have graphql playground console.
