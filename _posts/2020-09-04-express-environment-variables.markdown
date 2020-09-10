@@ -41,3 +41,5 @@ But in production we will not use `nodemon` because we will be not restarting se
     "start:dev": "nodemon app.js"
 }
 {% endhighlight %}
+<br /><br />
+We can then start our app locally with `npm run start:dev`.
