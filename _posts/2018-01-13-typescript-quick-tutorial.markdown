@@ -20,6 +20,14 @@ tsc main.ts
 {% endhighlight %}
 <br />
 
+<h2>Tsconfig - strict typing</h2>
+{% highlight ts %}
+tsc --init
+{% endhighlight %}
+If we run command above, `tsconfig.json` will be created, by default with `"strict": true`. Enabling strict mode means, that typescript will warn us for example if something can be null. <br />
+If we have `tsconfig.json` file under our project, then we compile only with `tsc` command.
+<br />
+
 
 <h2>Static Typing</h2>
 A very distinctive feature of TypeScript is the support of static typing. This means that you can declare the types of variables, and the compiler will make sure that they aren't assigned the wrong types of values. If type declarations are omitted, they will be inferred automatically from your code.
