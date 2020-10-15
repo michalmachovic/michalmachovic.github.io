@@ -1,9 +1,9 @@
 ---
 layout: post
-date:   2020-09-14 13:13:26 +0200
-title:  "Node.js and Typescript"
-category: nodejs, typescript
-tags: [nodejs, typescript]
+date:   2020-09-17 13:13:26 +0200
+title:  "Node.js, Express, Typescript, MongoDB"
+category: nodejs, typescript, express, mongo
+tags: [nodejs, typescript, express, mongo]
 ---
 
 
@@ -12,6 +12,7 @@ tags: [nodejs, typescript]
 {% highlight javascript %}
 tsc --init
 npm init
+npm install mongoose
 npm install --save express
 npm install --save body-parser
 npm install --save-dev ts-node-dev 
@@ -20,6 +21,7 @@ npm install --save-dev typescript
 npm install --save-dev @types/node
 npm install --save-dev @types/express
 npm install --save-dev @types/body-parser
+npm install --save-dev @types/mongoose
 {% endhighlight %}
 <br /><br />
 
