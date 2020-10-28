@@ -66,6 +66,20 @@ chmod 777 ./app/etc && chmod 644 ./app/etc/*.xml
 <br /><br />
 
 
+<h2>Magento 2.4.0 - CLI install</h2>
+Magento 2.4.0 is using ElasticSearch, for local installation you can disable it with:
+{% highlight ts %}
+php bin/magento module:disable Magento_Elasticsearch Magento_Elasticsearch6 Magento_Elasticsearch7
+{% endhighlight %}
+<br /><br />
+
+From Magento 2.4.0 you need to install it from command line. 
+{% highlight ts %}
+php bin/magento setup:install --base-url="http://localhost:8079/magento2/sites/magento2401/" --db-host="localhost" --db-name="magento2401" --db-user="root" --db-password="DB_PASSWORD" --admin-firstname="michal" --admin-lastname="michal" --admin-email="EMAIL" --admin-user="ADMIN_USERNAME" --admin-password="ADMIN_PASSWORD" --language="en_US" --currency="USD" --timezone="America/Chicago" --use-rewrites="1" --backend-frontname="site_admin"
+{% endhighlight %}
+
+<br /><br />
+
 <h2>After Installation</h2>
 If you dont see styles, check paths in sourcode. If you have there something like /version..../ run following querty
 {% highlight ts %}
