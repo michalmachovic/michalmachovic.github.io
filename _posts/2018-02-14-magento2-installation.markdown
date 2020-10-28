@@ -67,9 +67,10 @@ chmod 777 ./app/etc && chmod 644 ./app/etc/*.xml
 
 
 <h2>Magento 2.4.0 - CLI install</h2>
-Magento 2.4.0 is using ElasticSearch, for local installation you can disable it with:
+Magento 2.4.0 is using ElasticSearch, for local installation you can disable it. Also you can disable TwoFactor Authorization
 {% highlight ts %}
 php bin/magento module:disable Magento_Elasticsearch Magento_Elasticsearch6 Magento_Elasticsearch7
+php bin/magento module:disable Magento_TwoFactorAuth
 {% endhighlight %}
 <br /><br />
 
