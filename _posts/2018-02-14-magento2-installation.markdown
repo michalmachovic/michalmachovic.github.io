@@ -67,7 +67,11 @@ chmod 777 ./app/etc && chmod 644 ./app/etc/*.xml
 
 
 <h2>Magento 2.4.x - CLI install</h2>
-ou can disable TwoFactor Authorization for localhost.
+See `https://www.emizentech.com/blog/magento-2-4-with-elasticsearch-complete-guide.html` for complete tutorial.
+
+<br /><br />
+
+You can disable TwoFactor Authorization for localhost.
 {% highlight ts %}
 php bin/magento module:disable Magento_TwoFactorAuth
 {% endhighlight %}
