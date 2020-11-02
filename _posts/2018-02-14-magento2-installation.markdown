@@ -66,15 +66,68 @@ chmod 777 ./app/etc && chmod 644 ./app/etc/*.xml
 <br /><br />
 
 
-<h2>Magento 2.4.0 - CLI install</h2>
-Magento 2.4.0 is using ElasticSearch, for local installation you can disable it. Also you can disable TwoFactor Authorization
+<h2>Magento 2.4.x - CLI install</h2>
+ou can disable TwoFactor Authorization for localhost.
 {% highlight ts %}
-php bin/magento module:disable Magento_Elasticsearch Magento_Elasticsearch6 Magento_Elasticsearch7
 php bin/magento module:disable Magento_TwoFactorAuth
 {% endhighlight %}
 <br /><br />
 
-From Magento 2.4.0 you need to install it from command line. 
+Magento 2.4.x is using ElasticSearch. You can turn it off but then product view will not work, so its better install it
+{% highlight ts %}
+sudo apt-get update
+sudo apt install openjdk-8-jdk
+java -version
+
+sudo apt install apt-transport-https
+
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+
+sudo apt-get update
+sudo apt-get install elasticsearch
+sudo systemctl daemon-reload
+sudo systemctl enable elasticsearch.service
+sudo systemctl start elasticsearch.service
+service elasticsearch status
+{% endhighlight %}
+<br /><br />
+Edit `/etc/elasticsearch/elasticsearch.yml`:
+{% highlight ts %}
+#----------Network---------
+transport.host: localhost
+transport.tcp.port: 9300
+http.port: 9200
+{% endhighlight %}
+
+<br /><br />
+{% highlight ts %}
+sudo ufw allow 22
+sudo ufw enable
+ufw status
+
+curl localhost:9200    //test elasticsearch
+{% endhighlight %}
+
+<br /><br />
+After Magento installation you can configure ElasticSearch in Magento (this isnt required for local).
+<br />
+`Store -> Settings -> Configuration -> Catalog -> Catalog -> Catalog Search -> Search Engine`
+<br />
+{% highlight ts %}
+ElasticSearch Server Hostname: localhost
+ElasticSearch Server Port: 9200
+ElasticSearch Index Prefix: magento2
+Enable ElasticSearch HTTP Auth: No
+ElasticSearch Server Timeout: 15
+{% endhighlight %}
+<br />
+
+
+
+
+<br /><br />
+From Magento 2.4.x you need to install it from command line. 
 {% highlight ts %}
 php bin/magento setup:install --base-url="http://localhost:8079/magento2/sites/magento2401/" --db-host="localhost" --db-name="magento2401" --db-user="root" --db-password="DB_PASSWORD" --admin-firstname="michal" --admin-lastname="michal" --admin-email="EMAIL" --admin-user="ADMIN_USERNAME" --admin-password="ADMIN_PASSWORD" --language="en_US" --currency="USD" --timezone="America/Chicago" --use-rewrites="1" --backend-frontname="site_admin"
 {% endhighlight %}
