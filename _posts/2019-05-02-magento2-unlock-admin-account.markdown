@@ -10,3 +10,7 @@ If you cant login to admin and see error `You did not sign in correctly or your 
 <br />
 
 `sudo php bin/magento admin:user:create --admin-user="USERNAME" --admin-password="PASSWORD" --admin-email="EMAIL" --admin-firstname="FIRSTNAME" --admin-lastname="LASTNAME"`
+
+
+<br /><br />
+`php magento admin:user:unlock ADMINUSERNAME`
