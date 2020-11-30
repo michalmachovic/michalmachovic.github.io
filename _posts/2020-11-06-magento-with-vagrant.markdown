@@ -184,6 +184,8 @@ set -e
 
 export DEBIAN_FRONTEND=noninteractive
 
+#wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+#echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
 
 apt update
 apt upgrade -y
@@ -194,6 +196,8 @@ apt install -y\
 	nginx composer git mysql-server
 
 #apt install -y elasticsearch
+
+# service elasticsearch start
 
 if [ -f "/var/www/html/index.nginx-debian.html" ]; then
 	rm /var/www/html/index.nginx-debian.html
@@ -208,10 +212,7 @@ if [ ! -f "/var/www/html/.git" ]; then
 fi
 
 echo "#{$site}" > /etc/nginx/sites-enabled/default
-
-#stop apache2 for some reason apache2 was running and we want to use nginx
-service apache2 stop
-service nginx start
+service nginx reload
 
 cd /var/www/html
 
@@ -260,7 +261,6 @@ Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/bionic64"
 
   config.vm.provision :shell, inline: $script
-  #this is synced module, we cloned it before running vagrant into the dir
   config.vm.synced_folder "./", "/var/www/html/app/code/Gateway3D/PersonaliseIt", :mount_options => [ "ro" ]
   #config.vm.synced_folder "./", "/code", :mount_options => [ "ro" ]
   config.vm.network "forwarded_port", guest: 80, host: 8080
@@ -269,6 +269,8 @@ Vagrant.configure("2") do |config|
     v.memory = 1024 * 4
   end
 end
+
+
 {% endhighlight %}
 
 <br /><br />
