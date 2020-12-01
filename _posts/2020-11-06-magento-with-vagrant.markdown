@@ -21,7 +21,8 @@ sudo apt install ./vagrant_2.2.9_x86_64.deb
 Now you need `Vagrantfile` (see below) inside directory when you want to run Vagrant. <br /><br />
 `vagrant up` - creates and configures guest machines according to your Vagrantfile <br />
 `vagrant destroy` - stops the running machine Vagrant is managing and destroys all resources that were created during the machine creation process <br />
-`vagrant ssh` - SSH into a running Vagrant machine and give you access to a shell
+`vagrant ssh` - SSH into a running Vagrant machine and give you access to a shell <br />
+`sudo php -f ./bin/magento indexer:reindex` - reindex from inside shell
 <br /><br />
 You should be able to see your project on `http://localhost`.
 
