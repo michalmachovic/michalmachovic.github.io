@@ -1,6 +1,6 @@
 ---
 layout: post
-date:   2020-03-08 13:13:26 +0200
+date:   2021-03-08 13:13:26 +0200
 title:  "Selenium and Javascript"
 category: javascript
 tags: [selenium, javascript]
