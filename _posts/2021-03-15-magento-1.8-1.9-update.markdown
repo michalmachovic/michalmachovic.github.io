@@ -1,0 +1,34 @@
+---
+layout: post
+date:   2021-03-15 13:13:26 +0200
+title:  "Magento - Update from 1.8.x to 1.9.x"
+category: magento
+tags: [magento]
+---
+
+
+
+<h2>Upgrade Roadmap for CE 1.9.0.1 from 1.8</h2>
+
+1. take a backup of current database and current 1.8 code. <br />
+2. download latest magento from the http://www.magentocommerce.com/download <br />
+3. remove all folders and files from your 1.8 code (but you should have backup somewhere) and place all folders and files from the 1.9. <br />
+4. now from your 1.8 merge your following folders into the 1.9 <br />
+- Community app/code/community <br />
+- Local app/code/local <br />
+- Media <br />
+- your theme or package (app/design/frontend/default/ or app/design/frontend/) <br />
+- custom folders from Skin (both for adminhtml and frontend). <br />
+- copy your custom xml files from app/etc/modules/ to current app/etc/modules/ <br />
+- any custom admin theme folder from adminhtml/default/yourtheme. <br />
+- copy your custom folders from adminhtml/default/default/ (1.8) to adminhtml/default/default/ (1.9). <br />
+- custom js files if any from app/js/. <br />
+5. now go to app/etc/local.xml.Edit database details their.put your database username and password and database name. <br />
+6. now check the site.it done.<br /><br />
+
+
+
+{% highlight php %}
+
+{% endhighlight %}
+
