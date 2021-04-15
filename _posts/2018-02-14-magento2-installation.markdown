@@ -31,7 +31,19 @@ composer create-project --repository-url=https://repo.magento.com/ magento/proje
 
 //or for specific version
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.2.6 .
+
+//at this time (15 april 2021) Magento2 isnt working correctly with Composer v2
+//if you are using Composer v2 add flag --ignore-platform-reqs, for example
+composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition=2.4.1 .
 {% endhighlight %}
+
+<br /><br />
+Note: it looks that 2.4.2 is a quarterly update and not the full package. You will need to download version 2.4.1 and then update to version 2.4.2. After 2.4.1 installation run `composer require magento/product-community-edition=2.4.2`
+<br />
+source: https://magento.stackexchange.com/questions/331840/404-not-found-after-fresh-magento-2-4-2-installation
+
+
+
 <br /><br />
 You can get message about missing libraries, following you will require:
 <br />
