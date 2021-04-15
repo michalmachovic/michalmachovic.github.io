@@ -38,9 +38,9 @@ composer create-project --ignore-platform-reqs --repository-url=https://repo.mag
 {% endhighlight %}
 
 <br /><br />
-Note: it looks that 2.4.2 is a quarterly update and not the full package. You will need to download version 2.4.1 and then update to version 2.4.2. After 2.4.1 installation run `composer require magento/product-community-edition=2.4.2`
+<b>Note:</b> it looks that 2.4.2 is a quarterly update and not the full package. You will need to download version 2.4.1 and then update to version 2.4.2. After 2.4.1 installation run `composer require magento/product-community-edition=2.4.2`
 <br />
-source: https://magento.stackexchange.com/questions/331840/404-not-found-after-fresh-magento-2-4-2-installation
+<b>Source: </b> https://magento.stackexchange.com/questions/331840/404-not-found-after-fresh-magento-2-4-2-installation
 
 
 
