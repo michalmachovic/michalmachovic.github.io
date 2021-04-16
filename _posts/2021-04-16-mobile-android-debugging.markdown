@@ -30,3 +30,9 @@ sudo adb start-server
 adb devices
 {% endhighlight %}
 
+<br /><br />
+
+In Chrome you can then run
+{% highlight php %}
+chrome://inspect/#devices
+{% endhighlight %}
