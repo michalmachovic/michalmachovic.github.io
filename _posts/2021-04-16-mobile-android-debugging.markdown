@@ -32,7 +32,11 @@ adb devices
 
 <br /><br />
 
-In Chrome you can then run
+In `Chrome` you can then run
 {% highlight php %}
 chrome://inspect/#devices
 {% endhighlight %}
+
+
+<br /><br />
+In `Chrome` open `Developer Tools (F12)` and click on `three dots` in upper right corner, then `More Tools > Remote Devices` to see list of attached devices.
