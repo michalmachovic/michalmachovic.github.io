@@ -1,7 +1,7 @@
 ---
 layout: post
 date:   2021-04-16 13:13:26 +0200
-title:  "Mobile - Android debugging"
+title:  "Mobile - Android debugging (adb)"
 category: mobile
 tags: [mobile]
 ---
