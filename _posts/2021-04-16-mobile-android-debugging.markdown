@@ -25,5 +25,8 @@ apt-get install android-tools-adb android-tools-fastboot
 {% highlight php %}
 sudo adb kill-server
 sudo adb start-server
+
+//to list attached devices
+adb devices
 {% endhighlight %}
 
