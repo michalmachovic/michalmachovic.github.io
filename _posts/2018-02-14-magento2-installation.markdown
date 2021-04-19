@@ -38,9 +38,11 @@ composer create-project --ignore-platform-reqs --repository-url=https://repo.mag
 {% endhighlight %}
 
 <br /><br />
-<b>Note:</b> it looks that 2.4.2 is a quarterly update and not the full package. You will need to download version 2.4.1 and then update to version 2.4.2. After 2.4.1 installation run `composer require magento/product-community-edition=2.4.2`
+<h3>Magento 2.4.2 Changes</h3>
+Issue: The `[magento_root]/index.php` file has been removed, and Magento now runs from `/pub` by default for Apache configurations. Stores that are served from subfolders will not work as expected and may display 404 errors. Workaround: Use symlinks to emulate the installation of Magento into a subfolder. 
 <br />
-<b>Source: </b> https://magento.stackexchange.com/questions/331840/404-not-found-after-fresh-magento-2-4-2-installation
+https://devdocs.magento.com/guides/v2.4/release-notes/open-source-2-4-2.html#known-issues <br />
+https://devdocs.magento.com/guides/v2.4/install-gde/tutorials/change-docroot-to-pub.html
 
 
 
